@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+
+import 'package:flutter_music/common/music_store.dart';
+
+import 'package:flutter_music/music_app_bar/music_app_bar.dart';
+
 class LibraryPage extends StatefulWidget {
   @override
   _LibraryPageState createState() => _LibraryPageState();
@@ -7,21 +12,25 @@ class LibraryPage extends StatefulWidget {
 class _LibraryPageState extends State<LibraryPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
 
+    return Scaffold(
+      backgroundColor: MusicStore.Theme.of(context).theme,
+   appBar: MusicAppBar(
+     title: "播放列表",
+     rightIconData: Icons.edit,
+     rightOnTap: (){
+       print("这是右边按钮");
+     },
+   ),
      body: Center(
-       child: Container(
-         width: 100,
-         height: 100,
-         decoration: BoxDecoration(
-             borderRadius: BorderRadius.circular(10),
-             color: Color.fromRGBO(241, 243, 246, 1.0),
-             boxShadow: [
-               BoxShadow(color: Color.fromRGBO(162, 173, 190, 1.0),offset: Offset(12,12),blurRadius: 20)
-             ]
-         ),
-         child: Icon(Icons.favorite),
-       ),
+       child: GestureDetector(
+         onTap: (){
+
+
+
+
+           },
+       )
      ),
     );
   }

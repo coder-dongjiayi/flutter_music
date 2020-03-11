@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
-import 'package:flutter_music/common/music_global.dart';
+import 'package:flutter_music/common/music_store.dart';
 import 'package:flutter_music/tabbar/tabbar_items/music_tab_item.dart';
 class BottomTabar extends StatefulWidget {
 
@@ -66,6 +66,8 @@ class _BottomTabarState extends State<BottomTabar> with TickerProviderStateMixin
       return Tween<double>(begin: 0.0,end: 60.0).animate(_animationControllers[index]);
     });
 
+
+
   }
   @override
   void didUpdateWidget(BottomTabar oldWidget) {
@@ -83,32 +85,43 @@ class _BottomTabarState extends State<BottomTabar> with TickerProviderStateMixin
   }
 
 
-  @override
-  Widget build(BuildContext context) {
+  List<Widget> _createMusicTableItem(){
 
-    final double additionalBottomPadding = math.max(MediaQuery.of(context).padding.bottom, 0.0);
-
+    ColorTween colorTween = ColorTween(
+      begin:  Color.fromRGBO(222, 227, 233 , 1.0),
+      end:  Color.fromRGBO(92, 122, 170 , 1.0)
+    );
 
     List<MusicTabItem> _list  = List<MusicTabItem>.generate(_itemList.length, (int index){
 
       return MusicTabItem(
         index: index,
         animation: _animations[index],
+
+        animationController: _animationControllers[index],
         title: _itemList[index]["title"],
         iconData: _itemList[index]["iconData"],
         normalColor: Color.fromRGBO(222, 227, 233 , 1.0),
-        selectedColor: MusicGlobal.textColor,
+        selectedColor:Color.fromRGBO(92, 122, 170 , 1.0),
+        colorTween: colorTween,
         onTap: (index){
           if (widget.onTap != null)
             widget.onTap(index);
         },
       );
     });
+    return _list;
+  }
 
+  @override
+  Widget build(BuildContext context) {
 
-      return Material(
+    final double additionalBottomPadding = math.max(MediaQuery.of(context).padding.bottom, 0.0);
 
+    return Material(
+      color: MusicStore.Theme.of(context).theme,
       child: ConstrainedBox(
+
           constraints:BoxConstraints(minHeight: kBottomNavigationBarHeight+additionalBottomPadding),
           child: Padding(
             padding: EdgeInsets.only(bottom: additionalBottomPadding),
@@ -117,7 +130,7 @@ class _BottomTabarState extends State<BottomTabar> with TickerProviderStateMixin
               removeBottom: true,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: _list
+                children: _createMusicTableItem()
               )
             ),
           ),

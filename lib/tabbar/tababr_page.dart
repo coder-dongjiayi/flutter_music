@@ -3,7 +3,7 @@ import 'package:flutter_music/library/library_page.dart';
 import 'package:flutter_music/commend/commend_page.dart';
 import 'package:flutter_music/browse/browse_page.dart';
 import 'package:flutter_music/tabbar/bottom_tabbar.dart';
-
+import 'package:flutter_music/common/music_store.dart';
 
 
 class TabbarPage extends StatefulWidget {
@@ -35,6 +35,7 @@ class _TabbarPageState extends State<TabbarPage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+
         body: PageView(
           physics: NeverScrollableScrollPhysics(),
             controller:_pageController,

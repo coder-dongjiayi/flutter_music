@@ -1,6 +1,10 @@
 
 import 'package:flutter/material.dart';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:flutter_music/common/music_profile.dart';
+
 const _musicLightColor =  Color.fromRGBO(241, 243, 246, 1.0);
 
 const _musicTextColor =   Color.fromRGBO(92, 122, 170, 1.0);
@@ -28,7 +32,7 @@ class MusicGlobal {
   static Color get dart => _musicDarkColor;
 
   //文本、icon 颜色
-  static Color get textColor =>  _musicTextColor;
+  static Color get titleColor =>  _musicTextColor;
 
   //阴影颜色
   static Color get shadowColor =>  _musicShadowColor;
@@ -37,11 +41,18 @@ class MusicGlobal {
   static Color get goldenColor =>  _musicGoldenColor;
 
 
-
-
   //可选主题列表
   static List<Color> get themes => _musicThemes;
 
+
+  static SharedPreferences _preferences;
+
+  static MusicProfile profile = MusicProfile();
+
+
+  static saveProfile(){
+
+  }
 
 
 }
