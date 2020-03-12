@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_music/common/music_store.dart';
 
 import 'package:flutter_music/music_app_bar/music_app_bar.dart';
+import 'package:flutter_music/library/library_empty_widget.dart';
+import 'package:flutter_music/library/library_list_widget.dart';
 
 class LibraryPage extends StatefulWidget {
   @override
@@ -16,22 +18,13 @@ class _LibraryPageState extends State<LibraryPage> {
     return Scaffold(
       backgroundColor: MusicStore.Theme.of(context).theme,
    appBar: MusicAppBar(
-     title: "播放列表",
+     title: "歌单",
      rightIconData: Icons.edit,
      rightOnTap: (){
        print("这是右边按钮");
      },
    ),
-     body: Center(
-       child: GestureDetector(
-         onTap: (){
-
-
-
-
-           },
-       )
-     ),
+     body:LibraryEmptyWidget()
     );
   }
 }

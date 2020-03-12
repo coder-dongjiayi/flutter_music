@@ -9,6 +9,8 @@ const _musicLightColor =  Color.fromRGBO(241, 243, 246, 1.0);
 
 const _musicTextColor =   Color.fromRGBO(92, 122, 170, 1.0);
 
+const _musicSubTitleColor = Color.fromRGBO(162, 173, 190, 1.0);
+
 const _musicShadowColor =  Color.fromRGBO(225, 234, 242, 1.0);
 
 const _musicGoldenColor =  Color.fromRGBO(170, 147, 92, 1.0);
@@ -33,6 +35,9 @@ class MusicGlobal {
 
   //文本、icon 颜色
   static Color get titleColor =>  _musicTextColor;
+
+  //副标题
+  static Color get subTitleColor => _musicSubTitleColor;
 
   //阴影颜色
   static Color get shadowColor =>  _musicShadowColor;

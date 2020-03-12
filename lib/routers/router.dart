@@ -1,9 +1,12 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_music/tabbar/tababr_page.dart';
+import 'package:flutter_music/library/new_library/new_library_page.dart';
 final routers = {
-  "/": (context) => TabbarPage()
-
+  "/": (context) => TabbarPage(),
+ "/new_library_page": (context,{arguments}) => NewLibraryPage()
 };
+
 
 var onGenerateRoute = (RouteSettings settings) {
 

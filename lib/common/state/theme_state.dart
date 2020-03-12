@@ -13,6 +13,10 @@ class ThemeState extends ProfileChangeNotifiter{
 
   Color get shadowColor => profile.shadowColor ?? MusicGlobal.shadowColor;
 
+  Color get subtTitleColor => profile.subtTitleColor ?? MusicGlobal.subTitleColor;
+
+  Color get goldenColor => profile.goldenColor ?? MusicGlobal.goldenColor;
+
   setTheme(Color color){
     if(color != theme){
          profile.theme = color;
