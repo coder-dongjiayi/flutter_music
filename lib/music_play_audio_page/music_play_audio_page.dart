@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_music/music_app_bar/music_app_bar.dart';
 import 'package:flutter_music/common/music_store.dart';
-import 'package:flutter_music/public_widget/music_button_widget.dart';
+import 'package:flutter_music/music_play_audio_page/music_play_slider_widget.dart';
 import 'package:flutter_music/music_play_audio_page/music_play_info_widget.dart';
+import 'package:flutter_music/music_play_audio_page/music_play_control_widget.dart';
+import 'package:flutter_music/music_play_audio_page/music_play_bottom_widget.dart';
 
 class MusicPlayAudioPage extends StatelessWidget {
 
@@ -22,17 +24,35 @@ class MusicPlayAudioPage extends StatelessWidget {
 
       ),
 
-      body: Padding(
-        padding: EdgeInsets.only(top: 90),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              MusicPlayInfoWidget()
-            ],
-          ),
+      body: SafeArea(
+        child: Stack(
+          children: <Widget>[
+            _play(),
+            Positioned(
+              bottom: 40,
+              right: 0,
+              left: 0,
+              child: MusicPlayBottomWidget(),
+            )
+          ],
         ),
       )
+    );
+  }
+
+  Widget _play(){
+  return  Padding(
+      padding: EdgeInsets.only(top: 30),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            MusicPlayInfoWidget(),
+            MusicPlayControlWidget(),
+            MusicPlaySliderWidget()
+          ],
+        ),
+      ),
     );
   }
 }

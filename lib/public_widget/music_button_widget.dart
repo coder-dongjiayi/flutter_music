@@ -5,10 +5,20 @@ typedef GestureTapCallback = void Function();
 
 class MusicButtonWidget extends StatelessWidget {
 
-  MusicButtonWidget({Key key,this.iconData,this.onTap}): super(key:key);
+  MusicButtonWidget({
+    Key key,
+    this.iconData,
+    this.onTap,
+    this.padding : const EdgeInsets.fromLTRB(10, 10, 10, 10),
+    this.margin :  const EdgeInsets.fromLTRB(0, 0, 0, 0),
+    this.size : 20
+  }): super(key:key);
 
   final IconData iconData;
   final GestureTapCallback onTap;
+  final EdgeInsets padding;
+  final EdgeInsets margin;
+  final  double size;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +35,9 @@ class MusicButtonWidget extends StatelessWidget {
 
   Widget _icon(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+
+      margin: margin,
+      padding: padding,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: MusicStore.Theme
@@ -34,12 +46,12 @@ class MusicButtonWidget extends StatelessWidget {
           boxShadow: [
             BoxShadow(color: MusicStore.Theme
                 .of(context)
-                .shadowColor, offset: Offset(6, 6), blurRadius: 3),
+                .shadowColor, offset: Offset(10, 10), blurRadius: 15),
             BoxShadow(
-                color: Colors.white, offset: Offset(-5, -5), blurRadius: 26)
+                color: Colors.white, offset: Offset(-10, -10), blurRadius: 20)
           ]
       ),
-      child: Icon(iconData, size: 20, color: MusicStore.Theme
+      child: Icon(iconData, size: size, color: MusicStore.Theme
           .of(context)
           .titleColor),
     );

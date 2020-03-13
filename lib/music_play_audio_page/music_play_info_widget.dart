@@ -33,7 +33,7 @@ class MusicPlayInfoWidget extends StatelessWidget {
   }
   Widget _playCover(context){
     return Container(
-      margin: EdgeInsets.fromLTRB(80, 0, 80, 0),
+      margin: EdgeInsets.fromLTRB(90, 0, 90, 0),
       decoration: ShapeDecoration(
           color: Colors.white,
           shape: CircleBorder(),
