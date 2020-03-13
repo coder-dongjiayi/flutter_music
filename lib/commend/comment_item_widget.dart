@@ -69,10 +69,8 @@ class CommentItemWidget extends StatelessWidget {
         aspectRatio: 1.3,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(5),
-          child: Image.network(
-              "${imageUrl}",
-            fit: BoxFit.cover,
-          ),
+          child: FadeInImage.memoryNetwork(placeholder: kTransparentImage, image: "$imageUrl",fit: BoxFit.cover,),
+
         ),
       ),
 

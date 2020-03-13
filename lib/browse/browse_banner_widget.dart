@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_music/common/music_store.dart';
 import 'package:provider/provider.dart';
-
+import 'package:cached_network_image/cached_network_image.dart';
 class BanerScrollState extends ChangeNotifier{
   int currentIndex = 0;
   void setIndex(index){
@@ -129,10 +129,14 @@ class BrowseBannerWidget extends StatelessWidget {
       margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          image: DecorationImage(
-              fit: BoxFit.cover,
-              image: NetworkImage(_imageList[index])
-          )
+
+      ),
+      child: ClipRRect(
+        borderRadius:  BorderRadius.circular(8),
+        child: CachedNetworkImage(
+          imageUrl: _imageList[index],
+          fit: BoxFit.cover,
+        )
       ),
 
     );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_music/common/music_store.dart';
-
+import 'package:cached_network_image/cached_network_image.dart';
 class MusicItemWidget extends StatelessWidget {
 
   MusicItemWidget({
@@ -16,20 +16,28 @@ class MusicItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return GestureDetector(
+      onTap: (){
+        Map arguments = {"audioName":"明天会更好"};
 
-      margin: EdgeInsets.only(left: 20,right: 20,top: 10,bottom: 20),
+       Navigator.pushNamed(context, "/music_play_audio_page",arguments: arguments);
+      },
 
-      child: Row(
-        mainAxisAlignment:MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          _itemCover(context),
-         Expanded(
-           flex: 1,
-           child:  _itemTitle(context),
-         ),
-          _itemPlay(context)
-        ],
+      child: Container(
+        color: MusicStore.Theme.of(context).theme,
+        margin: EdgeInsets.only(left: 20,right: 20,top: 10,bottom: 20),
+
+        child: Row(
+          mainAxisAlignment:MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            _itemCover(context),
+            Expanded(
+              flex: 1,
+              child:  _itemTitle(context),
+            ),
+            _itemPlay(context)
+          ],
+        ),
       ),
     );
   }
@@ -67,10 +75,10 @@ class MusicItemWidget extends StatelessWidget {
 
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
-        child: Image.network(
-          "$coverImageUrl",
+        child: CachedNetworkImage(
+          imageUrl: "$coverImageUrl",
           fit: BoxFit.cover,
-        ),
+        )
       )
     );
   }
