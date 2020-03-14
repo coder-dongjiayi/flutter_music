@@ -3,7 +3,7 @@ import 'package:flutter_music/library/library_page.dart';
 import 'package:flutter_music/commend/commend_page.dart';
 import 'package:flutter_music/browse/browse_page.dart';
 import 'package:flutter_music/tabbar/bottom_tabbar.dart';
-import 'package:flutter_music/common/music_store.dart';
+import 'package:vibrate/vibrate.dart';
 
 
 class TabbarPage extends StatefulWidget {
@@ -44,6 +44,7 @@ class _TabbarPageState extends State<TabbarPage> {
       bottomNavigationBar: BottomTabar(
         currentIndex: _currentIndex,
         onTap: (index){
+          Vibrate.feedback(FeedbackType.impact);
           setState(() {
             _currentIndex = index;
             _pageController.animateToPage(index,

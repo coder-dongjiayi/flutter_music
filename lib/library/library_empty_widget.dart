@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_music/common/music_store.dart';
+import 'package:vibrate/vibrate.dart';
 
 class LibraryEmptyWidget extends StatelessWidget {
   @override
@@ -35,7 +36,7 @@ class LibraryEmptyWidget extends StatelessWidget {
   Widget _createPlayList(BuildContext context){
     return GestureDetector(
       onTap: (){
-
+        Vibrate.feedback(FeedbackType.selection);
         Navigator.of(context).pushNamed("/new_library_page");
       },
       child: Container(

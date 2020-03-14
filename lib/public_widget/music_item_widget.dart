@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_music/common/music_store.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_music/public_widget/music_button_widget.dart';
+import 'package:vibrate/vibrate.dart';
+import 'package:flutter_music/public_widget/music_button.dart';
 class MusicItemWidget extends StatelessWidget {
 
   MusicItemWidget({
@@ -19,9 +20,11 @@ class MusicItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
+
+        Vibrate.feedback(FeedbackType.selection);
         Map arguments = {"audioName":"明天会更好"};
 
-       Navigator.pushNamed(context, "/music_play_audio_page",arguments: arguments);
+        Navigator.pushNamed(context, "/music_play_audio_page",arguments: arguments);
       },
 
       child: Container(
@@ -36,8 +39,9 @@ class MusicItemWidget extends StatelessWidget {
               flex: 1,
               child:  _itemTitle(context),
             ),
-          MusicButtonWidget(
-            iconData: Icons.play_arrow,
+          MusicButton(
+            normalIconData: Icons.play_arrow,
+            isEnable: false,
             padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
           )
 //            _itemPlay(context)

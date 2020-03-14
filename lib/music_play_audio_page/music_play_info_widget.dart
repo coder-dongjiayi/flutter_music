@@ -2,19 +2,56 @@ import 'package:flutter/material.dart';
 import 'package:flutter_music/common/music_store.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
+class MusicPlayInfoController extends ChangeNotifier{
+
+  static const int MUSIC_STATE_RESUME = 1;
+
+
+  static const int MUSIC_STATE_PAUSE = 2;
+
+  int state;
+  void resumeAnimation(){
+    state = MUSIC_STATE_RESUME;
+    notifyListeners();
+  }
+
+  void pauseAnimation(){
+    state =  MUSIC_STATE_PAUSE;
+    notifyListeners();
+  }
+}
+
 class MusicPlayInfoWidget extends StatefulWidget {
+  MusicPlayInfoWidget({
+    Key key,
+    this.musicController
+
+}) : super (key : key);
+
+  final MusicPlayInfoController musicController;
   @override
   _MusicPlayInfoWidgetState createState() => _MusicPlayInfoWidgetState();
 }
 
 class _MusicPlayInfoWidgetState extends State<MusicPlayInfoWidget>  with TickerProviderStateMixin{
 
+
+
+
   AnimationController _animationController;
+
+  MusicPlayInfoController _controller;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    _controller = widget.musicController;
+    if (_controller != null) {
+      _controller.addListener(_addLister);
+    }
+
+
     _animationController = AnimationController(duration: Duration(seconds: 25),vsync: this);
 
     _animationController.addStatusListener((state){
@@ -28,15 +65,23 @@ class _MusicPlayInfoWidgetState extends State<MusicPlayInfoWidget>  with TickerP
     _animationController.forward();
 
   }
-  
+
+  void _addLister(){
+      if(_controller.state == MusicPlayInfoController.MUSIC_STATE_RESUME){
+
+        _animationController.forward();
+      }
+      if(_controller.state == MusicPlayInfoController.MUSIC_STATE_PAUSE){
+        _animationController.stop();
+      }
+  }
   @override
   void dispose() {
     // TODO: implement dispose
 
     _animationController.dispose();
+
     super.dispose();
-
-
     
   }
 

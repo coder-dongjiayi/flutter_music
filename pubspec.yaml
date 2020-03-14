@@ -31,6 +31,8 @@ dependencies:
   flutter_swiper : ^1.1.6
   flutter_screenutil: ^0.5.3
   cached_network_image: ^2.0.0
+  vibrate: ^0.0.4
+  audioplayers: ^0.14.0
 
 dev_dependencies:
   flutter_test:

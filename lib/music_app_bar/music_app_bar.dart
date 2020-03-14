@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_music/common/music_store.dart';
-import 'package:flutter_music/public_widget/music_button_widget.dart';
+import 'package:flutter_music/public_widget/music_button.dart';
 
 
 typedef GestureTapCallback = void Function();
@@ -64,9 +64,9 @@ class _MusicAppBarState extends State<MusicAppBar> {
     if(widget.leftIconData == null){
       return Text("");
     }
-    return MusicButtonWidget(
-      iconData: widget.leftIconData,
-      onTap: (){
+    return MusicButton(
+      normalIconData: widget.leftIconData,
+      onTap: (selected){
         if(widget.leftIconData != null){
           widget.leftOnTap();
         }
@@ -77,9 +77,9 @@ class _MusicAppBarState extends State<MusicAppBar> {
     if (widget.rightIconData == null){
       return Text("");
     }
-    return MusicButtonWidget(
-      iconData: widget.rightIconData,
-      onTap: (){
+    return MusicButton(
+      normalIconData: widget.rightIconData,
+      onTap: (selected){
         if(widget.rightOnTap != null){
           widget.rightOnTap();
         }
