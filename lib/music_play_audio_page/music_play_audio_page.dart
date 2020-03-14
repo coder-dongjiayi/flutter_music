@@ -42,17 +42,15 @@ class MusicPlayAudioPage extends StatelessWidget {
 
   Widget _play(){
   return  Padding(
-      padding: EdgeInsets.only(top: 30),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            MusicPlayInfoWidget(),
-            MusicPlayControlWidget(),
-            MusicPlaySliderWidget()
-          ],
-        ),
-      ),
-    );
+    padding: EdgeInsets.only(top: 50),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        MusicPlayInfoWidget(),
+        MusicPlayControlWidget(),
+        MusicPlaySliderWidget()
+      ],
+    ),
+  );
   }
 }

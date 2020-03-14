@@ -11,12 +11,12 @@ class MusicPlayBottomWidget extends StatelessWidget {
           iconData: Icons.airplay,
           size: 15,
           margin: EdgeInsets.only(right: 30),
-          padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
+          padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
         ),
         MusicButtonWidget(
           iconData: Icons.format_list_bulleted,
           size: 15,
-          padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
+          padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
           margin: EdgeInsets.only(left: 30),
         )
       ],

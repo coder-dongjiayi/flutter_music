@@ -5,7 +5,7 @@ class MusicPlayControlWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: 50),
+      padding: EdgeInsets.only(top: 45),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[

@@ -12,7 +12,7 @@ class _MusicPlaySliderWidgetState extends State<MusicPlaySliderWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(30, 40, 30, 30),
+      padding: EdgeInsets.fromLTRB(30, 50, 30, 30),
       child: Column(
         children: <Widget>[
           _slider(context),

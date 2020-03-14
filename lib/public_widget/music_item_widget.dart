@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_music/common/music_store.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_music/public_widget/music_button_widget.dart';
 class MusicItemWidget extends StatelessWidget {
 
   MusicItemWidget({
@@ -35,7 +36,11 @@ class MusicItemWidget extends StatelessWidget {
               flex: 1,
               child:  _itemTitle(context),
             ),
-            _itemPlay(context)
+          MusicButtonWidget(
+            iconData: Icons.play_arrow,
+            padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
+          )
+//            _itemPlay(context)
           ],
         ),
       ),
@@ -43,21 +48,6 @@ class MusicItemWidget extends StatelessWidget {
   }
 
 
-  Widget _itemPlay(context){
-    return Container(
-      padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        color: MusicStore.Theme.of(context).theme,
-          boxShadow:[
-            BoxShadow(color:MusicStore.Theme.of(context).shadowColor,offset: Offset(10,10),blurRadius: 10),
-            BoxShadow(color: Colors.white,offset: Offset(-10,-10),blurRadius: 26)
-          ]
-      ),
-      child: Icon(Icons.play_arrow,color: MusicStore.Theme.of(context).titleColor,size: 25,),
-
-    );
-  }
 
   Widget _itemCover(context){
     return Container(

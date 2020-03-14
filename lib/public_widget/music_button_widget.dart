@@ -44,11 +44,12 @@ class MusicButtonWidget extends StatelessWidget {
               .of(context)
               .theme,
           boxShadow: [
-            BoxShadow(color: MusicStore.Theme
-                .of(context)
-                .shadowColor, offset: Offset(10, 10), blurRadius: 15),
+            BoxShadow(color: MusicStore.Theme.of(context).shadowColor,
+                spreadRadius: 2,
+                offset: Offset(5, 5), blurRadius: 11),
             BoxShadow(
-                color: Colors.white, offset: Offset(-10, -10), blurRadius: 20)
+                color: Colors.white, offset: Offset(-5, -5), blurRadius: 11)
+
           ]
       ),
       child: Icon(iconData, size: size, color: MusicStore.Theme
