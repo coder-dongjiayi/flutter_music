@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_music/common/music_store.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_music/common/screen_adapter.dart';
-
+import 'package:flutter_music/music_play_audio_page/animation/music_translation_animation.dart';
 
 class MusicPlayInfoController extends ChangeNotifier{
 
@@ -31,6 +31,7 @@ class MusicPlayInfoWidget extends StatefulWidget {
     this.songName,
     this.artist,
     this.coverImageUrl,
+    this.translationAnimation
 
 
 }) : super (key : key);
@@ -40,6 +41,7 @@ class MusicPlayInfoWidget extends StatefulWidget {
   final String songName;
   final String artist;
   final String coverImageUrl;
+  final AnimationController translationAnimation;
   @override
   _MusicPlayInfoWidgetState createState() => _MusicPlayInfoWidgetState();
 }
@@ -139,8 +141,11 @@ class _MusicPlayInfoWidgetState extends State<MusicPlayInfoWidget>  with TickerP
   }
 
   Widget _playerName(context){
-    return Padding(
-      padding: EdgeInsets.only(top:_playerNameTop),
+
+    return MusicTranslationAnimation(
+      animationController: widget.translationAnimation,
+      begin: 0,
+      end: _playerNameTop,
       child: Text(widget.songName,
         style: TextStyle(color: MusicStore.Theme.of(context).titleColor,fontSize: 17,fontWeight: FontWeight.w600),
       ),

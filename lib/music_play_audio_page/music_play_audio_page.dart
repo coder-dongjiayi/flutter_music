@@ -7,6 +7,11 @@ import 'package:flutter_music/music_play_audio_page/music_play_control_widget.da
 import 'package:flutter_music/music_play_audio_page/music_play_bottom_widget.dart';
 import 'package:audioplayers/audioplayers.dart';
 
+
+import 'package:flutter_music/music_play_audio_page/animation/music_translation_animation.dart';
+
+import 'package:flutter_music/music_play_audio_page/animation/music_bottom_animation.dart';
+
 class MusicPlayAudioPage extends StatefulWidget {
   MusicPlayAudioPage({
     Key key,
@@ -36,8 +41,6 @@ class _MusicPlayAudioPageState extends State<MusicPlayAudioPage>  with TickerPro
 
   AnimationController _animationController;
 
-  Animation _shiftAnimation;
-  Animation _bottomAniamtion;
 
 
   @override
@@ -45,22 +48,11 @@ class _MusicPlayAudioPageState extends State<MusicPlayAudioPage>  with TickerPro
     // TODO: implement initState
     super.initState();
     _musicPlayInfoController = MusicPlayInfoController();
-    _initAnimation();
+
+    _animationController = AnimationController(duration: Duration(milliseconds: 300),vsync: this)..forward();
 
   }
 
-
- void _initAnimation(){
-
-    _animationController = AnimationController(duration: Duration(milliseconds: 200),vsync: this);
-
-     _shiftAnimation = Tween<double>(begin: 40.0,end: 0.0).animate(_animationController);
-
-    _bottomAniamtion =  Tween<double>(begin: 0.0,end: 40.0).animate(_animationController);
-
-    _animationController.forward();
-
-  }
 
 
   @override
@@ -75,30 +67,25 @@ class _MusicPlayAudioPageState extends State<MusicPlayAudioPage>  with TickerPro
           leftOnTap: (){
             Navigator.of(context).pop();
           },
-
         ),
 
         body: SafeArea(
           child: Stack(
             children: <Widget>[
               _playMusicInfo(),
-              AnimatedBuilder(
-               animation: _bottomAniamtion,
-               builder: (context,_){
-                 return Positioned(
-                   bottom: _bottomAniamtion.value,
-                   right: 0,
-                   left: 0,
-                   child: MusicPlayBottomWidget(),
-                 );
-               },
-              )
+              _bottomGroup()
             ],
           ),
         )
     );
   }
 
+  Widget _bottomGroup(){
+    return MusicBottomAnimation(
+      animationController: _animationController,
+      child:  MusicPlayBottomWidget(),
+    );
+  }
   Widget _playMusicInfo(){
     return  Padding(
       padding: EdgeInsets.only(top: 0),
@@ -106,41 +93,37 @@ class _MusicPlayAudioPageState extends State<MusicPlayAudioPage>  with TickerPro
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           MusicPlayInfoWidget(
+            translationAnimation: _animationController,
             heroTagName: widget.heroTagName,
-
             musicController: _musicPlayInfoController,
             songName: widget.songName,
             artist: widget.artist,
             coverImageUrl: widget.coverImageUrl,
+
           ),
 
-         AnimatedBuilder(
-           animation: Listenable.merge([_shiftAnimation]),
-           builder: (context,_){
+         MusicTranslationAnimation(
+           animationController: _animationController,
 
-             return Padding(
-               padding: EdgeInsets.only(top: _shiftAnimation.value),
-               child:  MusicPlayControlWidget(
-                 previousTap: (){
+           child: MusicPlayControlWidget(
+             previousTap: (){
 
-                 },
-                 stateTap: (selected){
-                   if(selected == true){
-                     _musicPlayInfoController.pauseAnimation();
-                     _audioPlayer.pause();
+             },
+             stateTap: (selected){
+               if(selected == true){
+                 _musicPlayInfoController.pauseAnimation();
+                 _audioPlayer.pause();
 
-                   }else{
-                     _musicPlayInfoController.resumeAnimation();
-                     _audioPlayer.resume();
+               }else{
+                 _musicPlayInfoController.resumeAnimation();
+                 _audioPlayer.resume();
 
-                   }
-                 },
-                 nextTap: (){
+               }
+             },
+             nextTap: (){
 
-                 },
-               ),
-             );
-           },
+             },
+           ),
          ),
           MusicPlaySliderWidget()
         ],
@@ -148,11 +131,14 @@ class _MusicPlayAudioPageState extends State<MusicPlayAudioPage>  with TickerPro
     );
   }
 
+
+
   @override
   void dispose() {
-    //_audioPlayer.dispose();
-    _musicPlayInfoController.dispose();
+
     _animationController.dispose();
+    _musicPlayInfoController.dispose();
+
     // TODO: implement dispose
     super.dispose();
   }
