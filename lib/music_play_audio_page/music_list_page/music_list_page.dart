@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_music/music_app_bar/music_app_bar.dart';
 import 'package:flutter_music/common/music_store.dart';
-import 'package:flutter_music/browse/browse_banner_widget.dart';
+import 'package:flutter_music/common/screen_adapter.dart';
 import 'package:flutter_music/public_widget/music_item_widget.dart';
-
-class BrowsePage extends StatefulWidget {
+import 'package:flutter_music/music_play_audio_page/music_paly_coverimage_widget.dart';
+class MusicListPage extends StatefulWidget {
   @override
-  _BrowsePageState createState() => _BrowsePageState();
+  _MusicListPageState createState() => _MusicListPageState();
 }
 
-class _BrowsePageState extends State<BrowsePage> {
-
+class _MusicListPageState extends State<MusicListPage> {
   var _itemList = [
     {
       "id":"1",
@@ -50,52 +49,68 @@ class _BrowsePageState extends State<BrowsePage> {
       "coverImageUrl":"https://img.xiami.net/images/appv5/common/5599/5d2ee9cfb1e62_hWTU_1563355599.jpg?x-oss-process=image/quality,q_80"
     },
   ];
-
-
   @override
   Widget build(BuildContext context) {
+    ScreenAdapter.init(context);
+    double _width =  ScreenAdapter.getScreenWidth()/4.0;
 
-    List<MusicItemWidget> _list = List<MusicItemWidget>.generate(_itemList.length, (int index){
-      return MusicItemWidget(
-        title: _itemList[index]["songName"],
-        subtTitle: _itemList[index]["artist"],
-        coverImageUrl: _itemList[index]["coverImageUrl"],
-        heroTageName: _itemList[index]["id"],
-      );
-    });
-
-    var _listView = <Widget>[];
-    _listView.add(BrowseBannerWidget());
-    _listView.add(_newSong(context));
-
-    for(Widget widget in _list){
-      _listView.add(widget);
-    }
 
     return Scaffold(
       backgroundColor: MusicStore.Theme.of(context).theme,
       appBar: MusicAppBar(
-        title: "浏览",
-        rightIconData: Icons.search,
+        title: "播放列表",
+        leftIconData: Icons.keyboard_arrow_left,
+        rightIconData: Icons.more_horiz,
+        leftOnTap: (){
+          Navigator.of(context).pop();
+        },
       ),
-      body:  ListView(
-        children: _listView
+      body: SafeArea(
+        child: Stack(
+          children: <Widget>[
+            _playCoverImage(_width),
+            _playList(_width)
+          ],
+        ),
       )
     );
   }
 
-  Widget _newSong(BuildContext context){
+  Widget _playList(top){
+    return Container(
+      margin: EdgeInsets.only(top: top+40),
+      child: ListView.builder(
 
-    return Padding(
-      padding: EdgeInsets.only(left: 20,right: 20,top: 30,bottom: 20),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Text("新歌",
+          itemCount: _itemList.length,
+          itemBuilder: (context,index){
 
-              style: TextStyle(color: MusicStore.Theme.of(context).titleColor,fontSize: 17)),
-          Icon(Icons.arrow_forward,size: 20,color: MusicStore.Theme.of(context).goldenColor)
-        ],
+            return MusicItemWidget(
+              onTap: (){
+                
+              },
+              title: _itemList[index]["songName"],
+              subtTitle: _itemList[index]["artist"],
+              coverImageUrl: _itemList[index]["coverImageUrl"],
+              heroTageName: _itemList[index]["id"],
+            );
+          }
+      ),
+    );
+  }
+
+
+  Widget _playCoverImage(width){
+
+    return Positioned(
+      top: 0,
+      left: 0,
+      right: 0,
+      child: Center(
+        child:  MusicPlayCoverimageWidget(
+          width: width,
+          marginTop: 20,
+          coverImageUrl: "https://pic.xiami.net/images/collect/15510601/1132807781/2ddcdab6d5c140878aa211e29c366f84_e9d34e1fa0b64470a4791884b24e4d00.jpg?x-oss-process=image/quality,q_80",
+        ),
       ),
     );
   }

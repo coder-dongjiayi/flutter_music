@@ -4,6 +4,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_music/common/screen_adapter.dart';
 import 'package:flutter_music/music_play_audio_page/animation/music_translation_animation.dart';
 
+import 'package:flutter_music/music_play_audio_page/music_paly_coverimage_widget.dart';
+
 class MusicPlayInfoController extends ChangeNotifier{
 
   static const int MUSIC_STATE_RESUME = 1;
@@ -162,43 +164,13 @@ class _MusicPlayInfoWidgetState extends State<MusicPlayInfoWidget>  with TickerP
   Widget _playCover(context){
     double _width =  ScreenAdapter.getScreenWidth()/3.0;
 
-    return Container(
+    return MusicPlayCoverimageWidget(
       width: _width,
-      height: _width,
-      margin: EdgeInsets.only(top: _playCovermarginTop),
-
-      decoration: ShapeDecoration(
-          color: Colors.white,
-          shape: CircleBorder(),
-          shadows: [
-            BoxShadow(color: MusicStore.Theme
-                .of(context)
-                .shadowColor, offset: Offset(10, 10), blurRadius: 20),
-            BoxShadow(
-                color: MusicStore.Theme
-                    .of(context)
-                    .shadowColor, offset: Offset(-10, -10), blurRadius: 20)
-          ]
-      ),
-      //margin: EdgeInsets.fromLTRB(60, 60, 60, 60),
-
-      padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-      child: RotationTransition(
-        alignment: Alignment.center,
-        turns: _animationController,
-        child: ClipOval(
-            child: CachedNetworkImage(
-              imageUrl: widget.coverImageUrl,
-              fit: BoxFit.cover,
-              placeholder: (context,url){
-                return Icon(Icons.music_note,size: _width,color:MusicStore.Theme.of(context).shadowColor);
-              },
-            )
-
-        ),
-      )
-
+      coverImageUrl: widget.coverImageUrl,
+      marginTop: _playCovermarginTop,
+      animationController: _animationController,
     );
+
   }
 }
 

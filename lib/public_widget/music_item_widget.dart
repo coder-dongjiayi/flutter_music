@@ -5,6 +5,8 @@ import 'package:vibrate/vibrate.dart';
 import 'package:flutter_music/public_widget/music_button.dart';
 
 import 'package:flutter_music/music_play_audio_page/music_play_audio_page.dart';
+typedef GestureTapCallback = void Function();
+
 class MusicItemWidget extends StatelessWidget {
 
   MusicItemWidget({
@@ -12,7 +14,8 @@ class MusicItemWidget extends StatelessWidget {
     this.title,
     this.subtTitle,
     this.coverImageUrl,
-    this.heroTageName
+    this.heroTageName,
+    this.onTap
 }):super(key:key);
 
   final String title;
@@ -20,6 +23,8 @@ class MusicItemWidget extends StatelessWidget {
   final String coverImageUrl;
 
   final String heroTageName;
+
+  final GestureTapCallback onTap;
 
   static const opacityCurve = const Interval(0.0, 0.75, curve: Curves.fastOutSlowIn);
 
@@ -29,28 +34,13 @@ class MusicItemWidget extends StatelessWidget {
 
     return GestureDetector(
       onTap: (){
-
         Vibrate.feedback(FeedbackType.selection);
+        if (onTap != null){
+          onTap();
+        }else{
+          _animationPush(context);
+        }
 
-        Navigator.of(context).push(PageRouteBuilder<void>(
-            pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation){
-              return AnimatedBuilder(
-                animation: animation,
-                builder:  (BuildContext context, Widget child){
-                  return Opacity(
-                      opacity: opacityCurve.transform(animation.value),
-                      child: MusicPlayAudioPage(
-                          heroTagName: heroTageName,
-                          songName: title,
-                          artist: subtTitle,
-                          coverImageUrl: coverImageUrl,
-                      )
-                  );
-                },
-              );
-            }
-
-        ));
 
       },
 
@@ -134,6 +124,27 @@ class MusicItemWidget extends StatelessWidget {
     );
   }
 
+  void _animationPush(context){
 
+    Navigator.of(context).push(PageRouteBuilder<void>(
+        pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation){
+          return AnimatedBuilder(
+            animation: animation,
+            builder:  (BuildContext context, Widget child){
+              return Opacity(
+                  opacity: opacityCurve.transform(animation.value),
+                  child: MusicPlayAudioPage(
+                    heroTagName: heroTageName,
+                    songName: title,
+                    artist: subtTitle,
+                    coverImageUrl: coverImageUrl,
+                  )
+              );
+            },
+          );
+        }
+
+    ));
+  }
 
 }
