@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_music/common/music_store.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_music/common/screen_adapter.dart';
+
 
 class MusicPlayInfoController extends ChangeNotifier{
 
@@ -24,11 +26,20 @@ class MusicPlayInfoController extends ChangeNotifier{
 class MusicPlayInfoWidget extends StatefulWidget {
   MusicPlayInfoWidget({
     Key key,
-    this.musicController
+    this.musicController,
+    this.heroTagName,
+    this.songName,
+    this.artist,
+    this.coverImageUrl,
+
 
 }) : super (key : key);
 
   final MusicPlayInfoController musicController;
+  final String heroTagName;
+  final String songName;
+  final String artist;
+  final String coverImageUrl;
   @override
   _MusicPlayInfoWidgetState createState() => _MusicPlayInfoWidgetState();
 }
@@ -37,6 +48,9 @@ class _MusicPlayInfoWidgetState extends State<MusicPlayInfoWidget>  with TickerP
 
 
 
+  var _playerNameTop = 35.0;
+  var _playerArtistTop = 5.0;
+  var _playCovermarginTop = 20.0;
 
   AnimationController _animationController;
 
@@ -48,7 +62,7 @@ class _MusicPlayInfoWidgetState extends State<MusicPlayInfoWidget>  with TickerP
     super.initState();
     _controller = widget.musicController;
     if (_controller != null) {
-      _controller.addListener(_addLister);
+     // _controller.addListener(_addLister);
     }
 
 
@@ -66,15 +80,15 @@ class _MusicPlayInfoWidgetState extends State<MusicPlayInfoWidget>  with TickerP
 
   }
 
-  void _addLister(){
-      if(_controller.state == MusicPlayInfoController.MUSIC_STATE_RESUME){
-
-        _animationController.forward();
-      }
-      if(_controller.state == MusicPlayInfoController.MUSIC_STATE_PAUSE){
-        _animationController.stop();
-      }
-  }
+//  void _addLister(){
+//      if(_controller.state == MusicPlayInfoController.MUSIC_STATE_RESUME){
+//
+//        _animationController.forward();
+//      }
+//      if(_controller.state == MusicPlayInfoController.MUSIC_STATE_PAUSE){
+//        _animationController.stop();
+//      }
+//  }
   @override
   void dispose() {
     // TODO: implement dispose
@@ -87,35 +101,67 @@ class _MusicPlayInfoWidgetState extends State<MusicPlayInfoWidget>  with TickerP
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        _playCover(context),
-        _playerName(context),
-        _playerArtist(context)
-      ],
+    ScreenAdapter.init(context);
+
+    double _containerHeight =  ScreenAdapter.getScreenWidth()/3.0
+                              + _playCovermarginTop *2
+                              + _playerNameTop
+                              + _playerArtistTop
+                              + 20
+                              + 10;
+
+
+
+    return Container(
+
+      height: _containerHeight,
+
+      child: PageView.builder(
+          itemCount: 5,
+          itemBuilder: (BuildContext context, int index){
+            return _pageItem();
+          }),
     );
 
   }
 
+  Widget _pageItem(){
+    return Column(
+      children: <Widget>[
+        Hero(
+          tag: widget.heroTagName,
+          child:  _playCover(context),
+        ),
+        _playerName(context),
+        _playerArtist(context)
+      ],
+    );
+  }
+
   Widget _playerName(context){
     return Padding(
-      padding: EdgeInsets.only(top: 35),
-      child: Text("光年之外",
+      padding: EdgeInsets.only(top:_playerNameTop),
+      child: Text(widget.songName,
         style: TextStyle(color: MusicStore.Theme.of(context).titleColor,fontSize: 17,fontWeight: FontWeight.w600),
       ),
     );
   }
   Widget _playerArtist(context){
     return Padding(
-      padding: EdgeInsets.only(top: 5),
-      child: Text("邓紫棋",
+      padding: EdgeInsets.only(top: _playerArtistTop),
+      child: Text(widget.artist,
         style: TextStyle(color: MusicStore.Theme.of(context).subtTitleColor,fontSize: 12),
       ),
     );
   }
   Widget _playCover(context){
+    double _width =  ScreenAdapter.getScreenWidth()/3.0;
+
     return Container(
-      margin: EdgeInsets.fromLTRB(80, 0, 80, 0),
+      width: _width,
+      height: _width,
+      margin: EdgeInsets.only(top: _playCovermarginTop),
+
       decoration: ShapeDecoration(
           color: Colors.white,
           shape: CircleBorder(),
@@ -137,10 +183,10 @@ class _MusicPlayInfoWidgetState extends State<MusicPlayInfoWidget>  with TickerP
         turns: _animationController,
         child: ClipOval(
             child: CachedNetworkImage(
-              imageUrl: "https://pic.xiami.net/images/album/img29/59/586525ffc9905_2961929_1483023871.jpg?x-oss-process=image/quality,q_80",
+              imageUrl: widget.coverImageUrl,
               fit: BoxFit.cover,
               placeholder: (context,url){
-                return Icon(Icons.music_note,size: 200,color:MusicStore.Theme.of(context).shadowColor);
+                return Icon(Icons.music_note,size: _width,color:MusicStore.Theme.of(context).shadowColor);
               },
             )
 

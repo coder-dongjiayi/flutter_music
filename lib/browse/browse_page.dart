@@ -13,31 +13,37 @@ class _BrowsePageState extends State<BrowsePage> {
 
   var _itemList = [
     {
+      "id":"1",
       "songName":"稀客",
       "artist":"杨千嬅 - 千嬅盛放",
       "coverImageUrl":"https://pic.xiami.net/images/collect/15510601/1132807781/2ddcdab6d5c140878aa211e29c366f84_e9d34e1fa0b64470a4791884b24e4d00.jpg?x-oss-process=image/quality,q_80"
     },
     {
+      "id":"2",
       "songName":"Young For Tou",
       "artist":"GALA - 2的奉献",
       "coverImageUrl":"https://pic.xiami.net/images/collect/948/48/956234948_1565835648_FzHE.jpg?x-oss-process=image/quality,q_80"
     },
     {
+      "id":"3",
       "songName":"我不是你的宋冬野",
       "artist":"林期得 - 我不是你的宋冬野",
       "coverImageUrl":"https://img.xiami.net/images/appv5/common/36051/5e5fca7378d94_LD8U_1583336051.jpg?x-oss-process=image/quality,q_80"
     },
     {
+      "id":"4",
       "songName":"北京、北京",
       "artist":"郝云 - 北京",
       "coverImageUrl":"https://pic.xiami.net/images/album/img29/59/586525ffc9905_2961929_1483023871.jpg?x-oss-process=image/quality,q_80/format,jpg"
     },
     {
+      "id":"5",
       "songName":"回到哈尔滨",
       "artist":"刘朋朋 - 刘同学",
       "coverImageUrl":"https://pic.xiami.net/images/album/img42/218842/2188421475218842.jpg?x-oss-process=image/quality,q_80/format,jpg"
     },
     {
+      "id":"6",
       "songName":"你给我听好",
       "artist":"小鹿Morning",
       "coverImageUrl":"https://img.xiami.net/images/appv5/common/5599/5d2ee9cfb1e62_hWTU_1563355599.jpg?x-oss-process=image/quality,q_80"
@@ -50,9 +56,10 @@ class _BrowsePageState extends State<BrowsePage> {
 
     List<MusicItemWidget> _list = List<MusicItemWidget>.generate(_itemList.length, (int index){
       return MusicItemWidget(
-        songName: _itemList[index]["songName"],
-        artist: _itemList[index]["artist"],
+        title: _itemList[index]["songName"],
+        subtTitle: _itemList[index]["artist"],
         coverImageUrl: _itemList[index]["coverImageUrl"],
+        heroTageName: _itemList[index]["id"],
       );
     });
 

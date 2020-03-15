@@ -44,10 +44,10 @@ class ScreenAdapter{
   }
 
   static getScreenHeight(){
-    return ScreenUtil.screenHeight;
+    return ScreenUtil.screenWidthDp;
   }
 
   static getScreenWidth(){
-    return ScreenUtil.screenWidth;
+    return ScreenUtil.screenHeightDp;
   }
 }
