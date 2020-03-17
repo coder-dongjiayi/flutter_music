@@ -62,7 +62,9 @@ class BrowseBannerWidget extends StatelessWidget {
     );
   }
 
-///每一个control
+///每一个control 300175285
+  ///
+  /// http://localhost:3000/user/playlist?uid=300175285
   Widget _swiperControlItem(index){
 
     return Builder(

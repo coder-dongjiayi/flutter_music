@@ -78,6 +78,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.1.3"
+  dio:
+    dependency: "direct main"
+    description:
+      name: dio
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.9"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -142,6 +149,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.1.4"
+  loading:
+    dependency: "direct main"
+    description:
+      name: loading
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.2"
   matcher:
     dependency: transitive
     description:
