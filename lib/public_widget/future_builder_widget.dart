@@ -11,29 +11,71 @@ class FutureBuilderWidget<T> extends StatelessWidget {
   FutureBuilderWidget({
     Key key,
     this.future,
-    this.errorWidget,
-    this.emptyWidget,
-    this.builder,
-    this.emptyShow
+    this.emptydBuilder,
+    this.activityIndicator,
+    EmptyWidgetBuilder<T>  isEmptyBuilder,
+    this.successBuilder,
+    AsyncWidgetBuilder<T>  fieldBuilder
 
-  }) : super(key : key);
 
-  final Widget errorWidget;
-  final Widget emptyWidget;
+  }) : _isEmptyBuilder = isEmptyBuilder ,
+        _fieldBuilder = fieldBuilder,
+        super(key : key);
+
+
+
+  /// 异步函数
   final Future<T> future;
 
-  final AsyncWidgetBuilder<T> builder;
+  /// 请求成功回调
+  final AsyncWidgetBuilder<T> successBuilder;
 
-  final EmptyWidgetBuilder<T> emptyShow;
+  /// 请求失败回调
+  final AsyncWidgetBuilder<T> _fieldBuilder;
 
-  Widget _empty(){
+  /// 用于显示空白页面的widget
+  final AsyncWidgetBuilder<T> emptydBuilder;
+
+  /// 指示器 不传的话 会有默认的大菊花指示器
+  final Widget activityIndicator;
+
+  /// 是否需要显示空白页面
+  final EmptyWidgetBuilder<T> _isEmptyBuilder;
+
+
+
+  /// MARK:空白页面
+  Widget _empty(BuildContext context,AsyncSnapshot<T> snapshot){
+
+    Widget emptyWidget = emptydBuilder(context,snapshot);
+
     return Center(
         child: emptyWidget == null ? Text("暂时没有数据哦") : emptyWidget
     );
   }
-  Widget _error(){
+
+  /// MARK: 错误信息页面
+  Widget _error(BuildContext context,AsyncSnapshot<T> snapshot){
+
+
     return Center(
-      child: errorWidget == null ? Text("请求失败") : errorWidget,
+      child: _fieldBuilder == null ?
+          Padding(
+            padding: EdgeInsets.only(left: 20,right: 20),
+            child: Text("请求失败:"+snapshot.error.toString(),style: TextStyle(color: Colors.red),),
+          )
+          : _fieldBuilder(context,snapshot),
+    );
+  }
+
+  ///MARK:指示器
+  Widget _activityIndicator(){
+    return  Center(
+
+      child: activityIndicator != null ? activityIndicator : CupertinoActivityIndicator(
+
+        radius: 20,
+      ),
     );
   }
 
@@ -48,31 +90,26 @@ class FutureBuilderWidget<T> extends StatelessWidget {
 
           if(snapshot.hasError){
 
-            return _error();
+            return _error(context,snapshot);
+
+
           }else{
 
             bool isShowEmpty = false;
-            if(emptyShow != null){
 
-              isShowEmpty = emptyShow(context,snapshot);
+            if(_isEmptyBuilder != null){
+              isShowEmpty = _isEmptyBuilder(context,snapshot);
             }
 
+            Widget builderWidget =  successBuilder(context,snapshot);
 
-            Widget builderWidget =  builder(context,snapshot);
-
-            return  isShowEmpty == true ? _empty() : builderWidget;
+            return  isShowEmpty == true ? _empty(context,snapshot) : builderWidget;
 
           }
 
         }else{
 
-          return  Center(
-
-            child: CupertinoActivityIndicator(
-
-              radius: 20,
-            ),
-          );
+          return  _activityIndicator();
         }
 
       },

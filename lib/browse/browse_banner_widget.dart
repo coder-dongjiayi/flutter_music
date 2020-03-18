@@ -3,6 +3,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_music/common/music_store.dart';
 import 'package:provider/provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_music/http_request/music_api.dart';
 class BanerScrollState extends ChangeNotifier{
   int currentIndex = 0;
   void setIndex(index){
@@ -26,23 +27,38 @@ class BrowseBannerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<BanerScrollState>(create: (_)=>BanerScrollState())
-      ],
+    return FutureBuilderWidget<List<PlayItemModel>>(
+      future: MusicApi.choicenessSongList(order: "hot",limit: 4),
 
-      child: Consumer<BanerScrollState>(
-        builder: (context,state,_){
-          return Column(
-            children: <Widget>[
-              _swiperList(),
-              _swiperControlList()
-            ],
-          );
-        },
-      )
+      successBuilder: (BuildContext context, AsyncSnapshot<List<PlayItemModel>> snapshot){
+
+        return _banner(snapshot.data);
+      },
     );
 
+
+  }
+  Widget _banner(List<PlayItemModel> list){
+
+    return  MultiProvider(
+        providers: [
+          ChangeNotifierProvider<BanerScrollState>(create: (_)=>BanerScrollState())
+        ],
+
+        child:
+
+        Consumer<BanerScrollState>(
+          builder: (context,state,_){
+            return Column(
+              children: <Widget>[
+                _swiperList(list),
+                _swiperControlList()
+              ],
+            );
+
+          },
+        )
+    );
   }
 
   ///轮播图下面的control
@@ -62,9 +78,8 @@ class BrowseBannerWidget extends StatelessWidget {
     );
   }
 
-///每一个control 300175285
-  ///
-  /// http://localhost:3000/user/playlist?uid=300175285
+///每一个control
+
   Widget _swiperControlItem(index){
 
     return Builder(
@@ -85,7 +100,7 @@ class BrowseBannerWidget extends StatelessWidget {
   }
 
 /// 轮播图
-  Widget _swiperList(){
+  Widget _swiperList(List<PlayItemModel> list){
     return Builder(
       builder: (context){
         return AspectRatio(
@@ -107,7 +122,7 @@ class BrowseBannerWidget extends StatelessWidget {
                 duration: 1000,
                 autoplayDelay: 5000,
                 autoplay: true,
-                itemCount: 4,
+                itemCount: list.length,
                 onIndexChanged: (index){
 
                   Provider.of<BanerScrollState>(context,listen: false).setIndex(index);
@@ -115,7 +130,7 @@ class BrowseBannerWidget extends StatelessWidget {
                 },
                 itemBuilder: (context,index){
 
-                  return  _swiperItem(index);
+                  return  _swiperItem(list[index].coverImgUrl);
                 },
 
               )
@@ -126,7 +141,7 @@ class BrowseBannerWidget extends StatelessWidget {
   }
 
 
-  Widget _swiperItem(index){
+  Widget _swiperItem(imageUrl){
 
     return Container(
       margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
@@ -137,7 +152,7 @@ class BrowseBannerWidget extends StatelessWidget {
       child: ClipRRect(
         borderRadius:  BorderRadius.circular(8),
         child: CachedNetworkImage(
-          imageUrl: _imageList[index],
+          imageUrl: imageUrl,
           fit: BoxFit.cover,
         )
       ),

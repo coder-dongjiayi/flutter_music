@@ -109,7 +109,7 @@ class MusicItemWidget extends StatelessWidget {
         children: <Widget>[
           Text("$title",
               maxLines: 1,
-              style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500, color: MusicStore.Theme.of(context).titleColor)),
+              style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500, color: MusicStore.Theme.of(context).titleColor),overflow: TextOverflow.ellipsis,),
 
           Padding(
               padding: EdgeInsets.only(top: 3,right: 60),

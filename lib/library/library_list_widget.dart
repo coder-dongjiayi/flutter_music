@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_music/common/music_store.dart';
 import 'package:flutter_music/public_widget/future_builder_widget.dart';
 import 'package:flutter_music/library/library_empty_widget.dart';
-import 'package:flutter_music/library/play_list_model.dart';
+import 'package:flutter_music/models/play_list_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_music/http_request/music_api.dart';
 class LibraryListWidget extends StatelessWidget {
@@ -18,14 +18,20 @@ class LibraryListWidget extends StatelessWidget {
 
       future: MusicApi.requestPlayList(),
 
-      emptyWidget: LibraryEmptyWidget(),
-
-      emptyShow: (BuildContext context,AsyncSnapshot<List<PlayItemModel>> snapshot){
-
-        return snapshot.data.length == 0 ? true : false;
+      emptydBuilder: (BuildContext context,AsyncSnapshot<List<PlayItemModel>> snapshot){
+        return LibraryEmptyWidget();
       },
 
-      builder: (BuildContext context, AsyncSnapshot<List<PlayItemModel>> snapshot){
+      isEmptyBuilder:(BuildContext context,AsyncSnapshot<List<PlayItemModel>> snapshot){
+        return  snapshot.data.length == 0 ? true : false;
+      } ,
+
+      fieldBuilder: (BuildContext context, AsyncSnapshot<List<PlayItemModel>> snapshot){
+
+        return null;
+      },
+
+      successBuilder: (BuildContext context, AsyncSnapshot<List<PlayItemModel>> snapshot){
 
         Widget listView =   _listView(context, snapshot.data);
 

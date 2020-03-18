@@ -5,14 +5,16 @@ class PlayListModel{
 
  PlayListModel({this.playlist});
 
- PlayListModel.fromJson(Map<String, dynamic> json){
-   if(json["playlist"] != null){
+ PlayListModel.fromJson(Map<String, dynamic> json,String keyString){
+   if(json[keyString] != null){
 
      playlist = new List<PlayItemModel>();
-     json["playlist"].forEach((v){
+     json[keyString].forEach((v){
        PlayItemModel itemModel = PlayItemModel.fromJson(v);
        playlist.add(itemModel);
      });
+
+
    }
  }
 }
