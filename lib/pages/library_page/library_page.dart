@@ -4,7 +4,7 @@ import 'package:flutter_music/common/music_store.dart';
 
 import 'package:flutter_music/music_app_bar/music_app_bar.dart';
 
-import 'package:flutter_music/library/library_list_widget.dart';
+import 'package:flutter_music/pages/library_page/library_list_widget.dart';
 
 
 class LibraryPage extends StatefulWidget {

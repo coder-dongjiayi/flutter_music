@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_music/common/music_store.dart';
 import 'package:provider/provider.dart';
+import 'dart:math';
 import 'package:flutter_music/public_widget/music_gestureDetector.dart';
 class _IntroductionState extends ChangeNotifier{
 
@@ -8,7 +9,7 @@ class _IntroductionState extends ChangeNotifier{
   int mainLine = 3;
 
   void updateState(){
-    mainLine = mainLine == 3 ? 1000 : 3;
+    mainLine = mainLine == 3 ? 10000 : 3;
 
     notifyListeners();
   }

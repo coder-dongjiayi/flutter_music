@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_music/public_widget/music_button.dart';
-import 'package:flutter_music/music_play_audio_page/music_list_page/music_list_page.dart';
+import 'package:flutter_music/pages/music_play_media_page/music_list_page/music_list_page.dart';
 
 
 class MusicPlayBottomWidget extends StatelessWidget {

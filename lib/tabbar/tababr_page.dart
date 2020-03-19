@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_music/library/library_page.dart';
-import 'package:flutter_music/commend/commend_page.dart';
-import 'package:flutter_music/browse/browse_page.dart';
+import 'package:flutter_music/pages/library_page/library_page.dart';
+import 'package:flutter_music/pages/recommend_page/recommend_page.dart';
+import 'package:flutter_music/pages/browse_page/browse_page.dart';
 import 'package:flutter_music/tabbar/bottom_tabbar.dart';
 import 'package:vibrate/vibrate.dart';
 

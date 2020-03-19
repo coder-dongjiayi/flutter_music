@@ -4,12 +4,12 @@ import 'package:flutter_music/models/song_list_model.dart';
 import 'package:flutter_music/music_app_bar/music_app_bar.dart';
 import 'package:flutter_music/common/music_store.dart';
 
-import 'package:flutter_music/commend/comment_item_widget.dart';
-import 'package:flutter_music/commend/comment_more_item_widget.dart';
+import 'package:flutter_music/pages/recommend_page/recomment_item_widget.dart';
+import 'package:flutter_music/pages/recommend_page/recomment_more_item_widget.dart';
 import 'package:flutter_music/http_request/music_api.dart';
 import 'package:flutter_music/public_widget/music_title_widget.dart';
 import 'package:flutter_music/public_widget/music_gestureDetector.dart';
-import 'package:flutter_music/album/album_page.dart';
+import 'package:flutter_music/pages/album_page/album_page.dart';
 class CommendPage extends StatefulWidget {
   @override
   _CommendPageState createState() => _CommendPageState();

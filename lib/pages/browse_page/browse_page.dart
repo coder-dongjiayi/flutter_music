@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_music/music_app_bar/music_app_bar.dart';
 import 'package:flutter_music/common/music_store.dart';
-import 'package:flutter_music/browse/browse_banner_widget.dart';
+import 'package:flutter_music/pages/browse_page/browse_banner_widget.dart';
 import 'package:flutter_music/public_widget/music_item_widget.dart';
 import 'package:flutter_music/http_request/music_api.dart';
 import 'package:flutter_music/public_widget/music_title_widget.dart';

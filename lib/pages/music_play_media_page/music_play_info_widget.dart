@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_music/common/music_store.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_music/common/screen_adapter.dart';
-import 'package:flutter_music/music_play_audio_page/animation/music_translation_animation.dart';
 
-import 'package:flutter_music/music_play_audio_page/music_paly_coverimage_widget.dart';
+import 'package:flutter_music/common/screen_adapter.dart';
+import 'package:flutter_music/pages/music_play_media_page/animation/music_translation_animation.dart';
+import 'package:flutter_music/pages/music_play_media_page/music_paly_coverimage_widget.dart';
 
 class MusicPlayInfoController extends ChangeNotifier{
 

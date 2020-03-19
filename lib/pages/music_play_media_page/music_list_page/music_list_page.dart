@@ -3,7 +3,7 @@ import 'package:flutter_music/music_app_bar/music_app_bar.dart';
 import 'package:flutter_music/common/music_store.dart';
 import 'package:flutter_music/common/screen_adapter.dart';
 import 'package:flutter_music/public_widget/music_item_widget.dart';
-import 'package:flutter_music/music_play_audio_page/music_paly_coverimage_widget.dart';
+import 'package:flutter_music/pages/music_play_media_page/music_paly_coverimage_widget.dart';
 class MusicListPage extends StatefulWidget {
   @override
   _MusicListPageState createState() => _MusicListPageState();
@@ -34,13 +34,13 @@ class _MusicListPageState extends State<MusicListPage> {
       "id":"4",
       "songName":"北京、北京",
       "artist":"郝云 - 北京",
-      "coverImageUrl":"https://pic.xiami.net/images/album/img29/59/586525ffc9905_2961929_1483023871.jpg?x-oss-process=image/quality,q_80/format,jpg"
+      "coverImageUrl":"https://pic.xiami.net/images/pages.album/img29/59/586525ffc9905_2961929_1483023871.jpg?x-oss-process=image/quality,q_80/format,jpg"
     },
     {
       "id":"5",
       "songName":"回到哈尔滨",
       "artist":"刘朋朋 - 刘同学",
-      "coverImageUrl":"https://pic.xiami.net/images/album/img42/218842/2188421475218842.jpg?x-oss-process=image/quality,q_80/format,jpg"
+      "coverImageUrl":"https://pic.xiami.net/images/pages.album/img42/218842/2188421475218842.jpg?x-oss-process=image/quality,q_80/format,jpg"
     },
     {
       "id":"6",

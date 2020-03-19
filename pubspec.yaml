@@ -31,7 +31,7 @@ dependencies:
   vibrate: ^0.0.4
   audioplayers: ^0.14.0
   dio: ^3.0.9
-
+  apple_sign_in: ^0.1.0
 
 dev_dependencies:
   flutter_test:

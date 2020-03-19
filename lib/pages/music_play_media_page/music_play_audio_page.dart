@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_music/music_app_bar/music_app_bar.dart';
 import 'package:flutter_music/common/music_store.dart';
-import 'package:flutter_music/music_play_audio_page/music_play_slider_widget.dart';
-import 'package:flutter_music/music_play_audio_page/music_play_info_widget.dart';
-import 'package:flutter_music/music_play_audio_page/music_play_control_widget.dart';
-import 'package:flutter_music/music_play_audio_page/music_play_bottom_widget.dart';
+import 'package:flutter_music/pages/music_play_media_page/music_play_slider_widget.dart';
+import 'package:flutter_music/pages/music_play_media_page/music_play_info_widget.dart';
+
 import 'package:audioplayers/audioplayers.dart';
-
-
-import 'package:flutter_music/music_play_audio_page/animation/music_translation_animation.dart';
-
-import 'package:flutter_music/music_play_audio_page/animation/music_bottom_animation.dart';
+import 'package:flutter_music/pages/music_play_media_page/music_play_control_widget.dart';
+import 'package:flutter_music/pages/music_play_media_page/animation/music_translation_animation.dart';
+import 'package:flutter_music/pages/music_play_media_page/music_play_bottom_widget.dart';
+import 'package:flutter_music/pages/music_play_media_page/animation/music_bottom_animation.dart';
 
 class MusicPlayAudioPage extends StatefulWidget {
   MusicPlayAudioPage({

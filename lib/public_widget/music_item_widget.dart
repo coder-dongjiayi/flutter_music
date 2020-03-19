@@ -4,7 +4,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:vibrate/vibrate.dart';
 import 'package:flutter_music/public_widget/music_button.dart';
 
-import 'package:flutter_music/music_play_audio_page/music_play_audio_page.dart';
+import 'package:flutter_music/pages/music_play_media_page/music_play_audio_page.dart';
+
 typedef GestureTapCallback = void Function();
 
 class MusicItemWidget extends StatelessWidget {

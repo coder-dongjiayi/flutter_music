@@ -2,11 +2,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_music/common/music_store.dart';
 import 'package:flutter_music/public_widget/future_builder_widget.dart';
-import 'package:flutter_music/library/library_empty_widget.dart';
+import 'package:flutter_music/pages/library_page/library_empty_widget.dart';
 import 'package:flutter_music/models/play_list_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_music/http_request/music_api.dart';
-import 'package:flutter_music/album/album_page.dart';
+import 'package:flutter_music/pages/album_page/album_page.dart';
 
 class LibraryListWidget extends StatefulWidget {
   @override
