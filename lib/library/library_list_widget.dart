@@ -6,9 +6,17 @@ import 'package:flutter_music/library/library_empty_widget.dart';
 import 'package:flutter_music/models/play_list_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_music/http_request/music_api.dart';
-class LibraryListWidget extends StatelessWidget {
+import 'package:flutter_music/album/album_page.dart';
+
+class LibraryListWidget extends StatefulWidget {
+  @override
+  _LibraryListWidgetState createState() => _LibraryListWidgetState();
+}
+
+class _LibraryListWidgetState extends State<LibraryListWidget> {
 
 
+  Future _future = MusicApi.requestPlayList();
 
 
   @override
@@ -16,7 +24,7 @@ class LibraryListWidget extends StatelessWidget {
 
     return FutureBuilderWidget<List<PlayItemModel>>(
 
-      future: MusicApi.requestPlayList(),
+      future: _future,
 
       emptydBuilder: (BuildContext context,AsyncSnapshot<List<PlayItemModel>> snapshot){
         return LibraryEmptyWidget();
@@ -26,10 +34,6 @@ class LibraryListWidget extends StatelessWidget {
         return  snapshot.data.length == 0 ? true : false;
       } ,
 
-      fieldBuilder: (BuildContext context, AsyncSnapshot<List<PlayItemModel>> snapshot){
-
-        return null;
-      },
 
       successBuilder: (BuildContext context, AsyncSnapshot<List<PlayItemModel>> snapshot){
 
@@ -44,12 +48,22 @@ class LibraryListWidget extends StatelessWidget {
   Widget _listView(context,dataSource){
 
 
-      return ListView.builder(
+    return ListView.builder(
 
         itemBuilder: (BuildContext context, int index){
           PlayItemModel itemModel = dataSource[index];
 
-          return  _libraryItem(itemModel.coverImgUrl,itemModel.name,itemModel.description);
+          return  GestureDetector(
+            onTap: (){
+
+              Navigator.push(context, MaterialPageRoute(
+                  builder: (context){
+                    return AlbumPage(id: itemModel.id);
+                  }
+              ));
+            },
+            child: _libraryItem(itemModel.coverImgUrl,itemModel.name,itemModel.description),
+          );
         },
         padding: EdgeInsets.only(top: 30),
         itemCount: dataSource.length
@@ -139,6 +153,7 @@ class LibraryListWidget extends StatelessWidget {
       },
     );
   }
-
-
 }
+
+
+

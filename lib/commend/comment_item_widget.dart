@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_music/common/music_store.dart';
 import 'package:flutter_music/public_widget/music_title_widget.dart';
+import 'package:flutter_music/public_widget/music_gestureDetector.dart';
+typedef GestureTapCallback = void Function();
+
 class CommentItemWidget extends StatelessWidget {
 
   CommentItemWidget({
     Key key,
     this.title,
     this.imageUrl1,
-    this.imageUrl2
+    this.imageUrl2,
+    this.leftOnTap,
+    this.rightOnTap
 
   }): super(key:key);
 
@@ -15,13 +20,19 @@ class CommentItemWidget extends StatelessWidget {
   final String imageUrl1;
   final String imageUrl2;
 
+  final GestureTapCallback leftOnTap;
+  final GestureTapCallback rightOnTap;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(top: 30,left: 20,right: 20),
       child: Column(
         children: <Widget>[
-          _title(context),
+          MusicTitleWidget(
+            title: title,
+            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+          ),
           _itemList(context)
         ],
       ),
@@ -36,14 +47,24 @@ class CommentItemWidget extends StatelessWidget {
             flex: 1,
             child: Container(
               margin: EdgeInsets.only(right:6),
-              child: _item(context,imageUrl1),
+              child: MusicGestureDetector(
+                onTap: (){
+                  leftOnTap();
+                },
+                child: _item(context,imageUrl1),
+              ),
             )
           ),
         Expanded(
           flex: 1,
           child: Container(
             margin: EdgeInsets.only(left: 6),
-            child: _item(context,imageUrl2),
+            child: MusicGestureDetector(
+              onTap: (){
+                rightOnTap();
+              },
+              child: _item(context,imageUrl2),
+            ),
           ),
         )
       ],
@@ -69,24 +90,14 @@ class CommentItemWidget extends StatelessWidget {
         aspectRatio: 1.3,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(5),
-          child: FadeInImage.memoryNetwork(placeholder: kTransparentImage, image: "$imageUrl",fit: BoxFit.cover,),
-
+          child: CachedNetworkImage(
+            imageUrl: "$imageUrl",
+            fit: BoxFit.cover,
+          )
         ),
       ),
 
     );
   }
 
-  Widget _title(BuildContext context){
-
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Text("${title}",
-
-            style: TextStyle(color: MusicStore.Theme.of(context).titleColor,fontSize: 17)),
-        Icon(Icons.arrow_forward,size: 20,color: MusicStore.Theme.of(context).goldenColor)
-      ],
-    );
-  }
 }

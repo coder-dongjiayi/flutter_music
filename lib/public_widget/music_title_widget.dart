@@ -4,15 +4,17 @@ import 'package:flutter_music/common/music_store.dart';
 class MusicTitleWidget extends StatelessWidget {
   MusicTitleWidget({
     Key key,
-    this.title
+    this.title,
+    this.padding : const EdgeInsets.fromLTRB(20, 20, 20, 20)
 
 }) : super(key:key);
   final String title;
+  final EdgeInsets padding;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(left: 20,right: 20,top: 20,bottom: 20),
+      padding: padding,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[

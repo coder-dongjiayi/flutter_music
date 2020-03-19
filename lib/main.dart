@@ -22,6 +22,8 @@ class MyApp extends StatelessWidget {
 
             initialRoute: "/",
 
+             routes: routers,
+
             onGenerateRoute: onGenerateRoute,
 
             theme: ThemeData(primaryColor:state.theme),

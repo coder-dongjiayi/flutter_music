@@ -16,6 +16,7 @@ class _BrowsePageState extends State<BrowsePage> with AutomaticKeepAliveClientMi
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 
+  Future _future = MusicApi.newSongList();
 
 
   @override
@@ -28,42 +29,35 @@ class _BrowsePageState extends State<BrowsePage> with AutomaticKeepAliveClientMi
         title: "浏览",
         rightIconData: Icons.search,
       ),
-      body: NestedScrollView(
-          headerSliverBuilder:(BuildContext context, bool innerBoxIsScrolled){
-            return [
-             SliverToBoxAdapter(
-               child:  BrowseBannerWidget(),
-             ),
-              SliverToBoxAdapter(
-                child: MusicTitleWidget(
-                  title: "新歌",
-                ),
-              )
-            ];
-
-          },
-          body: FutureBuilderWidget(
-            future: MusicApi.newSongList(),
-            successBuilder: (BuildContext context, AsyncSnapshot<List<TrackItemModel>> snapshot){
+      body: FutureBuilderWidget<List<TrackItemModel>>(
+        future:_future,
+        successBuilder: (BuildContext context, AsyncSnapshot<List<TrackItemModel>> snapshot){
 
 
-              return ListView.builder(
-                itemCount: 10,
-                  itemBuilder: (BuildContext context, int index){
-                    TrackItemModel itemModel = snapshot.data[index];
+          return ListView.builder(
+              itemCount: 10 + 2,
+              itemBuilder: (BuildContext context, int index){
 
-                  return MusicItemWidget(
-                    title: itemModel.name,
-                    subtTitle: itemModel.arList.first.name + "-" + itemModel.al.name,
-                    coverImageUrl: itemModel.al.picUrl,
-                    heroTageName: itemModel.id.toString(),
+
+                if(index == 0){
+                  return BrowseBannerWidget();
+                }else if(index == 1){
+                  return MusicTitleWidget(
+                    title: "新歌",
                   );
-                  }
-              );
-            },
-          ),
+                }
 
-      ),
+                TrackItemModel itemModel = snapshot.data[index-2];
+                return MusicItemWidget(
+                  title: itemModel.name,
+                  subtTitle: itemModel.arList.first.name + "-" + itemModel.al.name,
+                  coverImageUrl: itemModel.al.picUrl,
+                  heroTageName: itemModel.id.toString(),
+                );
+              }
+          );
+        },
+      )
 
     );
   }

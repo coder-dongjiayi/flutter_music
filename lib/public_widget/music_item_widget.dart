@@ -108,7 +108,7 @@ class MusicItemWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text("$title",
-              maxLines: 1,
+              maxLines: 2,
               style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500, color: MusicStore.Theme.of(context).titleColor),overflow: TextOverflow.ellipsis,),
 
           Padding(

@@ -27,7 +27,10 @@ class CommentMoreItemWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Text("${title}",style: TextStyle(fontSize: 14,color: MusicStore.Theme.of(context).titleColor),),
+          Expanded(
+            flex: 1,
+            child: Text("${title}",style: TextStyle(fontSize: 14,color: MusicStore.Theme.of(context).titleColor),),
+          ),
           Icon(Icons.keyboard_arrow_right,size: 20,color: MusicStore.Theme.of(context).titleColor)
         ],
       ),

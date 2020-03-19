@@ -3,9 +3,12 @@ import 'package:flutter_music/http_request/http_request_manager.dart';
 import 'package:flutter_music/models/play_list_model.dart';
 import 'package:flutter_music/models/song_list_model.dart';
 import 'package:flutter_music/models/track_list_model.dart';
+import 'package:flutter_music/models/song_detail_model.dart';
 
 export  'package:flutter_music/models/play_list_model.dart';
 export 'package:flutter_music/models/track_list_model.dart';
+export 'package:flutter_music/models/song_detail_model.dart';
+
 export 'package:flutter_music/public_widget/future_builder_widget.dart';
 class MusicApi{
 
@@ -53,6 +56,7 @@ class MusicApi{
  /// 新歌列表
 
  static Future<List<TrackItemModel>> newSongList() async{
+
    final response = await HttpRequestManager.request(
        "/top/list",
        params: {"idx":"0"}
@@ -60,7 +64,16 @@ class MusicApi{
 
    return TrackListModel.fromJson(response).trackList;
  }
- ///playlist/hot
+
+ /// 歌单详情
+ static Future<SongDetailModel> songDetail(id) async{
+   final response  = await HttpRequestManager.request("/playlist/detail",
+     params: {"id":id}
+
+   );
+   return SongDetailModel.fromJson(response["playlist"]);
+ }
+
 
 
 
