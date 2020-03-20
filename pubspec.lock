@@ -36,6 +36,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.14.1"
+  before_after:
+    dependency: "direct main"
+    description:
+      name: before_after
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -118,6 +125,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.5.3"
+  flutter_secure_storage:
+    dependency: "direct main"
+    description:
+      name: flutter_secure_storage
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.3.1+1"
   flutter_swiper:
     dependency: "direct main"
     description:

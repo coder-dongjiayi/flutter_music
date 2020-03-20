@@ -3,13 +3,15 @@ import 'package:flutter_music/models/play_list_model.dart';
 import 'package:flutter_music/models/song_list_model.dart';
 import 'package:flutter_music/music_app_bar/music_app_bar.dart';
 import 'package:flutter_music/common/music_store.dart';
-
 import 'package:flutter_music/pages/recommend_page/recomment_item_widget.dart';
 import 'package:flutter_music/pages/recommend_page/recomment_more_item_widget.dart';
 import 'package:flutter_music/http_request/music_api.dart';
 import 'package:flutter_music/public_widget/music_title_widget.dart';
 import 'package:flutter_music/public_widget/music_gestureDetector.dart';
 import 'package:flutter_music/pages/album_page/album_page.dart';
+
+import 'package:flutter_music/pages/login_widget/app_login_widget.dart';
+
 class CommendPage extends StatefulWidget {
   @override
   _CommendPageState createState() => _CommendPageState();
@@ -35,6 +37,10 @@ class _CommendPageState extends State<CommendPage> with AutomaticKeepAliveClient
       appBar: MusicAppBar(
         title: "推荐",
         rightIconData: Icons.person_pin,
+        rightOnTap: (){
+       AppLoginWidget();
+
+        },
       ),
 
       body: ListView(
