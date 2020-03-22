@@ -5,7 +5,8 @@ import 'package:flutter_music/common/music_store.dart';
 import 'package:flutter_music/music_app_bar/music_app_bar.dart';
 
 import 'package:flutter_music/pages/library_page/library_list_widget.dart';
-
+import 'package:flutter_music/pages/library_page/library_list_controller.dart';
+import 'package:flutter_music/pages/library_page/library_list_state.dart';
 
 class LibraryPage extends StatefulWidget {
   @override
@@ -18,21 +19,62 @@ class _LibraryPageState extends State<LibraryPage> with AutomaticKeepAliveClient
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 
+
+  LibraryListController libraryListController;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    libraryListController = LibraryListController();
+  }
+
   @override
   Widget build(BuildContext context) {
 
 
- return   Scaffold(
-     backgroundColor: MusicStore.Theme.of(context).theme,
-     appBar: MusicAppBar(
-       title: "歌单",
-       rightIconData: Icons.edit,
-       rightOnTap: (){
-         print("这是右边按钮");
-       },
-     ),
-     body:LibraryListWidget()
-  );
+ return  MultiProvider(
+   providers: [
+     ChangeNotifierProvider(
 
+       create: (context)=>LibraryListState(),
+     )
+   ],
+   child: Consumer<LibraryListState>(
+     builder: (context,state,_){
+       return  Scaffold(
+           backgroundColor: MusicStore.Theme.of(context).theme,
+           appBar: MusicAppBar(
+             title: "歌单",
+             rightIconData: Icons.edit,
+             rightSelectedIconData: Icons.delete_sweep ,
+             rightOnTap: (){
+
+               if(libraryListController.isEditing == false){
+                 libraryListController.startEditAnimationStart();
+                 state.isEditing = true;
+               }else{
+                 libraryListController.endEditAnimationStart();
+                 state.isEditing = false;
+               }
+
+
+             },
+           ),
+           body:LibraryListWidget(
+             libraryListController: libraryListController,
+           )
+       );
+     }
+   )
+
+ );
+
+
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    libraryListController.dispose();
+    super.dispose();
   }
 }

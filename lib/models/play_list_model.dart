@@ -29,12 +29,16 @@ class PlayItemModel{
 
   String description;
 
+  bool selected;
+
   PlayItemModel({
     this.coverImgUrl,
     this.name,
-    this.id
+    this.id,
+    this.selected
   });
   PlayItemModel.fromJson(Map<String,dynamic> json){
+    selected = false;
     coverImgUrl = json["coverImgUrl"];
     name        = json["name"];
     id          = json["id"];

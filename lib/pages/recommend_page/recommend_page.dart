@@ -10,8 +10,6 @@ import 'package:flutter_music/public_widget/music_title_widget.dart';
 import 'package:flutter_music/public_widget/music_gestureDetector.dart';
 import 'package:flutter_music/pages/album_page/album_page.dart';
 
-import 'package:flutter_music/pages/login_widget/app_login_widget.dart';
-
 class CommendPage extends StatefulWidget {
   @override
   _CommendPageState createState() => _CommendPageState();
@@ -30,6 +28,13 @@ class _CommendPageState extends State<CommendPage> with AutomaticKeepAliveClient
   Future _recommendMoreFuture =  MusicApi.recommendMoreSongList();
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+  }
+
+  @override
   Widget build(BuildContext context) {
 
     return Scaffold(
@@ -38,7 +43,6 @@ class _CommendPageState extends State<CommendPage> with AutomaticKeepAliveClient
         title: "推荐",
         rightIconData: Icons.person_pin,
         rightOnTap: (){
-       AppLoginWidget();
 
         },
       ),

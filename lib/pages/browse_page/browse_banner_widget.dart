@@ -13,22 +13,15 @@ class BanerScrollState extends ChangeNotifier{
 }
 
 class BrowseBannerWidget extends StatelessWidget {
-  @override
 
-  var _imageList = [
-    "https://pic.xiami.net/images/pages.album/img78/978/49051469082316.jpg?x-oss-process=image/quality,q_80/format,jpg",
-
-    "https://pic.xiami.net/images/collect/398/98/38578398_1456470468_2XCC.jpg?x-oss-process=image/quality,q_80",
-    "https://pic.xiami.net/images/collect/419/19/30042419_1410842309_hiFG.jpg?x-oss-process=image/quality,q_80",
-    "https://pic.xiami.net/images/collect/844/44/361042844_5a3cb6d0baa1d_bKum_1513928400.jpg?x-oss-process=image/quality,q_80"
-  ];
+   final Future _future = MusicApi.choicenessSongList(order: "hot",limit: 4);
 
 
   @override
   Widget build(BuildContext context) {
 
     return FutureBuilderWidget<List<PlayItemModel>>(
-      future: MusicApi.choicenessSongList(order: "hot",limit: 4),
+      future: _future,
 
       successBuilder: (BuildContext context, AsyncSnapshot<List<PlayItemModel>> snapshot){
 
@@ -52,7 +45,7 @@ class BrowseBannerWidget extends StatelessWidget {
             return Column(
               children: <Widget>[
                 _swiperList(list),
-                _swiperControlList()
+                _swiperControlList(list)
               ],
             );
 
@@ -62,18 +55,19 @@ class BrowseBannerWidget extends StatelessWidget {
   }
 
   ///轮播图下面的control
-  Widget _swiperControlList(){
-    var _index = 0;
+  Widget _swiperControlList(List<PlayItemModel>  list){
+
+    List<Widget> _listWidget = List<Widget>.generate(list.length , (int index){
+
+      return  _swiperControlItem(index);
+
+    });
+
     return Padding(
       padding: EdgeInsets.only(top: 20),
       child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: _imageList.map((_){
-            Widget item =  _swiperControlItem(_index);
-            _index ++;
-            return item;
-
-          }).toList()
+          children: _listWidget
       ),
     );
   }

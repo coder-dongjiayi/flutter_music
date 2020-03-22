@@ -12,6 +12,7 @@ class MusicAppBar extends StatefulWidget implements PreferredSizeWidget{
     this.title,
     this.leftIconData,
     this.rightIconData,
+    this.rightSelectedIconData,
     this.leftOnTap,
     this.rightOnTap
   }) : preferredSize = Size.fromHeight(kToolbarHeight), super(key:key);
@@ -24,6 +25,8 @@ class MusicAppBar extends StatefulWidget implements PreferredSizeWidget{
   final String title;
   final IconData leftIconData;
   final IconData rightIconData;
+
+  final IconData rightSelectedIconData;
 
   @override
   _MusicAppBarState createState() => _MusicAppBarState();
@@ -79,6 +82,7 @@ class _MusicAppBarState extends State<MusicAppBar> {
     }
     return MusicButton(
       normalIconData: widget.rightIconData,
+      selectedIconData: widget.rightSelectedIconData,
       onTap: (selected){
         if(widget.rightOnTap != null){
           widget.rightOnTap();
