@@ -14,6 +14,7 @@ class LibraryListState extends ChangeNotifier{
 
   var isEditing = false;
 
+   List<PlayItemModel> get dataSource => _dataSource;
   void updateSelected(int index){
 
     if(_selectedIndex >= 0){

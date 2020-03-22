@@ -29,14 +29,12 @@ class _LibraryItemWidgetState extends State<LibraryItemWidget> {
   Widget build(BuildContext context) {
     ScreenAdapter.init(context);
 
-    LibraryListState state = LibraryListState.libraryState(context);
-
     PlayItemModel itemModel= LibraryListState.getDataSource(context)[widget.index];
 
     return Stack(
       children: <Widget>[
         MusicGestureDetector(
-          onTap:state.isEditing == false ? null :  (){
+          onTap:(){
             LibraryListState.updateDeleteState(context,widget.index);
           },
           child: LibraryDeleteButtonWidget(

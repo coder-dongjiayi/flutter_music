@@ -39,9 +39,9 @@ class _LibraryPageState extends State<LibraryPage> with AutomaticKeepAliveClient
        create: (context)=>LibraryListState(),
      )
    ],
-   child: Consumer<LibraryListState>(
-     builder: (context,state,_){
-       return  Scaffold(
+   child: Builder(
+     builder: (context){
+       return Scaffold(
            backgroundColor: MusicStore.Theme.of(context).theme,
            appBar: MusicAppBar(
              title: "歌单",
@@ -50,11 +50,12 @@ class _LibraryPageState extends State<LibraryPage> with AutomaticKeepAliveClient
              rightOnTap: (){
 
                if(libraryListController.isEditing == false){
+                 LibraryListState.libraryState(context).isEditing = true;
                  libraryListController.startEditAnimationStart();
-                 state.isEditing = true;
+
                }else{
                  libraryListController.endEditAnimationStart();
-                 state.isEditing = false;
+                 LibraryListState.libraryState(context).isEditing = false;
                }
 
 
@@ -64,8 +65,9 @@ class _LibraryPageState extends State<LibraryPage> with AutomaticKeepAliveClient
              libraryListController: libraryListController,
            )
        );
-     }
+     },
    )
+
 
  );
 

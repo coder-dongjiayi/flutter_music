@@ -13,6 +13,7 @@ class LibraryDeleteButtonWidget extends StatelessWidget {
   final  selected;
   @override
   Widget build(BuildContext context) {
+    print("LibraryDeleteButtonWidget");
     return Container(
       color: MusicStore.Theme.of(context).theme,
       alignment: Alignment.centerLeft,

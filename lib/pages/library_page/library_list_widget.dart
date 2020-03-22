@@ -11,6 +11,10 @@ import 'package:flutter_music/pages/library_page/library_item_widget.dart';
 import 'package:flutter_music/pages/library_page/library_list_controller.dart';
 import 'package:flutter_music/pages/library_page/library_list_state.dart';
 
+
+
+
+
 class LibraryListWidget extends StatefulWidget {
 
   LibraryListWidget({
@@ -41,9 +45,11 @@ class _LibraryListWidgetState extends State<LibraryListWidget> with TickerProvid
 
   @override
   Widget build(BuildContext context) {
+
     ScreenAdapter.init(context);
 
-    return FutureBuilderWidget<List<PlayItemModel>>(
+    return
+      FutureBuilderWidget<List<PlayItemModel>>(
 
       future: _future,
 
@@ -73,6 +79,7 @@ class _LibraryListWidgetState extends State<LibraryListWidget> with TickerProvid
 
   Widget _listView() {
 
+
     return Builder(
 
       builder: (context){
@@ -91,17 +98,29 @@ class _LibraryListWidgetState extends State<LibraryListWidget> with TickerProvid
                         }
                     ));
                   },
-                  child: AnimatedBuilder(
-                    animation: widget.libraryListController.editAnimation,
-                    builder: (context,_){
-                      return LibraryItemWidget(
-                       index: index,
-                        coverImage: itemModel.coverImgUrl,
-                        name: itemModel.name,
-                        desc: itemModel.description,
-                        marginLeft: widget.libraryListController.editAnimation.value,
+                  child: Selector(
+                    builder: (context,state,child){
+                      return AnimatedBuilder(
+                        animation: widget.libraryListController.editAnimation,
+                        builder: (context,_){
+                          return LibraryItemWidget(
+                            index: index,
+                            coverImage: itemModel.coverImgUrl,
+                            name: itemModel.name,
+                            desc: itemModel.description,
+                            marginLeft: widget.libraryListController.editAnimation.value,
+                          );
+                        },
                       );
                     },
+                      selector:(BuildContext context, LibraryListState state){
+
+                      return state;
+                    },
+                    shouldRebuild: (pre,next){
+                      return false;
+                    },
+
                   )
               );
             },
