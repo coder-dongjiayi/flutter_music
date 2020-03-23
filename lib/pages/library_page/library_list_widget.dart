@@ -8,8 +8,8 @@ import 'package:flutter_music/http_request/music_api.dart';
 import 'package:flutter_music/pages/album_page/album_page.dart';
 import 'package:flutter_music/common/screen_adapter.dart';
 import 'package:flutter_music/pages/library_page/library_item_widget.dart';
-import 'package:flutter_music/pages/library_page/library_list_controller.dart';
-import 'package:flutter_music/pages/library_page/library_list_state.dart';
+import 'package:flutter_music/pages/library_page/library_controller/library_list_controller.dart';
+import 'package:flutter_music/pages/library_page/library_state/library_list_state.dart';
 
 
 
@@ -79,7 +79,6 @@ class _LibraryListWidgetState extends State<LibraryListWidget> with TickerProvid
 
   Widget _listView() {
 
-
     return Builder(
 
       builder: (context){
@@ -98,29 +97,17 @@ class _LibraryListWidgetState extends State<LibraryListWidget> with TickerProvid
                         }
                     ));
                   },
-                  child: Selector(
-                    builder: (context,state,child){
-                      return AnimatedBuilder(
-                        animation: widget.libraryListController.editAnimation,
-                        builder: (context,_){
-                          return LibraryItemWidget(
-                            index: index,
-                            coverImage: itemModel.coverImgUrl,
-                            name: itemModel.name,
-                            desc: itemModel.description,
-                            marginLeft: widget.libraryListController.editAnimation.value,
-                          );
-                        },
+                  child: AnimatedBuilder(
+                    animation: widget.libraryListController.editAnimation,
+                    builder: (context,_){
+                      return LibraryItemWidget(
+                        index: index,
+                        coverImage: itemModel.coverImgUrl,
+                        name: itemModel.name,
+                        desc: itemModel.description,
+                        marginLeft: widget.libraryListController.editAnimation.value,
                       );
                     },
-                      selector:(BuildContext context, LibraryListState state){
-
-                      return state;
-                    },
-                    shouldRebuild: (pre,next){
-                      return false;
-                    },
-
                   )
               );
             },

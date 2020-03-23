@@ -39,7 +39,7 @@ DEPENDENCIES:
   - vibrate (from `.symlinks/plugins/vibrate/ios`)
 
 SPEC REPOS:
-  trunk:
+  https://github.com/cocoapods/specs.git:
     - FMDB
 
 EXTERNAL SOURCES:
@@ -82,4 +82,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 1b66dae606f75376c5f2135a8290850eeb09ae83
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.7.0

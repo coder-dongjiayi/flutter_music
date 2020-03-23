@@ -1,19 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_music/common/music_store.dart';
-
+import 'package:flutter_music/pages/library_page/library_state/library_list_state.dart';
 
 
 class LibraryDeleteButtonWidget extends StatelessWidget {
   LibraryDeleteButtonWidget({
     Key key,
-    this.selected : false,
+    this.index
 
   }): super(key : key);
 
-  final  selected;
+  final  int index;
   @override
   Widget build(BuildContext context) {
-    print("LibraryDeleteButtonWidget");
+
+    ///这里有个触点的问题 点击手势触摸区域距离左边是0 但是在未显示删除按钮的时候
+    ///也可以点击 这里为了避免点击生效 当没有显示删除按钮的时候 点击事件不生效
+    bool isEditing = LibraryListState.libraryState(context).isEditing;
+
+
+    return MusicGestureDetector(
+      onTap:isEditing == false ? null : (){
+        LibraryListState.updateDeleteState(context, index);
+      },
+      child: _deleteButton(context),
+    );
+  }
+  Widget _deleteButton(BuildContext context){
     return Container(
       color: MusicStore.Theme.of(context).theme,
       alignment: Alignment.centerLeft,
@@ -26,14 +39,25 @@ class LibraryDeleteButtonWidget extends StatelessWidget {
         height:  ScreenAdapter.setHeight(30),
         margin: EdgeInsets.only(left: 5),
         padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-        child: Container(
-          width: ScreenAdapter.setWidth(20),
-          height: ScreenAdapter.setWidth(20),
-          decoration: BoxDecoration(
-              color: selected == false ? Colors.white : Colors.red,
-              borderRadius: BorderRadius.circular(5)
-          ),
+        child: Selector<LibraryListState,bool>(
+          builder: (context,selected,_){
 
+            return Container(
+              width: ScreenAdapter.setWidth(20),
+              height: ScreenAdapter.setWidth(20),
+              decoration: BoxDecoration(
+                  color: selected == false ? Colors.white : Colors.red,
+                  borderRadius: BorderRadius.circular(5)
+              ),
+
+            );
+          },
+          selector: (BuildContext context,LibraryListState state){
+            return state.dataSource[index].selected;
+          },
+          shouldRebuild: (pre,next){
+            return pre != next;
+          },
         ),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(ScreenAdapter.setWidth(15)),

@@ -5,8 +5,8 @@ import 'package:flutter_music/common/music_store.dart';
 import 'package:flutter_music/music_app_bar/music_app_bar.dart';
 
 import 'package:flutter_music/pages/library_page/library_list_widget.dart';
-import 'package:flutter_music/pages/library_page/library_list_controller.dart';
-import 'package:flutter_music/pages/library_page/library_list_state.dart';
+import 'package:flutter_music/pages/library_page/library_controller/library_list_controller.dart';
+import 'package:flutter_music/pages/library_page/library_state/library_list_state.dart';
 
 class LibraryPage extends StatefulWidget {
   @override
