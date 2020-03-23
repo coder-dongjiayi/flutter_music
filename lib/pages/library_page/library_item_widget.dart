@@ -1,75 +1,100 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_music/common/music_store.dart';
-import 'package:flutter_music/http_request/music_api.dart';
-
-import 'package:flutter_music/pages/library_page/library_state/library_list_state.dart';
 import 'package:flutter_music/pages/library_page/library_delete_button_widget.dart';
+import 'package:flutter_music/pages/library_page/library_state/library_list_state.dart';
+typedef GestureTapCallback = void Function(int index);
+
 
 class LibraryItemWidget extends StatefulWidget {
   LibraryItemWidget(
       {Key key,
-      this.index,
-      this.coverImage,
-      this.name,
-      this.desc,
-      this.marginLeft})
+        this.onTap,
+        this.index,
+        this.coverImage,
+        this.name,
+        this.desc,
+        this.animation
+      })
       : super(key: key);
 
   final String coverImage;
   final String name;
   final String desc;
-  final double marginLeft;
+
   final int index;
+  final Animation<Offset> animation;
+  final GestureTapCallback onTap;
   @override
   _LibraryItemWidgetState createState() => _LibraryItemWidgetState();
 }
 
-class _LibraryItemWidgetState extends State<LibraryItemWidget> {
+class _LibraryItemWidgetState extends State<LibraryItemWidget> with TickerProviderStateMixin {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+  }
+
   @override
   Widget build(BuildContext context) {
     ScreenAdapter.init(context);
-
-    return Stack(
-      children: <Widget>[
-
-        LibraryDeleteButtonWidget(
-             index: widget.index,
-        ),
-        _libraryCoverItem(
-            widget.coverImage, widget.name, widget.desc, widget.marginLeft)
-      ],
-    );
-  }
-
-  Widget _libraryCoverItem(coverImage, name, desc, marginLeft) {
-    return Container(
-      width: double.infinity,
-      margin: EdgeInsets.only(left: marginLeft, right: 20, top: 10, bottom: 10),
-      padding: EdgeInsets.only(left: 10, right: 10, bottom: 10, top: 10),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: MusicStore.Theme.of(context).theme,
-          boxShadow: [
-            BoxShadow(
-                color: MusicStore.Theme.of(context).shadowColor,
-                offset: Offset(10, 10),
-                blurRadius: 10),
-            BoxShadow(
-                color: Colors.white, offset: Offset(-10, -10), blurRadius: 26)
-          ]),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return MusicGestureDetector(
+      onTap: (){
+        widget.onTap(widget.index);
+      },
+      child: Stack(
         children: <Widget>[
-          _itemCover(context, coverImage),
-          Expanded(
-            flex: 1,
-            child: _itemTitle(context, name, desc),
+
+          LibraryDeleteButtonWidget(
+            index: widget.index,
           ),
-          Icon(Icons.keyboard_arrow_right,
-              size: 20, color: MusicStore.Theme.of(context).titleColor)
+          SlideTransition(
+            position: widget.animation,
+            child: _libraryCoverItem(
+              widget.coverImage,
+              widget.name,
+              widget.desc,
+            ),
+          )
         ],
       ),
     );
+
+  }
+
+  Widget _libraryCoverItem(coverImage, name, desc) {
+    return Builder(builder: (context){
+      return  Container(
+        width: double.infinity,
+        margin: EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
+        padding: EdgeInsets.only(left: 10, right: 10, bottom: 10, top: 10),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: MusicStore.Theme.of(context).theme,
+            boxShadow: [
+              BoxShadow(
+                  color: MusicStore.Theme.of(context).shadowColor,
+                  offset: Offset(10, 10),
+                  blurRadius: 10),
+              BoxShadow(
+                  color: Colors.white, offset: Offset(-10, -10), blurRadius: 26)
+            ]),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            _itemCover(context, coverImage),
+            Expanded(
+              flex: 1,
+              child: _itemTitle(context, name, desc),
+            ),
+            Icon(Icons.keyboard_arrow_right,
+                size: 20, color: MusicStore.Theme.of(context).titleColor)
+          ],
+        ),
+      );
+    });
   }
 
   Widget _itemCover(context, coverImage) {
@@ -125,3 +150,8 @@ class _LibraryItemWidgetState extends State<LibraryItemWidget> {
     );
   }
 }
+
+
+
+
+

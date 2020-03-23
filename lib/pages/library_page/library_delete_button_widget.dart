@@ -14,13 +14,9 @@ class LibraryDeleteButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    ///这里有个触点的问题 点击手势触摸区域距离左边是0 但是在未显示删除按钮的时候
-    ///也可以点击 这里为了避免点击生效 当没有显示删除按钮的时候 点击事件不生效
-    bool isEditing = LibraryListState.libraryState(context).isEditing;
-
 
     return MusicGestureDetector(
-      onTap:isEditing == false ? null : (){
+      onTap: (){
         LibraryListState.updateDeleteState(context, index);
       },
       child: _deleteButton(context),
@@ -29,11 +25,12 @@ class LibraryDeleteButtonWidget extends StatelessWidget {
   Widget _deleteButton(BuildContext context){
     return Container(
       color: MusicStore.Theme.of(context).theme,
+
       alignment: Alignment.centerLeft,
       width: double.infinity,
       height: ScreenAdapter.setHeight(180),
-      margin: EdgeInsets.only(left: 0,right: 20,top: 10,bottom: 10),
-      padding: EdgeInsets.only(left: 20,right: 20),
+      margin: EdgeInsets.only(left: 20,right: 20,top: 10,bottom: 10),
+      padding: EdgeInsets.only(left: 0,),
       child: Container(
         width: ScreenAdapter.setWidth(30),
         height:  ScreenAdapter.setHeight(30),

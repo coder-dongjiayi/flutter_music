@@ -48,15 +48,17 @@ class _LibraryPageState extends State<LibraryPage> with AutomaticKeepAliveClient
              rightIconData: Icons.edit,
              rightSelectedIconData: Icons.delete_sweep ,
              rightOnTap: (){
-
-               if(libraryListController.isEditing == false){
-                 LibraryListState.libraryState(context).isEditing = true;
-                 libraryListController.startEditAnimationStart();
-
-               }else{
-                 libraryListController.endEditAnimationStart();
-                 LibraryListState.libraryState(context).isEditing = false;
-               }
+               LibraryListState.libraryState(context).deletePlayItem();
+//               if(libraryListController.isEditing == false){
+//
+//                 libraryListController.startEditAnimation();
+//                 libraryListController.isEditing = true;
+//
+//               }else{
+//                 libraryListController.isEditing = false;
+//                // libraryListController.endEditAnimation();
+//                 LibraryListState.libraryState(context).deletePlayItem();
+//               }
 
 
              },
