@@ -12,9 +12,9 @@ import 'package:flutter_music/pages/library_page/library_controller/library_list
 import 'package:flutter_music/pages/library_page/library_state/library_list_state.dart';
 
 class LibraryListWidget extends StatefulWidget {
-  LibraryListWidget({Key key, this.libraryListController}) : super(key: key);
+  LibraryListWidget({Key key}) : super(key: key);
 
-  final LibraryListController libraryListController;
+
   @override
   _LibraryListWidgetState createState() => _LibraryListWidgetState();
 }
@@ -22,23 +22,14 @@ class LibraryListWidget extends StatefulWidget {
 class _LibraryListWidgetState extends State<LibraryListWidget>
     with TickerProviderStateMixin {
   Future _future = MusicApi.requestPlayList();
-  final _listKey = GlobalKey<AnimatedListState>();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
-    widget.libraryListController.initAnimation(vsync: this);
+    LibraryListState.libraryState(context).initEditAnimation(this);
 
-    LibraryListState.libraryState(context).addListener((){
-
-    if(LibraryListState.libraryState(context).deleteIndex >= 0){
-      print("mmm");
-       _deleteItem();
-     }
-
-    });
   }
 
   @override
@@ -80,53 +71,38 @@ class _LibraryListWidgetState extends State<LibraryListWidget>
     );
   }
 
-  void _deleteItem(){
-    List<PlayItemModel> dataSource = LibraryListState.getDataSource(context);
-    _listKey.currentState.removeItem(0, (context,animation){
-      return _animatonItem(context, animation, dataSource, 0);
-    });
-  }
 
-  Widget _animatonItem(context,animation,dataSource,index){
-    PlayItemModel itemModel = dataSource[index];
-    Tween<Offset> _tween = Tween<Offset>(begin: Offset(1,0), end: Offset(0,0));
 
-    return SlideTransition(
-      position: animation.drive(_tween),
-      child: LibraryItemWidget(
-        animation: widget.libraryListController.editAnimation,
-        onTap: (index) {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) {
-                return AlbumPage(id: itemModel.id);
-              }));
-        },
-        index: index,
-        coverImage: itemModel.coverImgUrl,
-        name: itemModel.name,
-        desc: itemModel.description,
-
-      ),
-    );
-  }
   Widget _listView(List<PlayItemModel> dataSource) {
     return Builder(builder: (context) {
 
       return dataSource.length == 0
           ? LibraryEmptyWidget()
-          : AnimatedList(
-        
-            key: _listKey,
-            padding: EdgeInsets.only(top: 30),
-            initialItemCount: dataSource.length,
-           itemBuilder: (context,index,animation){
+          : ListView.builder(
+        padding: EdgeInsets.only(top: 30),
 
+        itemCount: dataSource.length,
 
-            return _animatonItem(context,animation,dataSource,index);
+          itemBuilder: (context,index){
+            PlayItemModel itemModel = dataSource[index];
 
+            return LibraryItemWidget(
+              animation: LibraryListState.libraryState(context).editAnimation,
+              onTap: (index) {
 
-        },
-        );
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) {
+                      return AlbumPage(id: itemModel.id);
+                    }));
+              },
+              index: index,
+              coverImage: itemModel.coverImgUrl,
+              name: itemModel.name,
+              desc: itemModel.description,
+
+            );
+          }
+      );
 
     });
   }

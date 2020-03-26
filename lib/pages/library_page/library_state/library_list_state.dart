@@ -11,15 +11,25 @@ class LibraryListState extends ChangeNotifier{
 
   var _dataSource = List<PlayItemModel>();
 
-  var deleteIndex = -1;
+  ///点击删除按钮列表的编辑动画
+  AnimationController editAnimationController;
+  Animation editAnimation;
 
-  var _dissAnimationControllerList = List<AnimationController>();
-  var dissAnimationList = List<Animation<Offset>>();
+  ///列表删除之后的平移动画
+  var sliderAnimationControllerList = List<AnimationController>();
+  var sliderAnimationList = List<Animation<Offset>>();
+
+  ///删除平移之后上滑动画
+  var sizeAnimationControllerList = List<AnimationController>();
+  var sizeAnimationList = List<Animation<double>>();
+
+
+
+
+
 
   ///用于记录删除的时候 选中的index 默认没有被选中的 为-1
   var selectedIndex = -1;
-
-  var isEditing = false;
 
    List<PlayItemModel> get dataSource => _dataSource;
   void updateSelected(int index){
@@ -38,45 +48,76 @@ class LibraryListState extends ChangeNotifier{
 
 
 
-  void deletePlayItem(){
+  void deleteAction(){
 
-    deleteIndex = 0;
-    _dataSource.removeAt(0);
-    notifyListeners();
 
-//    _dataSource.removeWhere((item){
-//      return item.selected == true;
-//     });
-//   for(int index =0 ; index < _dataSource.length ; index++){
-//     if(_dataSource[index].selected == true){
-//       AnimationController controller = _dissAnimationControllerList[index];
-//       controller.forward().whenComplete((){
-//         _dataSource.removeAt(index);
-//       });
-//
-//       return;
-//     }
-//   }
+   if(editAnimationController.status == AnimationStatus.completed){
+     editAnimationController.reverse().whenComplete((){
+       ///执行删除的位移动画
+       if(selectedIndex == -1) return;
+       AnimationController sliderAnimationController = sliderAnimationControllerList[selectedIndex];
 
-    //notifyListeners();
+       PlayItemModel model = _dataSource[selectedIndex];
+       model.slideEnd = true;
+
+       AnimationController sizeAnimationController = sizeAnimationControllerList[selectedIndex];
+       sliderAnimationController.forward().whenComplete((){
+
+         notifyListeners();
+
+         sizeAnimationController.forward();
+
+       });
+
+     });
+
+   }else{
+     editAnimationController.forward();
+   }
+
+
   }
 
-  void initAnimationController(TickerProvider vsync){
-    AnimationController animationController = AnimationController(duration: Duration(microseconds: 300),vsync: vsync);
-    Animation<Offset>  animation = Tween<Offset>(begin: Offset.zero,end: Offset(1.0,0)).animate(CurvedAnimation(parent: animationController, curve: Curves.easeOut));
+  void initEditAnimation(TickerProvider vsync){
 
-    _dissAnimationControllerList.add(animationController);
+    editAnimationController = AnimationController(duration: Duration(milliseconds: 200),vsync: vsync);
 
-
-    dissAnimationList.add(animation);
+    editAnimation = Tween<Offset>(begin: Offset.zero,end: Offset(0.1, 0)).animate(editAnimationController);
 
   }
+
+  void initDeleteAnimation(TickerProvider vsync){
+
+
+    ///平移动画
+    AnimationController sliderAnimationController = AnimationController(vsync: vsync, duration: Duration(milliseconds: 250));
+
+    Animation sliderAnimation = Tween(begin: Offset.zero, end: Offset(1.0, 0.0))
+        .animate(
+        CurvedAnimation(parent: sliderAnimationController, curve: Curves.easeOut));
+
+    sliderAnimationControllerList.add(sliderAnimationController);
+
+    sliderAnimationList.add(sliderAnimation);
+
+
+
+   /// 上滑动画
+    AnimationController sizeAnimationController =
+        AnimationController(vsync: vsync, duration: Duration(milliseconds: 300));
+
+    Animation sizeAnimation = Tween(begin: 1.0, end: 0.0).animate(
+        CurvedAnimation(parent: sizeAnimationController, curve: Curves.easeOut));
+
+    sizeAnimationControllerList.add(sizeAnimationController);
+    sizeAnimationList.add(sizeAnimation);
+  }
+
+
 
   void initDataSourceList(List<PlayItemModel> list){
     _dataSource = list;
   }
-
-
 
 
   static LibraryListState libraryState (BuildContext context){
@@ -103,6 +144,14 @@ class LibraryListState extends ChangeNotifier{
   @override
   void dispose() {
     // TODO: implement dispose
+    sliderAnimationControllerList.forEach((controller){
+      controller.dispose();
+    });
+    sizeAnimationControllerList.forEach((controller){
+      controller.dispose();
+    });
+    editAnimationController.dispose();
+
 
     super.dispose();
   }

@@ -31,6 +31,8 @@ class PlayItemModel{
 
   bool selected;
 
+  bool slideEnd;
+
   PlayItemModel({
     this.coverImgUrl,
     this.name,
@@ -39,6 +41,7 @@ class PlayItemModel{
   });
   PlayItemModel.fromJson(Map<String,dynamic> json){
     selected = false;
+    slideEnd = false;
     coverImgUrl = json["coverImgUrl"];
     name        = json["name"];
     id          = json["id"];

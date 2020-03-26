@@ -30,38 +30,88 @@ class LibraryItemWidget extends StatefulWidget {
 
 class _LibraryItemWidgetState extends State<LibraryItemWidget> with TickerProviderStateMixin {
 
+  Size _size;
+
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
+
+
+   LibraryListState libraryListState = LibraryListState.libraryState(context);
+
+    libraryListState.initDeleteAnimation(this);
+
+
+    WidgetsBinding.instance.addPostFrameCallback(onAfterRender);
+  }
+  @override
+  void didUpdateWidget(LibraryItemWidget oldWidget) {
+    // TODO: implement didUpdateWidget
+    super.didUpdateWidget(oldWidget);
+    WidgetsBinding.instance.addPostFrameCallback(onAfterRender);
+  }
+
+  void onAfterRender(Duration timeStamp){
+    _size = context.size;
   }
 
   @override
   Widget build(BuildContext context) {
     ScreenAdapter.init(context);
-    return MusicGestureDetector(
-      onTap: (){
-        widget.onTap(widget.index);
-      },
-      child: Stack(
-        children: <Widget>[
 
-          LibraryDeleteButtonWidget(
-            index: widget.index,
-          ),
-          SlideTransition(
-            position: widget.animation,
-            child: _libraryCoverItem(
-              widget.coverImage,
-              widget.name,
-              widget.desc,
-            ),
-          )
-        ],
-      ),
+    return  Selector<LibraryListState,bool>(
+      shouldRebuild: (pre,next){
+        return pre != next;
+      },
+      selector: (context,state){
+        return state.dataSource[widget.index].slideEnd;
+      },
+      builder: (context,slideEnd,_){
+        return slideEnd == true ? _sizeTransition() : _slideTransition();
+      },
     );
 
+  }
+
+  Widget _sizeTransition(){
+    Animation sizeAnimation = LibraryListState.libraryState(context).sizeAnimationList[widget.index];
+
+    return SizeTransition(
+      axis: Axis.vertical,
+      sizeFactor: sizeAnimation,
+      child: Material(
+        color: Colors.transparent,
+        child: SizedBox.fromSize(size: _size),
+      ),
+    );
+  }
+
+  Widget _slideTransition(){
+    Animation animation = LibraryListState.libraryState(context).sliderAnimationList[widget.index];
+
+    return SlideTransition(
+        position: animation,
+        child: Stack(
+          children: <Widget>[
+
+            LibraryDeleteButtonWidget(
+              index: widget.index,
+            ),
+
+            SlideTransition(
+              position: widget.animation,
+              child: _libraryCoverItem(
+                widget.coverImage,
+                widget.name,
+                widget.desc,
+              ),
+            )
+          ],
+        )
+    );
   }
 
   Widget _libraryCoverItem(coverImage, name, desc) {

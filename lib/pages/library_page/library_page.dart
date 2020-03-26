@@ -20,12 +20,11 @@ class _LibraryPageState extends State<LibraryPage> with AutomaticKeepAliveClient
   bool get wantKeepAlive => true;
 
 
-  LibraryListController libraryListController;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    libraryListController = LibraryListController();
+
   }
 
   @override
@@ -37,6 +36,7 @@ class _LibraryPageState extends State<LibraryPage> with AutomaticKeepAliveClient
      ChangeNotifierProvider(
 
        create: (context)=>LibraryListState(),
+
      )
    ],
    child: Builder(
@@ -48,23 +48,13 @@ class _LibraryPageState extends State<LibraryPage> with AutomaticKeepAliveClient
              rightIconData: Icons.edit,
              rightSelectedIconData: Icons.delete_sweep ,
              rightOnTap: (){
-               LibraryListState.libraryState(context).deletePlayItem();
-//               if(libraryListController.isEditing == false){
-//
-//                 libraryListController.startEditAnimation();
-//                 libraryListController.isEditing = true;
-//
-//               }else{
-//                 libraryListController.isEditing = false;
-//                // libraryListController.endEditAnimation();
-//                 LibraryListState.libraryState(context).deletePlayItem();
-//               }
+              LibraryListState.libraryState(context).deleteAction();
 
 
              },
            ),
            body:LibraryListWidget(
-             libraryListController: libraryListController,
+
            )
        );
      },
@@ -78,7 +68,7 @@ class _LibraryPageState extends State<LibraryPage> with AutomaticKeepAliveClient
   @override
   void dispose() {
     // TODO: implement dispose
-    libraryListController.dispose();
+
     super.dispose();
   }
 }
