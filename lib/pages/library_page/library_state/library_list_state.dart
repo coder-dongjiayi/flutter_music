@@ -80,7 +80,7 @@ class LibraryListState extends ChangeNotifier{
 
   void initEditAnimation(TickerProvider vsync){
 
-    editAnimationController = AnimationController(duration: Duration(milliseconds: 200),vsync: vsync);
+    editAnimationController = AnimationController(duration: Duration(milliseconds: 250),vsync: vsync);
 
     editAnimation = Tween<Offset>(begin: Offset.zero,end: Offset(0.1, 0)).animate(editAnimationController);
 
