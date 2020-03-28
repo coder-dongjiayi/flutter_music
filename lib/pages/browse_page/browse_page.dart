@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_music/music_app_bar/music_app_bar.dart';
+import 'package:flutter_music/base_music/music_app_bar.dart';
 import 'package:flutter_music/common/music_store.dart';
 import 'package:flutter_music/pages/browse_page/browse_banner_widget.dart';
 import 'package:flutter_music/public_widget/music_item_widget.dart';
@@ -23,8 +23,8 @@ class _BrowsePageState extends State<BrowsePage> with AutomaticKeepAliveClientMi
   Widget build(BuildContext context) {
 
 
-    return Scaffold(
-      backgroundColor: MusicStore.Theme.of(context).theme,
+    return MusicScaffold(
+      showFloatingActionButton: false,
       appBar: MusicAppBar(
         title: "浏览",
         rightIconData: Icons.search,
@@ -57,9 +57,9 @@ class _BrowsePageState extends State<BrowsePage> with AutomaticKeepAliveClientMi
               }
           );
         },
-      )
-
+      ),
     );
+
   }
 
 

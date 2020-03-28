@@ -14,7 +14,9 @@ class MyApp extends StatelessWidget {
 
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<ThemeState>(create: (_)=>ThemeState())
+
+        ChangeNotifierProvider<ThemeState>(create: (_)=>ThemeState()),
+
       ],
       child: Consumer<ThemeState>(
         builder: (context,state,widget){

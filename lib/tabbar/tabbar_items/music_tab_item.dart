@@ -54,7 +54,7 @@ class MusicTabItem extends StatelessWidget {
             color: MusicStore.Theme.of(context).theme,
             boxShadow: [
               BoxShadow(color:MusicStore.Theme.of(context).shadowColor,offset: Offset(5,5),blurRadius: 10),
-              BoxShadow(color: Colors.white,offset: Offset(-5,-5),blurRadius: 26)
+              BoxShadow(color: Colors.white,offset: Offset(-2,-2),blurRadius: 4)
             ]
         ),
         child: Row(

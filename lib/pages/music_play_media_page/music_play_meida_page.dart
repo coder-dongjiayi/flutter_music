@@ -1,7 +1,8 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_music/music_app_bar/music_app_bar.dart';
+import 'package:flutter_music/base_music/music_app_bar.dart';
 import 'package:flutter_music/common/music_store.dart';
+import 'package:flutter_music/pages/library_page/library_state/library_list_state.dart';
 import 'package:flutter_music/pages/music_play_media_page/music_play_slider_widget.dart';
 import 'package:flutter_music/pages/music_play_media_page/music_play_info_widget.dart';
 
@@ -10,6 +11,7 @@ import 'package:flutter_music/pages/music_play_media_page/music_play_control_wid
 import 'package:flutter_music/pages/music_play_media_page/animation/music_translation_animation.dart';
 import 'package:flutter_music/pages/music_play_media_page/music_play_bottom_widget.dart';
 import 'package:flutter_music/pages/music_play_media_page/animation/music_bottom_animation.dart';
+import 'package:flutter_music/pages/music_play_media_page/state/music_play_list_state.dart';
 
 class MusicPlayMeidaPage extends StatefulWidget {
   MusicPlayMeidaPage({
@@ -57,8 +59,8 @@ class _MusicPlayMeidaPageState extends State<MusicPlayMeidaPage>  with TickerPro
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
-        backgroundColor: MusicStore.Theme.of(context).theme,
+    return MusicScaffold(
+        showFloatingActionButton: false,
         appBar: MusicAppBar(
           title: "",
           leftIconData: Icons.keyboard_arrow_left,
@@ -74,7 +76,7 @@ class _MusicPlayMeidaPageState extends State<MusicPlayMeidaPage>  with TickerPro
               _playMusicInfo(),
               _bottomGroup()
             ],
-          ),
+          )
         )
     );
   }

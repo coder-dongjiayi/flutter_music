@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_music/models/play_list_model.dart';
 import 'package:flutter_music/models/song_list_model.dart';
-import 'package:flutter_music/music_app_bar/music_app_bar.dart';
+import 'package:flutter_music/base_music/music_app_bar.dart';
 import 'package:flutter_music/common/music_store.dart';
 import 'package:flutter_music/pages/recommend_page/recomment_item_widget.dart';
 import 'package:flutter_music/pages/recommend_page/recomment_more_item_widget.dart';
@@ -37,8 +37,8 @@ class _CommendPageState extends State<CommendPage> with AutomaticKeepAliveClient
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
-      backgroundColor:MusicStore.Theme.of(context).theme,
+    return MusicScaffold(
+     showFloatingActionButton: false,
       appBar: MusicAppBar(
         title: "推荐",
         rightIconData: Icons.person_pin,
