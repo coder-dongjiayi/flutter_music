@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:flutter_music/common/music_profile.dart';
+export 'package:flutter_music/routers/router_page_name.dart';
 
 const _musicLightColor =  Color.fromRGBO(241, 243, 246, 1.0);
 

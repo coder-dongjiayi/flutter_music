@@ -20,11 +20,9 @@ class MyApp extends StatelessWidget {
         builder: (context,state,widget){
           return MaterialApp(
 
-            initialRoute: "/",
+            initialRoute: MusicRouter.initialRoute,
 
-             routes: routers,
-
-            onGenerateRoute: onGenerateRoute,
+            onGenerateRoute: MusicRouter.generateRoute,
 
             theme: ThemeData(primaryColor:state.theme),
 

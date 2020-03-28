@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_music/music_app_bar/music_app_bar.dart';
 import 'package:flutter_music/common/music_store.dart';
@@ -10,8 +11,8 @@ import 'package:flutter_music/pages/music_play_media_page/animation/music_transl
 import 'package:flutter_music/pages/music_play_media_page/music_play_bottom_widget.dart';
 import 'package:flutter_music/pages/music_play_media_page/animation/music_bottom_animation.dart';
 
-class MusicPlayAudioPage extends StatefulWidget {
-  MusicPlayAudioPage({
+class MusicPlayMeidaPage extends StatefulWidget {
+  MusicPlayMeidaPage({
     Key key,
     this.heroTagName,
     this.songName,
@@ -28,10 +29,10 @@ class MusicPlayAudioPage extends StatefulWidget {
   final String coverImageUrl;
 
   @override
-  _MusicPlayAudioPageState createState() => _MusicPlayAudioPageState();
+  _MusicPlayMeidaPageState createState() => _MusicPlayMeidaPageState();
 }
 
-class _MusicPlayAudioPageState extends State<MusicPlayAudioPage>  with TickerProviderStateMixin {
+class _MusicPlayMeidaPageState extends State<MusicPlayMeidaPage>  with TickerProviderStateMixin {
 
   var mp3Url = "https://m7.music.126.net/20200314221758/32596cde74ee053ccef4800c8913b87a/ymusic/6082/fe9d/74e5/3e2118b63ebe06bc7136ff53fd803035.mp3";
   MusicPlayInfoController _musicPlayInfoController;

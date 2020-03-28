@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_music/common/music_global.dart';
 import 'package:flutter_music/common/music_store.dart';
 import 'package:flutter_music/public_widget/future_builder_widget.dart';
 import 'package:flutter_music/pages/library_page/library_empty_widget.dart';
@@ -59,12 +60,14 @@ class _LibraryListWidgetState extends State<LibraryListWidget>
     List<PlayItemModel> dataSource = LibraryListState.getDataSource(context);
     return Selector<LibraryListState, int>(
       builder: (context, state, _) {
+
         return _listView(dataSource);
       },
       selector: (context, state) {
         return state.dataSource.length;
       },
       shouldRebuild: (pre, next) {
+
         return pre != next;
       },
     );
@@ -73,6 +76,7 @@ class _LibraryListWidgetState extends State<LibraryListWidget>
 
 
   Widget _listView(List<PlayItemModel> dataSource) {
+
     return Builder(builder: (context) {
 
       return dataSource.length == 0
@@ -86,13 +90,12 @@ class _LibraryListWidgetState extends State<LibraryListWidget>
             PlayItemModel itemModel = dataSource[index];
 
             return LibraryItemWidget(
+
               animation: LibraryListState.libraryState(context).editAnimation,
               onTap: (index) {
 
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) {
-                      return AlbumPage(id: itemModel.id);
-                    }));
+                 Navigator.of(context).pushNamed(RouterPageName.AlbumPage, arguments: itemModel.id);
+
               },
               index: index,
               coverImage: itemModel.coverImgUrl,

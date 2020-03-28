@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_music/common/music_global.dart';
 import 'package:flutter_music/common/music_store.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:vibrate/vibrate.dart';
 import 'package:flutter_music/public_widget/music_button.dart';
 
-import 'package:flutter_music/pages/music_play_media_page/music_play_audio_page.dart';
+import 'package:flutter_music/pages/music_play_media_page/music_play_meida_page.dart';
 
 typedef GestureTapCallback = void Function();
 
@@ -27,7 +28,6 @@ class MusicItemWidget extends StatelessWidget {
 
   final GestureTapCallback onTap;
 
-  static const opacityCurve = const Interval(0.0, 0.75, curve: Curves.fastOutSlowIn);
 
 
   @override
@@ -127,25 +127,14 @@ class MusicItemWidget extends StatelessWidget {
 
   void _animationPush(context){
 
-    Navigator.of(context).push(PageRouteBuilder<void>(
-        pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation){
-          return AnimatedBuilder(
-            animation: animation,
-            builder:  (BuildContext context, Widget child){
-              return Opacity(
-                  opacity: opacityCurve.transform(animation.value),
-                  child: MusicPlayAudioPage(
-                    heroTagName: heroTageName,
-                    songName: title,
-                    artist: subtTitle,
-                    coverImageUrl: coverImageUrl,
-                  )
-              );
-            },
-          );
-        }
-
-    ));
+    Navigator.of(context).pushNamed(
+        RouterPageName.MusicPlayMeidaPage,
+        arguments: {"heroTagName":heroTageName,
+                    "title":title,
+                    "subtTitle":subtTitle,
+                    "coverImageUrl":coverImageUrl
+          }
+        );
   }
 
 }

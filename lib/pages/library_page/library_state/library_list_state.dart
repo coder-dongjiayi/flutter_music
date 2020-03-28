@@ -25,9 +25,6 @@ class LibraryListState extends ChangeNotifier{
 
 
 
-
-
-
   ///用于记录删除的时候 选中的index 默认没有被选中的 为-1
   var selectedIndex = -1;
 
@@ -55,17 +52,38 @@ class LibraryListState extends ChangeNotifier{
      editAnimationController.reverse().whenComplete((){
        ///执行删除的位移动画
        if(selectedIndex == -1) return;
+
+
        AnimationController sliderAnimationController = sliderAnimationControllerList[selectedIndex];
 
        PlayItemModel model = _dataSource[selectedIndex];
        model.slideEnd = true;
 
        AnimationController sizeAnimationController = sizeAnimationControllerList[selectedIndex];
+
+       
        sliderAnimationController.forward().whenComplete((){
 
          notifyListeners();
 
-         sizeAnimationController.forward();
+
+
+         sizeAnimationController.forward().whenComplete((){
+
+
+
+           sliderAnimationList.removeAt(selectedIndex);
+           sizeAnimationList.removeAt(selectedIndex);
+
+           sliderAnimationControllerList.removeAt(selectedIndex);
+           sizeAnimationControllerList.removeAt(selectedIndex);
+
+           _dataSource.removeAt(selectedIndex);
+           selectedIndex = -1;
+           notifyListeners();
+
+
+         });
 
        });
 
@@ -82,7 +100,7 @@ class LibraryListState extends ChangeNotifier{
 
     editAnimationController = AnimationController(duration: Duration(milliseconds: 250),vsync: vsync);
 
-    editAnimation = Tween<Offset>(begin: Offset.zero,end: Offset(0.1, 0)).animate(editAnimationController);
+    editAnimation = Tween<Offset>(begin: Offset.zero,end: Offset(0.1, 0)).animate(CurvedAnimation(parent:editAnimationController,curve: Curves.easeIn));
 
   }
 
@@ -90,7 +108,7 @@ class LibraryListState extends ChangeNotifier{
 
 
     ///平移动画
-    AnimationController sliderAnimationController = AnimationController(vsync: vsync, duration: Duration(milliseconds: 250));
+    AnimationController sliderAnimationController = AnimationController(vsync: vsync, duration: Duration(milliseconds: 300));
 
     Animation sliderAnimation = Tween(begin: Offset.zero, end: Offset(1.0, 0.0))
         .animate(

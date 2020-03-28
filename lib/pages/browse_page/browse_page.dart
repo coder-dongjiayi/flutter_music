@@ -35,9 +35,9 @@ class _BrowsePageState extends State<BrowsePage> with AutomaticKeepAliveClientMi
 
 
           return ListView.builder(
+              padding: EdgeInsets.only(bottom: 20),
               itemCount: 10 + 2,
               itemBuilder: (BuildContext context, int index){
-
 
                 if(index == 0){
                   return BrowseBannerWidget();

@@ -55,11 +55,13 @@ class _LibraryItemWidgetState extends State<LibraryItemWidget> with TickerProvid
   }
 
   void onAfterRender(Duration timeStamp){
-    _size = context.size;
+    _size = context?.size;
   }
 
   @override
   Widget build(BuildContext context) {
+
+
     ScreenAdapter.init(context);
 
     return  Selector<LibraryListState,bool>(
@@ -82,39 +84,43 @@ class _LibraryItemWidgetState extends State<LibraryItemWidget> with TickerProvid
     return SizeTransition(
       axis: Axis.vertical,
       sizeFactor: sizeAnimation,
-      child: Material(
-        color: Colors.transparent,
-        child: SizedBox.fromSize(size: _size),
-      ),
+      child: SizedBox.fromSize(size: _size)
     );
   }
 
   Widget _slideTransition(){
+
     Animation animation = LibraryListState.libraryState(context).sliderAnimationList[widget.index];
 
-    return SlideTransition(
-        position: animation,
-        child: Stack(
-          children: <Widget>[
+    return MusicGestureDetector(
+      onTap: (){
+        widget.onTap(widget.index);
+      },
+      child: SlideTransition(
+          position: animation,
+          child: Stack(
+            children: <Widget>[
 
-            LibraryDeleteButtonWidget(
-              index: widget.index,
-            ),
-
-            SlideTransition(
-              position: widget.animation,
-              child: _libraryCoverItem(
-                widget.coverImage,
-                widget.name,
-                widget.desc,
+              LibraryDeleteButtonWidget(
+                index: widget.index,
               ),
-            )
-          ],
-        )
+
+              SlideTransition(
+                position: widget.animation,
+                child: _libraryCoverItem(
+                  widget.coverImage,
+                  widget.name,
+                  widget.desc,
+                ),
+              )
+            ],
+          )
+      ),
     );
   }
 
   Widget _libraryCoverItem(coverImage, name, desc) {
+
     return Builder(builder: (context){
       return  Container(
         width: double.infinity,
