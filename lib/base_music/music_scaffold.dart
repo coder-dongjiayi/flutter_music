@@ -25,18 +25,37 @@ class _MusicScaffoldState extends State<MusicScaffold> {
   @override
   Widget build(BuildContext context) {
     ScreenAdapter.init(context);
-
+    int listCount =   MusicPlayListState.musicPlayState(context).currentPlayList.length;
     return Scaffold(
       backgroundColor: MusicStore.Theme.of(context).theme,
       appBar: widget.appBar,
-      body: Padding(
-        padding: EdgeInsets.fromLTRB(0, 0, 0,widget.showFloatingActionButton==true ? ScreenAdapter.setHeight(90) : 0),
-        child: widget.body,
+      body:  Consumer<MusicPlayListState>(
+        builder: (context,state,child){
+          return Padding(
+            padding: EdgeInsets.only(bottom: (listCount == 0 || widget.bottomNavigationBar!= null) ? 0 : ScreenAdapter.setHeight(90)),
+            child: widget.body,
+          );
+        },
       ),
+
       bottomNavigationBar: widget.bottomNavigationBar,
-      floatingActionButton: widget.showFloatingActionButton == true ? MusicBottomPlay() : null,
+      floatingActionButton: _floatingWidget(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
 
+    );
+  }
+
+  Widget _floatingWidget(){
+
+    return Consumer<MusicPlayListState>(
+      builder: (context,state,child){
+
+        if(state.currentPlayList.length == 0 || widget.showFloatingActionButton == false){
+          return Text("");
+        }
+
+        return  MusicBottomPlay();
+      },
     );
   }
 

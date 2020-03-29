@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_music/models/track_list_model.dart';
 import 'package:provider/provider.dart';
+export 'package:flutter_music/models/track_list_model.dart';
 class MusicPlayListState extends ChangeNotifier{
 
   /// 当前播放列表
@@ -12,6 +13,8 @@ class MusicPlayListState extends ChangeNotifier{
   int get currentIndex => _currentIndex;
 
   List<TrackItemModel> get currentPlayList => _currentPlayList;
+
+  TrackItemModel get currentTrackItem => _currentPlayList[_currentIndex];
 
   void updatePlayList(List<TrackItemModel> list,int currentIndex){
 

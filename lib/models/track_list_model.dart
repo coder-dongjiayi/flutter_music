@@ -17,14 +17,19 @@ class TrackItemModel{
   String name;
   int id;
   List<TrackArAlModel> arList;
+
+  MusicItemModel musicItemModel;
+
   TrackArAlModel al;
 
   TrackItemModel({
     this.name,
     this.arList,
-    this.al
+    this.al,
+    this.musicItemModel
   });
   TrackItemModel.fromJson(Map<String,dynamic> json){
+
 
     name = json["name"];
     id = json["id"];
@@ -54,6 +59,22 @@ class TrackArAlModel{
     id = json["id"];
     name = json["name"];
     picUrl = json["picUrl"];
+
+  }
+
+}
+
+class MusicItemModel{
+  int id;
+  String url;
+
+  MusicItemModel({
+    this.id,
+    this.url : "",
+  });
+  MusicItemModel.fromJson(Map<String,dynamic> json){
+    this.id = json["id"];
+    this.url = json["url"];
 
   }
 

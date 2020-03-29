@@ -11,7 +11,6 @@ class MusicBottomPlay extends StatefulWidget {
 
 class _MusicBottomPlayState extends State<MusicBottomPlay> with TickerProviderStateMixin{
   AnimationController  _animationController;
-  var imageUrl = "https://pic.xiami.net/xiamiWeb/10cd9f6b79e0fb457f22380ee90c71c9/f3ff3553dd4f44e511b660ce5e144717-336x335.gif?x-oss-process=image/quality,q_80";
 
   @override
   void initState() {
@@ -73,30 +72,26 @@ class _MusicBottomPlayState extends State<MusicBottomPlay> with TickerProviderSt
   }
 
   Widget _playInfo() {
+    TrackItemModel itemModel = MusicPlayListState.musicPlayState(context).currentTrackItem;
     return MusicGestureDetector(
       onTap: (){
         Navigator.of(context).pushNamed(
             RouterPageName.MusicPlayMeidaPage,
-            arguments: {"heroTagName":"play_bottom_music_hero",
-              "title":"少年",
-              "subtTitle":"猛然",
-              "coverImageUrl":imageUrl
-            }
+            arguments: {"heroTagName":"play_bottom_music_hero"}
         );
       },
       child: Container(
         margin: EdgeInsets.only(left: 20),
-
         child: Row(
           children: <Widget>[
             RotationTransition(
                 alignment: Alignment.center,
                 turns: _animationController,
-                child: _clipOval()
+                child: _clipOval(itemModel.al.picUrl)
             ),
             Expanded(
               flex: 1,
-              child: _title(),
+              child: _title(itemModel.name+"-"+itemModel.arList.first.name),
             )
           ],
         ),
@@ -104,7 +99,7 @@ class _MusicBottomPlayState extends State<MusicBottomPlay> with TickerProviderSt
     );
   }
 
-  Widget _clipOval(){
+  Widget _clipOval(imageUrl){
     return ClipOval(
         child: CachedNetworkImage(
           imageUrl: "$imageUrl",
@@ -117,10 +112,13 @@ class _MusicBottomPlayState extends State<MusicBottomPlay> with TickerProviderSt
     );
 
   }
-  Widget _title(){
+  Widget _title(title){
     return Padding(
       padding: EdgeInsets.only(left: 10),
-      child: Text("少年-猛然",style: TextStyle(color: MusicStore.Theme.of(context).titleColor),),
+      child: Text(
+        "$title",
+        maxLines: 2,
+        style: TextStyle(color: MusicStore.Theme.of(context).titleColor),),
     );
   }
 

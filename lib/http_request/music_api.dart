@@ -74,6 +74,42 @@ class MusicApi{
    return SongDetailModel.fromJson(response["playlist"]);
  }
 
+ /// 获取音乐的mp3路径
+  static Future<List<TrackItemModel>> musicMp3Item(List<TrackItemModel> trackItemList) async{
+
+    /// 1. 这个接口是 传入一组id 返回这组id 对应的歌曲url
+    /// 2. 但是存在一个问题 就是返回数据的顺序不一定是按照 你传入id的顺序
+    /// 3. 为了把返回的歌曲url跟歌曲信息对应上 这里使用了 map 为了最后能够 降低实际复杂度 提高效率
+   Map<String,TrackItemModel> trackMap = Map();
+
+   List<String> trackIdList = trackItemList.map((value){
+     String trackId =  value.id.toString();
+      trackMap[trackId] = value;
+     return trackId;
+
+    }).toList();
+
+
+    String trackIds  = trackIdList.join(",");
+    
+    final response = await HttpRequestManager.request("/song/url",
+        params: {"id":trackIds}
+        );
+
+    if(response["data"] != null){
+      response["data"].forEach((v){
+        MusicItemModel itemModel = MusicItemModel.fromJson(v);
+        TrackItemModel trackItemModel = trackMap[itemModel.id.toString()];
+        trackItemModel.musicItemModel = itemModel;
+      });
+    }
+
+
+
+    return trackItemList;
+
+  }
+
 
 
 

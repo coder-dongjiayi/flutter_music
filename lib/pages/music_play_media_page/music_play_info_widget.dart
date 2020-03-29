@@ -31,14 +31,14 @@ class MusicPlayInfoWidget extends StatefulWidget {
 
     this.heroTagName,
 
-    this.translationAnimation
-
+    this.translationAnimation,
 
 }) : super (key : key);
 
   final String heroTagName;
 
   final AnimationController translationAnimation;
+
   @override
   _MusicPlayInfoWidgetState createState() => _MusicPlayInfoWidgetState();
 }
@@ -94,6 +94,9 @@ class _MusicPlayInfoWidgetState extends State<MusicPlayInfoWidget>  with TickerP
       height: _containerHeight,
 
       child: PageView.builder(
+          onPageChanged: (index){
+            print(_tracks[index].musicItemModel.url);
+          },
           controller: _pageController,
           itemCount: _tracks.length,
           itemBuilder: (BuildContext context, int index){

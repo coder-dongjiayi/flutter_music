@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_music/base_music/music_app_bar.dart';
 import 'package:flutter_music/common/music_store.dart';
+import 'package:flutter_music/http_request/music_api.dart';
 import 'package:flutter_music/pages/library_page/library_state/library_list_state.dart';
 import 'package:flutter_music/pages/music_play_media_page/music_play_slider_widget.dart';
 import 'package:flutter_music/pages/music_play_media_page/music_play_info_widget.dart';
@@ -11,7 +12,7 @@ import 'package:flutter_music/pages/music_play_media_page/music_play_control_wid
 import 'package:flutter_music/pages/music_play_media_page/animation/music_translation_animation.dart';
 import 'package:flutter_music/pages/music_play_media_page/music_play_bottom_widget.dart';
 import 'package:flutter_music/pages/music_play_media_page/animation/music_bottom_animation.dart';
-import 'package:flutter_music/pages/music_play_media_page/state/music_play_list_state.dart';
+import 'package:flutter_music/common/music_play_list_state.dart';
 
 class MusicPlayMeidaPage extends StatefulWidget {
   MusicPlayMeidaPage({
@@ -30,17 +31,19 @@ class MusicPlayMeidaPage extends StatefulWidget {
 
 class _MusicPlayMeidaPageState extends State<MusicPlayMeidaPage>  with TickerProviderStateMixin {
 
-  var mp3Url = "https://m7.music.126.net/20200314221758/32596cde74ee053ccef4800c8913b87a/ymusic/6082/fe9d/74e5/3e2118b63ebe06bc7136ff53fd803035.mp3";
-
   AudioPlayer _audioPlayer;
 
   AnimationController _animationController;
 
 
+  Future _future;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    List<TrackItemModel> trackList =   MusicPlayListState.musicPlayState(context).currentPlayList;
+
+    _future = MusicApi.musicMp3Item(trackList);
 
     _animationController = AnimationController(duration: Duration(milliseconds: 300),vsync: this)..forward();
 
@@ -63,19 +66,11 @@ class _MusicPlayMeidaPageState extends State<MusicPlayMeidaPage>  with TickerPro
         ),
 
         body: SafeArea(
-            child: ChangeNotifierProvider.value(
-                value: MusicPlayListState.musicPlayState(context),
-                 child: Consumer<MusicPlayListState>(
-                   builder: (context,state,_){
-
-                     return Stack(
-                       children: <Widget>[
-                         _playMusicInfo(),
-                         _bottomGroup()
-                       ],
-                     );
-                   },
-                 ),
+            child: FutureBuilderWidget<List<TrackItemModel>>(
+              future: _future,
+              successBuilder: (BuildContext context, AsyncSnapshot<List<TrackItemModel>> snapshot){
+                return _musicBody();
+              },
             )
         )
     );
@@ -83,12 +78,31 @@ class _MusicPlayMeidaPageState extends State<MusicPlayMeidaPage>  with TickerPro
 
   }
 
+  Widget _musicBody(){
+    return ChangeNotifierProvider.value(
+      value: MusicPlayListState.musicPlayState(context),
+      child: Consumer<MusicPlayListState>(
+        builder: (context,state,_){
+
+          return Stack(
+            children: <Widget>[
+              _playMusicInfo(),
+              _bottomGroup()
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  /// 底部两个按钮
   Widget _bottomGroup(){
     return MusicBottomAnimation(
       animationController: _animationController,
       child:  MusicPlayBottomWidget(),
     );
   }
+  /// 播放控制 封面图
   Widget _playMusicInfo(){
     return  Padding(
       padding: EdgeInsets.only(top: 0),
@@ -96,6 +110,7 @@ class _MusicPlayMeidaPageState extends State<MusicPlayMeidaPage>  with TickerPro
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           MusicPlayInfoWidget(
+
             translationAnimation: _animationController,
           ),
 
@@ -125,7 +140,7 @@ class _MusicPlayMeidaPageState extends State<MusicPlayMeidaPage>  with TickerPro
   @override
   void dispose() {
 
-
+    _animationController.dispose();
     // TODO: implement dispose
     super.dispose();
   }
