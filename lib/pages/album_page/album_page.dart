@@ -43,6 +43,7 @@ class _AlbumPageState extends State<AlbumPage> {
           return ListView.builder(
               itemCount: model.tracks.length +1,
               itemBuilder: (context,index){
+
                 if(index == 0){
                   return AlbumHeaderWidget(
                     title: model.name,
@@ -50,12 +51,28 @@ class _AlbumPageState extends State<AlbumPage> {
                     coverImageUrl: model.coverImgUrl,
                   );
                 }
+                var  tracks = model.tracks;
+                var  trackIndex = index-1;
+                var  title = tracks[trackIndex].name;
+                var  subtTitle = tracks[trackIndex].arList.first.name + tracks[trackIndex].al.name;
+                var  coverImageUrl = tracks[trackIndex].al.picUrl;
+                var  heroTagName = tracks[trackIndex].id.toString();
 
                 return MusicItemWidget(
-                  title: model.tracks[index-1].name,
-                  subtTitle: model.tracks[index-1].arList.first.name + "-" + model.tracks[index-1].al.name,
-                  coverImageUrl: model.tracks[index-1].al.picUrl,
-                  heroTageName: model.tracks[index-1].id.toString(),
+                  onTap: (index){
+
+                     MusicPlayListState.musicPlayState(context).updatePlayList(tracks, index);
+
+                    Navigator.of(context).pushNamed(
+                            RouterPageName.MusicPlayMeidaPage,
+                            arguments: {"heroTagName":heroTagName}
+                            );
+                  },
+                  index: trackIndex,
+                  title: title,
+                  subtTitle:subtTitle,
+                  coverImageUrl:coverImageUrl,
+                  heroTageName:heroTagName,
                 );
               }
           );

@@ -17,18 +17,12 @@ class MusicPlayMeidaPage extends StatefulWidget {
   MusicPlayMeidaPage({
     Key key,
     this.heroTagName,
-    this.songName,
-    this.artist,
-    this.coverImageUrl
+
   }) : super(key : key);
 
   final String heroTagName;
 
-  final String songName;
 
-  final String artist;
-
-  final String coverImageUrl;
 
   @override
   _MusicPlayMeidaPageState createState() => _MusicPlayMeidaPageState();
@@ -37,18 +31,16 @@ class MusicPlayMeidaPage extends StatefulWidget {
 class _MusicPlayMeidaPageState extends State<MusicPlayMeidaPage>  with TickerProviderStateMixin {
 
   var mp3Url = "https://m7.music.126.net/20200314221758/32596cde74ee053ccef4800c8913b87a/ymusic/6082/fe9d/74e5/3e2118b63ebe06bc7136ff53fd803035.mp3";
-  MusicPlayInfoController _musicPlayInfoController;
+
   AudioPlayer _audioPlayer;
 
   AnimationController _animationController;
-
 
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _musicPlayInfoController = MusicPlayInfoController();
 
     _animationController = AnimationController(duration: Duration(milliseconds: 300),vsync: this)..forward();
 
@@ -59,7 +51,7 @@ class _MusicPlayMeidaPageState extends State<MusicPlayMeidaPage>  with TickerPro
   @override
   Widget build(BuildContext context) {
 
-    return MusicScaffold(
+    return  MusicScaffold(
         showFloatingActionButton: false,
         appBar: MusicAppBar(
           title: "",
@@ -71,14 +63,24 @@ class _MusicPlayMeidaPageState extends State<MusicPlayMeidaPage>  with TickerPro
         ),
 
         body: SafeArea(
-          child: Stack(
-            children: <Widget>[
-              _playMusicInfo(),
-              _bottomGroup()
-            ],
-          )
+            child: ChangeNotifierProvider.value(
+                value: MusicPlayListState.musicPlayState(context),
+                 child: Consumer<MusicPlayListState>(
+                   builder: (context,state,_){
+
+                     return Stack(
+                       children: <Widget>[
+                         _playMusicInfo(),
+                         _bottomGroup()
+                       ],
+                     );
+                   },
+                 ),
+            )
         )
     );
+
+
   }
 
   Widget _bottomGroup(){
@@ -95,31 +97,17 @@ class _MusicPlayMeidaPageState extends State<MusicPlayMeidaPage>  with TickerPro
         children: <Widget>[
           MusicPlayInfoWidget(
             translationAnimation: _animationController,
-            heroTagName: widget.heroTagName,
-            musicController: _musicPlayInfoController,
-            songName: widget.songName,
-            artist: widget.artist,
-            coverImageUrl: widget.coverImageUrl,
-
           ),
 
          MusicTranslationAnimation(
            animationController: _animationController,
-
            child: MusicPlayControlWidget(
              previousTap: (){
+             MusicPlayListState.musicPlayState(context).previousTrack();
 
              },
              stateTap: (selected){
-               if(selected == true){
-                 _musicPlayInfoController.pauseAnimation();
-                 _audioPlayer.pause();
 
-               }else{
-                 _musicPlayInfoController.resumeAnimation();
-                 _audioPlayer.resume();
-
-               }
              },
              nextTap: (){
 
@@ -137,8 +125,6 @@ class _MusicPlayMeidaPageState extends State<MusicPlayMeidaPage>  with TickerPro
   @override
   void dispose() {
 
-    _animationController.dispose();
-    _musicPlayInfoController.dispose();
 
     // TODO: implement dispose
     super.dispose();

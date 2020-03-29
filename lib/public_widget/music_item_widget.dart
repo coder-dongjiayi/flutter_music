@@ -5,14 +5,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:vibrate/vibrate.dart';
 import 'package:flutter_music/public_widget/music_button.dart';
 
-import 'package:flutter_music/pages/music_play_media_page/music_play_meida_page.dart';
 
-typedef GestureTapCallback = void Function();
+typedef GestureTapCallback = void Function(int index);
 
 class MusicItemWidget extends StatelessWidget {
 
   MusicItemWidget({
     Key key,
+    this.index,
     this.title,
     this.subtTitle,
     this.coverImageUrl,
@@ -26,6 +26,8 @@ class MusicItemWidget extends StatelessWidget {
 
   final String heroTageName;
 
+  final int index;
+
   final GestureTapCallback onTap;
 
 
@@ -36,11 +38,7 @@ class MusicItemWidget extends StatelessWidget {
     return GestureDetector(
       onTap: (){
         Vibrate.feedback(FeedbackType.selection);
-        if (onTap != null){
-          onTap();
-        }else{
-          _animationPush(context);
-        }
+        onTap(index);
 
 
       },
@@ -72,31 +70,27 @@ class MusicItemWidget extends StatelessWidget {
 
 
   Widget _itemCover(context){
-    return  Hero(
+    return  Container(
 
-      tag: "$heroTageName",
-      child: Container(
+        width: 60,
+        height: 60,
+        padding: EdgeInsets.fromLTRB(2, 2, 2, 2),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Colors.white,
+            boxShadow:[
+              BoxShadow(color:MusicStore.Theme.of(context).shadowColor,offset: Offset(10,10),blurRadius: 10),
+              BoxShadow(color: Colors.white,offset: Offset(-10,-10),blurRadius: 26)
+            ]
+        ),
 
-          width: 60,
-          height: 60,
-          padding: EdgeInsets.fromLTRB(2, 2, 2, 2),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: Colors.white,
-              boxShadow:[
-                BoxShadow(color:MusicStore.Theme.of(context).shadowColor,offset: Offset(10,10),blurRadius: 10),
-                BoxShadow(color: Colors.white,offset: Offset(-10,-10),blurRadius: 26)
-              ]
-          ),
-
-          child: ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: CachedNetworkImage(
-                imageUrl: "$coverImageUrl",
-                fit: BoxFit.cover,
-              )
-          )
-      ),
+        child: ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: CachedNetworkImage(
+              imageUrl: "$coverImageUrl",
+              fit: BoxFit.cover,
+            )
+        )
     );
 
   }
@@ -125,16 +119,6 @@ class MusicItemWidget extends StatelessWidget {
     );
   }
 
-  void _animationPush(context){
 
-    Navigator.of(context).pushNamed(
-        RouterPageName.MusicPlayMeidaPage,
-        arguments: {"heroTagName":heroTageName,
-                    "title":title,
-                    "subtTitle":subtTitle,
-                    "coverImageUrl":coverImageUrl
-          }
-        );
-  }
 
 }

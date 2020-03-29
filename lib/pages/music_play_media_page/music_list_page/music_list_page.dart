@@ -85,7 +85,7 @@ class _MusicListPageState extends State<MusicListPage> {
           itemBuilder: (context,index){
 
             return MusicItemWidget(
-              onTap: (){
+              onTap: (index){
 
               },
               title: _itemList[index]["songName"],

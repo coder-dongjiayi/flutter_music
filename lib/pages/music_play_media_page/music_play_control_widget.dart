@@ -31,7 +31,9 @@ class MusicPlayControlWidget extends StatelessWidget {
           MusicButton(
             normalIconData:Icons.skip_previous,
             padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
-
+            onTap: (selected){
+              previousTap();
+            },
             size: 30,
           ),
           MusicButton(
@@ -48,6 +50,9 @@ class MusicPlayControlWidget extends StatelessWidget {
             normalIconData:Icons.skip_next,
             padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
             size: 30,
+            onTap: (selected){
+              nextTap();
+            },
           ),
         ],
       ),

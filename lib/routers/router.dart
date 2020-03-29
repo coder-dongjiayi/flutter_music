@@ -44,29 +44,36 @@ class MusicRouter{
          Map arguments = settings.arguments as Map;
 
          String heroTageName = arguments["heroTagName"];
-         String title = arguments["title"];
-         String subtTitle = arguments["subtTitle"];
-         String coverImageUrl = arguments["coverImageUrl"];
 
-       return  PageRouteBuilder<void>(
-             pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation){
-               return AnimatedBuilder(
-                 animation: animation,
-                 builder:  (BuildContext context, Widget child){
-                   return Opacity(
-                       opacity: opacityCurve.transform(animation.value),
-                       child: MusicPlayMeidaPage(
-                         heroTagName: heroTageName,
-                         songName: title,
-                         artist: subtTitle,
-                         coverImageUrl: coverImageUrl,
-                       )
-                   );
-                 },
+
+         return MaterialPageRoute(
+             builder: (context) {
+               return MusicPlayMeidaPage(
+                 heroTagName: heroTageName,
+
                );
              }
-
          );
+
+//       return  PageRouteBuilder<void>(
+//             pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation){
+//               return AnimatedBuilder(
+//                 animation: animation,
+//                 builder:  (BuildContext context, Widget child){
+//                   return Opacity(
+//                       opacity: opacityCurve.transform(animation.value),
+//                       child: MusicPlayMeidaPage(
+//                         heroTagName: heroTageName,
+//                         songName: title,
+//                         artist: subtTitle,
+//                         coverImageUrl: coverImageUrl,
+//                       )
+//                   );
+//                 },
+//               );
+//             }
+//
+//         );
        }
 
       }else{
