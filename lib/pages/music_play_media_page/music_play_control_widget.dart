@@ -37,8 +37,9 @@ class MusicPlayControlWidget extends StatelessWidget {
             size: 30,
           ),
           MusicButton(
-            normalIconData:Icons.play_arrow,
-            selectedIconData: Icons.pause,
+
+            selectedIconData:Icons.play_arrow,
+            normalIconData: Icons.pause,
             onTap: (selected){
                 stateTap(selected);
             },

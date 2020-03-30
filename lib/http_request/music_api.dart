@@ -71,6 +71,7 @@ class MusicApi{
      params: {"id":id}
 
    );
+
    return SongDetailModel.fromJson(response["playlist"]);
  }
 
@@ -79,7 +80,7 @@ class MusicApi{
 
     /// 1. 这个接口是 传入一组id 返回这组id 对应的歌曲url
     /// 2. 但是存在一个问题 就是返回数据的顺序不一定是按照 你传入id的顺序
-    /// 3. 为了把返回的歌曲url跟歌曲信息对应上 这里使用了 map 为了最后能够 降低实际复杂度 提高效率
+    /// 3. 为了把返回的歌曲url跟歌曲信息对应上 这里使用了 map 为了最后能够降低时间复杂度 提高效率
    Map<String,TrackItemModel> trackMap = Map();
 
    List<String> trackIdList = trackItemList.map((value){

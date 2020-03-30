@@ -67,15 +67,16 @@ class TrackArAlModel{
 class MusicItemModel{
   int id;
   String url;
-
+  int size;
   MusicItemModel({
     this.id,
     this.url : "",
+    this.size
   });
   MusicItemModel.fromJson(Map<String,dynamic> json){
     this.id = json["id"];
     this.url = json["url"];
-
+    this.size = json["size"];
   }
 
 }

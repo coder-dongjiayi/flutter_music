@@ -59,7 +59,7 @@ class _MusicPlayInfoWidgetState extends State<MusicPlayInfoWidget>  with TickerP
     super.initState();
 
 
-    int index = MusicPlayListState.musicPlayState(context).currentIndex;
+    int index = MusicGlobalPlayListState.musicPlayState(context).currentIndex;
 
    _pageController = PageController(initialPage: index);
 
@@ -80,7 +80,7 @@ class _MusicPlayInfoWidgetState extends State<MusicPlayInfoWidget>  with TickerP
   Widget build(BuildContext context) {
     ScreenAdapter.init(context);
 
-   List<TrackItemModel>  _tracks = MusicPlayListState.musicPlayState(context).currentPlayList;
+   List<TrackItemModel>  _tracks = MusicGlobalPlayListState.musicPlayState(context).currentPlayList;
 
    double _containerHeight =  ScreenAdapter.getScreenWidth()/3.0
                               + _playCovermarginTop *2

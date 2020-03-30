@@ -72,7 +72,7 @@ class _MusicBottomPlayState extends State<MusicBottomPlay> with TickerProviderSt
   }
 
   Widget _playInfo() {
-    TrackItemModel itemModel = MusicPlayListState.musicPlayState(context).currentTrackItem;
+    TrackItemModel itemModel = MusicGlobalPlayListState.musicPlayState(context).currentTrackItem;
     return MusicGestureDetector(
       onTap: (){
         Navigator.of(context).pushNamed(

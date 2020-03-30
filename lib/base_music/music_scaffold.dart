@@ -25,11 +25,11 @@ class _MusicScaffoldState extends State<MusicScaffold> {
   @override
   Widget build(BuildContext context) {
     ScreenAdapter.init(context);
-    int listCount =   MusicPlayListState.musicPlayState(context).currentPlayList.length;
+    int listCount =   MusicGlobalPlayListState.musicPlayState(context).currentPlayList.length;
     return Scaffold(
       backgroundColor: MusicStore.Theme.of(context).theme,
       appBar: widget.appBar,
-      body:  Consumer<MusicPlayListState>(
+      body:  Consumer<MusicGlobalPlayListState>(
         builder: (context,state,child){
           return Padding(
             padding: EdgeInsets.only(bottom: (listCount == 0 || widget.bottomNavigationBar!= null) ? 0 : ScreenAdapter.setHeight(90)),
@@ -47,7 +47,7 @@ class _MusicScaffoldState extends State<MusicScaffold> {
 
   Widget _floatingWidget(){
 
-    return Consumer<MusicPlayListState>(
+    return Consumer<MusicGlobalPlayListState>(
       builder: (context,state,child){
 
         if(state.currentPlayList.length == 0 || widget.showFloatingActionButton == false){
