@@ -48,11 +48,20 @@ class _BrowsePageState extends State<BrowsePage> with AutomaticKeepAliveClientMi
                 }
 
                 TrackItemModel itemModel = snapshot.data[index-2];
+
                 return MusicItemWidget(
+                  onTap: (_){
+
+                    MusicGlobalPlayListState.musicPlayState(context).updatePlayList(snapshot.data, index-2);
+
+                    Navigator.of(context).pushNamed(
+                        RouterPageName.MusicPlayMeidaPage
+                    );
+                  },
                   title: itemModel.name,
                   subtTitle: itemModel.arList.first.name + "-" + itemModel.al.name,
                   coverImageUrl: itemModel.al.picUrl,
-                  heroTageName: itemModel.id.toString(),
+
                 );
               }
           );

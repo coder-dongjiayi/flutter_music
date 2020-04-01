@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_music/common/music_global.dart';
 import 'package:flutter_music/common/music_store.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:vibrate/vibrate.dart';
@@ -16,7 +15,6 @@ class MusicItemWidget extends StatelessWidget {
     this.title,
     this.subtTitle,
     this.coverImageUrl,
-    this.heroTageName,
     this.onTap
 }):super(key:key);
 
@@ -24,7 +22,6 @@ class MusicItemWidget extends StatelessWidget {
   final String subtTitle;
   final String coverImageUrl;
 
-  final String heroTageName;
 
   final int index;
 

@@ -6,7 +6,6 @@ import 'package:flutter_music/public_widget/future_builder_widget.dart';
 import 'package:flutter_music/pages/library_page/library_empty_widget.dart';
 import 'package:flutter_music/models/play_list_model.dart';
 import 'package:flutter_music/http_request/music_api.dart';
-import 'package:flutter_music/pages/album_page/album_page.dart';
 import 'package:flutter_music/common/screen_adapter.dart';
 import 'package:flutter_music/pages/library_page/library_item_widget.dart';
 import 'package:flutter_music/pages/library_page/library_state/library_list_state.dart';

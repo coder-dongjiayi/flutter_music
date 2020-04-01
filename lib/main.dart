@@ -16,11 +16,12 @@ class MyApp extends StatelessWidget {
       providers: [
 
         ChangeNotifierProvider<ThemeState>(create: (_)=>ThemeState()),
-        ChangeNotifierProvider<MusicGlobalPlayListState>(create: (_)=>MusicGlobalPlayListState())
+        ChangeNotifierProvider<MusicGlobalPlayListState>(create: (_)=>MusicGlobalPlayListState(
+          platform: Theme.of(context).platform
+        ))
       ],
       child: Consumer<ThemeState>(
         builder: (context,state,widget){
-          print("执行");
           return MaterialApp(
 
             initialRoute: MusicRouter.initialRoute,

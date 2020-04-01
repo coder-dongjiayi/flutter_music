@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_music/common/music_store.dart';
 import 'package:flutter_music/pages/library_page/library_state/library_list_state.dart';
@@ -8,6 +9,7 @@ import 'package:flutter_music/pages/music_play_media_page/animation/music_transl
 import 'package:flutter_music/pages/music_play_media_page/music_play_bottom_widget.dart';
 import 'package:flutter_music/pages/music_play_media_page/animation/music_bottom_animation.dart';
 
+
 class MusicPlayBodyWidget extends StatefulWidget {
   @override
   _MusicPlayBodyWidget createState() => _MusicPlayBodyWidget();
@@ -15,42 +17,67 @@ class MusicPlayBodyWidget extends StatefulWidget {
 
 class _MusicPlayBodyWidget extends State<MusicPlayBodyWidget> with TickerProviderStateMixin{
   AnimationController _animationController;
+
+  AnimationController _rotationAnimationController;
+
+  PageController _pageController;
+
+  MusicGlobalPlayListState _musicGlobalPlayListState;
+
+  double _screenWidth = 0.0;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
+    _musicGlobalPlayListState =  MusicGlobalPlayListState.musicPlayState(context);
+
+    _musicGlobalPlayListState.addListener((){
+      if(_musicGlobalPlayListState.audioPlayerState == AudioPlayerState.COMPLETED){
+        _pageViewAnimatePage();
+      }
+    });
     _animationController = AnimationController(duration: Duration(milliseconds: 200),vsync: this)..forward();
 
+    _rotationAnimationController = AnimationController(duration: Duration(seconds: 25),vsync: this);
+    _rotationAnimationController.repeat();
+
+    _pageController = PageController(initialPage:_musicGlobalPlayListState.currentIndex);
+
+
+    _pageController.addListener((){
+
+      if(_pageController.offset == _musicGlobalPlayListState.currentIndex * _screenWidth){
+        _rotationAnimationController.repeat();
+      }else{
+        _rotationAnimationController.stop();
+      }
+
+    });
   }
   @override
   void dispose() {
     // TODO: implement dispose
+
+    _rotationAnimationController.dispose();
     _animationController.dispose();
+    _pageController.dispose();
     super.dispose();
   }
   @override
   Widget build(BuildContext context) {
-
+    _screenWidth = MediaQuery.of(context).size.width;
 
     return _musicBody();
   }
 
   Widget _musicBody(){
 
-    return ChangeNotifierProvider.value(
-      value: MusicGlobalPlayListState.musicPlayState(context),
-      child: Consumer<MusicGlobalPlayListState>(
-        builder: (context,state,_){
-
-          return Stack(
-            children: <Widget>[
-              _playMusicInfo(),
-              _bottomGroup()
-            ],
-          );
-        },
-      ),
+    return Stack(
+      children: <Widget>[
+        _playMusicInfo(),
+        _bottomGroup()
+      ],
     );
   }
 
@@ -63,6 +90,7 @@ class _MusicPlayBodyWidget extends State<MusicPlayBodyWidget> with TickerProvide
   }
   /// 播放控制 封面图
   Widget _playMusicInfo(){
+
     MusicGlobalPlayListState musicGlobalPlayListState =   MusicGlobalPlayListState.musicPlayState(context);
     return  Padding(
       padding: EdgeInsets.only(top: 0),
@@ -71,27 +99,35 @@ class _MusicPlayBodyWidget extends State<MusicPlayBodyWidget> with TickerProvide
         children: <Widget>[
           MusicPlayInfoWidget(
 
+            pageController: _pageController,
+            rotationAnimationController: _rotationAnimationController,
             translationAnimation: _animationController,
           ),
 
           MusicTranslationAnimation(
             animationController: _animationController,
+
             child: MusicPlayControlWidget(
               previousTap: (){
-                musicGlobalPlayListState.music_previous();
 
+                _musicGlobalPlayListState.music_control_previous();
+
+                _pageViewAnimatePage();
               },
               stateTap: (selected){
 
                  if(selected == true){
+                   _rotationAnimationController.stop();
                    musicGlobalPlayListState.music_pause();
                  } else{
+                   _rotationAnimationController.repeat();
                    musicGlobalPlayListState.music_resume();
                  }
               },
               nextTap: (){
-                musicGlobalPlayListState.music_next();
+                _musicGlobalPlayListState.music_control_next();
 
+                _pageViewAnimatePage();
               },
             ),
           ),
@@ -101,5 +137,9 @@ class _MusicPlayBodyWidget extends State<MusicPlayBodyWidget> with TickerProvide
     );
   }
 
+  void _pageViewAnimatePage(){
+    _pageController.animateToPage(_musicGlobalPlayListState.currentIndex,
+        duration:  Duration(milliseconds: 250), curve: Curves.ease);
+  }
 
 }

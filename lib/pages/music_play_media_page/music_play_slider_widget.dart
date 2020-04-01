@@ -8,7 +8,6 @@ class MusicPlaySliderWidget extends StatefulWidget {
 
 class _MusicPlaySliderWidgetState extends State<MusicPlaySliderWidget> {
 
- double _progressValue = 0.0;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -23,13 +22,41 @@ class _MusicPlaySliderWidgetState extends State<MusicPlaySliderWidget> {
   }
   
   Widget _time(context){
+
     return Padding(
       padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Text("1:30",style: TextStyle(fontSize: 12,color: Color.fromRGBO(165, 171, 191, 1.0))),
-          Text("3.30",style: TextStyle(fontSize: 12,color: Color.fromRGBO(165, 171, 191, 1.0)))
+
+          /// 当前时间
+          Selector<MusicGlobalPlayListState,String>(
+            builder: (context,positionText,_){
+
+              return Text(positionText,style: TextStyle(fontSize: 12,color: Color.fromRGBO(165, 171, 191, 1.0)));
+            },
+            selector: (context,state){
+              return state.positionText;
+            },
+            shouldRebuild: (pre,next){
+              return pre != next;
+            },
+          ),
+        /// 总时长
+          Selector<MusicGlobalPlayListState,String>(
+            builder: (context,durationText,_){
+
+              return Text(durationText,style: TextStyle(fontSize: 12,color: Color.fromRGBO(165, 171, 191, 1.0)));
+            },
+            selector: (context,state){
+              return state.durationText;
+            },
+            shouldRebuild: (pre,next){
+              return pre != next;
+            },
+
+          )
+
         ],
       ),
     );
@@ -54,14 +81,25 @@ class _MusicPlaySliderWidgetState extends State<MusicPlaySliderWidget> {
         ),
 
       ),
-      child: Slider(
-        onChanged: (double value) {
-          setState(() {
-            _progressValue = value;
-          });
+      child: Selector<MusicGlobalPlayListState,double>(
+        builder: (context,progress,_){
+        MusicGlobalPlayListState musicGlobalPlayListState =   MusicGlobalPlayListState.musicPlayState(context);
+          return  Slider(
+            onChanged: (double value) {
+
+              musicGlobalPlayListState.music_seek(value);
+            },
+            value: progress,
+          );
         },
-        value: _progressValue,
-      ),
+        selector: (context,state){
+          return state.playProgress;
+        },
+        shouldRebuild: (pre,next){
+          return pre != next;
+        },
+      )
+
     );
   }
 }

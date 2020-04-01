@@ -41,6 +41,7 @@ class _LibraryPageState extends State<LibraryPage> with AutomaticKeepAliveClient
    ],
    child: Builder(
      builder: (context){
+
        return MusicScaffold(
          showFloatingActionButton: false,
          appBar: MusicAppBar(

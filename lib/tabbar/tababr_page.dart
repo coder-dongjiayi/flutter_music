@@ -35,6 +35,7 @@ class _TabbarPageState extends State<TabbarPage> {
   @override
   Widget build(BuildContext context) {
 
+
     ScreenAdapter.init(context);
     return MusicScaffold(
       body: PageView(
@@ -51,6 +52,7 @@ class _TabbarPageState extends State<TabbarPage> {
             _pageController.animateToPage(index,
                 duration:  Duration(milliseconds: 300), curve: Curves.ease);
           });
+
         },
       ),
     );

@@ -4,19 +4,10 @@ import 'package:flutter_music/base_music/music_app_bar.dart';
 import 'package:flutter_music/common/music_store.dart';
 import 'package:flutter_music/http_request/music_api.dart';
 
-import 'package:audioplayers/audioplayers.dart';
 
 import 'package:flutter_music/common/music_global_play_list_state.dart';
 import 'package:flutter_music/pages/music_play_media_page/music_play_body_widget.dart';
 class MusicPlayMeidaPage extends StatefulWidget {
-  MusicPlayMeidaPage({
-    Key key,
-    this.heroTagName,
-
-  }) : super(key : key);
-
-  final String heroTagName;
-
 
 
   @override

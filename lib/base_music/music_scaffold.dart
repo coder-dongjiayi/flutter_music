@@ -21,21 +21,33 @@ class MusicScaffold extends StatefulWidget {
   _MusicScaffoldState createState() => _MusicScaffoldState();
 }
 
-class _MusicScaffoldState extends State<MusicScaffold> {
+class _MusicScaffoldState extends State<MusicScaffold> with TickerProviderStateMixin{
+
+  AnimationController  _animationController;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _animationController = AnimationController(duration: Duration(seconds: 25),vsync: this);
+   _animationController.repeat();
+  }
+  @override
+  void dispose() {
+    _animationController.dispose();
+    // TODO: implement dispose
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     ScreenAdapter.init(context);
+
     int listCount =   MusicGlobalPlayListState.musicPlayState(context).currentPlayList.length;
     return Scaffold(
       backgroundColor: MusicStore.Theme.of(context).theme,
       appBar: widget.appBar,
-      body:  Consumer<MusicGlobalPlayListState>(
-        builder: (context,state,child){
-          return Padding(
-            padding: EdgeInsets.only(bottom: (listCount == 0 || widget.bottomNavigationBar!= null) ? 0 : ScreenAdapter.setHeight(90)),
-            child: widget.body,
-          );
-        },
+      body:  Padding(
+        padding: EdgeInsets.only(bottom: (listCount == 0 || widget.bottomNavigationBar!= null) ? 0 : ScreenAdapter.setHeight(90)),
+        child: widget.body,
       ),
 
       bottomNavigationBar: widget.bottomNavigationBar,
@@ -47,16 +59,15 @@ class _MusicScaffoldState extends State<MusicScaffold> {
 
   Widget _floatingWidget(){
 
-    return Consumer<MusicGlobalPlayListState>(
-      builder: (context,state,child){
+    if(MusicGlobalPlayListState.musicPlayState(context).currentPlayList.length == 0 || widget.showFloatingActionButton == false){
+      return Text("");
+    }
 
-        if(state.currentPlayList.length == 0 || widget.showFloatingActionButton == false){
-          return Text("");
-        }
-
-        return  MusicBottomPlay();
-      },
+    return MusicBottomPlay(
+      animationController: _animationController,
     );
+
+
   }
 
 

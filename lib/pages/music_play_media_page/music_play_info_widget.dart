@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_music/common/music_store.dart';
 
@@ -5,89 +6,49 @@ import 'package:flutter_music/common/screen_adapter.dart';
 import 'package:flutter_music/http_request/music_api.dart';
 import 'package:flutter_music/pages/music_play_media_page/animation/music_translation_animation.dart';
 import 'package:flutter_music/pages/music_play_media_page/music_paly_coverimage_widget.dart';
-
-class MusicPlayInfoController extends ChangeNotifier{
-
-  static const int MUSIC_STATE_RESUME = 1;
+import 'dart:ui';
 
 
-  static const int MUSIC_STATE_PAUSE = 2;
+class MusicPlayInfoWidget extends StatelessWidget {
 
-  int state;
-  void resumeAnimation(){
-    state = MUSIC_STATE_RESUME;
-    notifyListeners();
-  }
-
-  void pauseAnimation(){
-    state =  MUSIC_STATE_PAUSE;
-    notifyListeners();
-  }
-}
-
-class MusicPlayInfoWidget extends StatefulWidget {
   MusicPlayInfoWidget({
     Key key,
 
-    this.heroTagName,
 
     this.translationAnimation,
 
-}) : super (key : key);
+    this.rotationAnimationController,
+    this.pageController
 
-  final String heroTagName;
+  }) : super (key : key);
+
+
+
+
+  final  AnimationController      rotationAnimationController;
 
   final AnimationController translationAnimation;
-
-  @override
-  _MusicPlayInfoWidgetState createState() => _MusicPlayInfoWidgetState();
-}
-
-class _MusicPlayInfoWidgetState extends State<MusicPlayInfoWidget>  with TickerProviderStateMixin{
-
-
 
   var _playerNameTop = 35.0;
   var _playerArtistTop = 5.0;
   var _playCovermarginTop = 20.0;
 
 
-  PageController          _pageController;
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
+  final PageController pageController;
 
-
-    int index = MusicGlobalPlayListState.musicPlayState(context).currentIndex;
-
-   _pageController = PageController(initialPage: index);
-
-
-  }
-
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    _pageController.dispose();
-
-    super.dispose();
-    
-  }
 
   @override
   Widget build(BuildContext context) {
     ScreenAdapter.init(context);
 
-   List<TrackItemModel>  _tracks = MusicGlobalPlayListState.musicPlayState(context).currentPlayList;
+    List<TrackItemModel>  _tracks = MusicGlobalPlayListState.musicPlayState(context).currentPlayList;
 
-   double _containerHeight =  ScreenAdapter.getScreenWidth()/3.0
-                              + _playCovermarginTop *2
-                              + _playerNameTop
-                              + _playerArtistTop
-                              + 20
-                              + 10;
+    double _containerHeight =  ScreenAdapter.getScreenWidth()/3.0
+        + _playCovermarginTop *2
+        + _playerNameTop
+        + _playerArtistTop
+        + 20
+        + 10;
 
     return Container(
 
@@ -95,9 +56,16 @@ class _MusicPlayInfoWidgetState extends State<MusicPlayInfoWidget>  with TickerP
 
       child: PageView.builder(
           onPageChanged: (index){
-            print(_tracks[index].musicItemModel.url);
+
+            if(index < MusicGlobalPlayListState.musicPlayState(context).currentIndex){
+              MusicGlobalPlayListState.musicPlayState(context).music_control_previous();
+
+            }else if(index > MusicGlobalPlayListState.musicPlayState(context).currentIndex){
+              MusicGlobalPlayListState.musicPlayState(context).music_control_next();
+            }
+
           },
-          controller: _pageController,
+          controller: pageController,
           itemCount: _tracks.length,
           itemBuilder: (BuildContext context, int index){
             TrackItemModel itemModel = _tracks[index];
@@ -108,25 +76,43 @@ class _MusicPlayInfoWidgetState extends State<MusicPlayInfoWidget>  with TickerP
   }
 
   Widget _pageItem(name,artist,coverImageUrl){
-    return Column(
-      children: <Widget>[
+    return Builder(
+      builder: (context){
+        return Column(
+          children: <Widget>[
 
-        _playCover(context,coverImageUrl),
-        _playerName(context,name),
-        _playerArtist(context,artist)
-      ],
+            _playCover(context,coverImageUrl),
+            _playerName(context,name),
+            _playerArtist(context,artist)
+          ],
+        );
+      },
     );
   }
 
   Widget _playerName(context,name){
 
-    return MusicTranslationAnimation(
-      animationController: widget.translationAnimation,
-      begin: 0,
-      end: _playerNameTop,
-      child: Text(name,
-        style: TextStyle(color: MusicStore.Theme.of(context).titleColor,fontSize: 17,fontWeight: FontWeight.w600),
-      ),
+    return Row(
+      children: <Widget>[
+        Expanded(
+          flex: 1,
+          child: Padding(
+            padding: EdgeInsets.only(left: 20,right: 20),
+            child: MusicTranslationAnimation(
+              animationController: translationAnimation,
+              begin: 0,
+              end: _playerNameTop,
+              child: Text(
+                name,
+                maxLines: 1,
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(color: MusicStore.Theme.of(context).titleColor,fontSize: 17,fontWeight: FontWeight.w600),
+              ),
+            ),
+          ),
+        )
+      ],
     );
   }
   Widget _playerArtist(context,artist){
@@ -141,13 +127,16 @@ class _MusicPlayInfoWidgetState extends State<MusicPlayInfoWidget>  with TickerP
     double _width =  ScreenAdapter.getScreenWidth()/3.0;
 
     return MusicPlayCoverimageWidget(
+
       width: _width,
       coverImageUrl: coverImageUrl,
       marginTop: _playCovermarginTop,
-      animationController: null,
+      animationController: rotationAnimationController,
     );
 
   }
 }
+
+
 
 

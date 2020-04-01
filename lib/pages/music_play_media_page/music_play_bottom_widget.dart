@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_music/common/music_global.dart';
 import 'package:flutter_music/public_widget/music_button.dart';
-import 'package:flutter_music/pages/music_play_media_page/music_list_page/music_list_page.dart';
-
 
 class MusicPlayBottomWidget extends StatelessWidget {
   @override
@@ -26,11 +25,8 @@ class MusicPlayBottomWidget extends StatelessWidget {
           padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
           margin: EdgeInsets.only(left: 30),
           onTap: (selected){
-            Navigator.push(context, MaterialPageRoute(
-                builder: (context){
-                  return MusicListPage();
-                }
-            ));
+            Navigator.of(context).pushNamed(RouterPageName.MusicListPage);
+
           },
         )
       ],

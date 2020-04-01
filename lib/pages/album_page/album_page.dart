@@ -56,23 +56,19 @@ class _AlbumPageState extends State<AlbumPage> {
                 var  title = tracks[trackIndex].name;
                 var  subtTitle = tracks[trackIndex].arList.first.name + tracks[trackIndex].al.name;
                 var  coverImageUrl = tracks[trackIndex].al.picUrl;
-                var  heroTagName = tracks[trackIndex].id.toString();
 
                 return MusicItemWidget(
                   onTap: (index){
 
                     MusicGlobalPlayListState.musicPlayState(context).updatePlayList(tracks, index);
-
                     Navigator.of(context).pushNamed(
-                            RouterPageName.MusicPlayMeidaPage,
-                            arguments: {"heroTagName":heroTagName}
-                            );
+                            RouterPageName.MusicPlayMeidaPage
+                    );
                   },
                   index: trackIndex,
                   title: title,
                   subtTitle:subtTitle,
                   coverImageUrl:coverImageUrl,
-                  heroTageName:heroTagName,
                 );
               }
           );
