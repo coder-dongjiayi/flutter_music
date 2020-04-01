@@ -116,6 +116,11 @@ class MusicGlobalPlayListState extends ChangeNotifier{
     _currentIndex  = currentIndex;
 
   }
+  void  updatePlayItem(int index){
+    _currentIndex = index;
+
+    music_play();
+  }
 
 
   ///播放当前的歌曲

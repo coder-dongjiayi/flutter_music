@@ -58,6 +58,7 @@ class _BrowsePageState extends State<BrowsePage> with AutomaticKeepAliveClientMi
                         RouterPageName.MusicPlayMeidaPage
                     );
                   },
+                  index: itemModel.id,
                   title: itemModel.name,
                   subtTitle: itemModel.arList.first.name + "-" + itemModel.al.name,
                   coverImageUrl: itemModel.al.picUrl,

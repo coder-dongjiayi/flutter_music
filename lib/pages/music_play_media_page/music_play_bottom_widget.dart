@@ -16,7 +16,6 @@ class MusicPlayBottomWidget extends StatelessWidget {
           onTap: (selected){
 
 
-
           },
         ),
         MusicButton(

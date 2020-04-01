@@ -53,6 +53,8 @@ class _AlbumPageState extends State<AlbumPage> {
                 }
                 var  tracks = model.tracks;
                 var  trackIndex = index-1;
+
+                var  id = tracks[trackIndex].id;
                 var  title = tracks[trackIndex].name;
                 var  subtTitle = tracks[trackIndex].arList.first.name + tracks[trackIndex].al.name;
                 var  coverImageUrl = tracks[trackIndex].al.picUrl;
@@ -65,6 +67,7 @@ class _AlbumPageState extends State<AlbumPage> {
                             RouterPageName.MusicPlayMeidaPage
                     );
                   },
+                  id: id,
                   index: trackIndex,
                   title: title,
                   subtTitle:subtTitle,

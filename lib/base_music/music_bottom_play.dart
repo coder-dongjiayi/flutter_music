@@ -58,12 +58,18 @@ class _MusicBottomPlayState extends State<MusicBottomPlay> with TickerProviderSt
   }
 
   Widget _muiscList() {
-    return Padding(
-      padding: EdgeInsets.only(right: 20),
-      child: Icon(Icons.format_list_bulleted,
-          size: ScreenAdapter.setHeight(60),
-          color: MusicStore.Theme.of(context).titleColor),
+    return MusicGestureDetector(
+      onTap: (){
+        Navigator.of(context).pushNamed(RouterPageName.MusicListPage);
+      },
+      child: Padding(
+        padding: EdgeInsets.only(right: 20),
+        child: Icon(Icons.format_list_bulleted,
+            size: ScreenAdapter.setHeight(60),
+            color: MusicStore.Theme.of(context).titleColor),
+      ),
     );
+
   }
 
   Widget _pause() {

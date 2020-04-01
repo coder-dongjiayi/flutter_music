@@ -75,6 +75,7 @@ class _MusicListPageState extends State<MusicListPage>  with TickerProviderState
               onTap: (index){
 
               },
+              id: itemModel.id,
               title: title,
               subtTitle: subtTitle,
               coverImageUrl: coverImageUrl,
@@ -93,12 +94,23 @@ class _MusicListPageState extends State<MusicListPage>  with TickerProviderState
       left: 0,
       right: 0,
       child: Center(
-        child:  MusicPlayCoverimageWidget(
-          animationController: _rotationAnimationController,
-          width: width,
-          marginTop: 20,
-          coverImageUrl: musicGlobalPlayListState.currentTrackItem.al.picUrl,
-        ),
+        child: Selector<MusicGlobalPlayListState,int>(
+          selector: (context,state){
+            return state.currentIndex;
+          },
+          builder: (context,currentIndex,_){
+            return MusicPlayCoverimageWidget(
+              animationController: _rotationAnimationController,
+              width: width,
+              marginTop: 20,
+              coverImageUrl: musicGlobalPlayListState.currentTrackItem.al.picUrl,
+            );
+          },
+          shouldRebuild: (pre,next){
+            return pre != next;
+          },
+
+        )
       ),
     );
   }

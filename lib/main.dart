@@ -3,6 +3,7 @@ import 'package:flutter_music/routers/router.dart';
 
 import 'package:flutter_music/common/state/theme_state.dart';
 import 'package:flutter_music/common/music_global_play_list_state.dart';
+
 import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());

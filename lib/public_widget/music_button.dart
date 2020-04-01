@@ -9,6 +9,7 @@ class MusicButton extends StatefulWidget {
   MusicButton({
     Key key,
     @required this.normalIconData,
+    this.showLayer:true,
     this.selectedIconData,
     this.onTap,
     this.isEnable : true,
@@ -24,6 +25,7 @@ class MusicButton extends StatefulWidget {
   final EdgeInsets margin;
   final bool isEnable;
   final  double size;
+  final bool showLayer;
   @override
   _MusicButtonState createState() => _MusicButtonState();
 }
@@ -67,7 +69,7 @@ class _MusicButtonState extends State<MusicButton> {
           color: MusicStore.Theme
               .of(context)
               .theme,
-          boxShadow: [
+          boxShadow: widget.showLayer == false ? null : [
             BoxShadow(color: MusicStore.Theme.of(context).shadowColor,
                 spreadRadius: 2,
                 offset: Offset(5, 5), blurRadius: 11),
