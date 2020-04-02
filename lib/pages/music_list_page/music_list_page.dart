@@ -23,7 +23,15 @@ class _MusicListPageState extends State<MusicListPage>  with TickerProviderState
     _musicGlobalPlayListState = MusicGlobalPlayListState.musicPlayState(context);
 
     _rotationAnimationController = AnimationController(duration: Duration(seconds: 25),vsync: this);
+
+   if(_musicGlobalPlayListState.playerState == AudioPlayerState.PAUSED){
+     _rotationAnimationController.stop();
+   }else{
+     _rotationAnimationController.repeat();
+   }
     _musicGlobalPlayListState.onPlayerStateChanged.listen((state){
+      if(this.mounted == false) return;
+
       if(state == AudioPlayerState.PAUSED){
         _rotationAnimationController.stop();
       }else{
