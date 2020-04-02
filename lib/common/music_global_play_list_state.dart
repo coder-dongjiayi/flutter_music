@@ -1,8 +1,11 @@
+
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_music/models/track_list_model.dart';
 import 'package:provider/provider.dart';
 export 'package:flutter_music/models/track_list_model.dart';
 import 'package:audioplayers/audioplayers.dart';
+
 
 class MusicGlobalPlayListState extends ChangeNotifier{
 
@@ -23,7 +26,6 @@ class MusicGlobalPlayListState extends ChangeNotifier{
 
   TargetPlatform platform;
 
-  AudioPlayerState audioPlayerState;
 
 
   List<TrackItemModel> get currentPlayList => _currentPlayList;
@@ -41,9 +43,28 @@ class MusicGlobalPlayListState extends ChangeNotifier{
 
   int get currentIndex => _currentIndex;
 
+  AudioPlayerState playerState;
+
   ///进度
   double  playProgress = 0.0;
 
+  final StreamController<int> _currentIndexController = StreamController<int>.broadcast();
+
+  final StreamController<AudioPlayerState> _playerStateController =
+  StreamController<AudioPlayerState>.broadcast();
+
+  Stream<int> get onUpdateCurrentIndex => _currentIndexController.stream;
+
+  Stream<AudioPlayerState> get onPlayerStateChanged =>
+      _playerStateController.stream;
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _playerStateController.close();
+    _currentIndexController.close();
+    super.dispose();
+  }
   MusicGlobalPlayListState({this.platform}){
 
     _listenDurationChanged();
@@ -56,12 +77,9 @@ class MusicGlobalPlayListState extends ChangeNotifier{
 
   void _listenPlayerStateChanged(){
     _audioPlayer.onPlayerStateChanged.listen((state) {
-      audioPlayerState = state;
+      playerState = state;
+      _playerStateController.add(state);
 
-     if(state == AudioPlayerState.COMPLETED){
-       music_control_next();
-       notifyListeners();
-     }
     });
   }
 
@@ -92,6 +110,7 @@ class MusicGlobalPlayListState extends ChangeNotifier{
     });
   }
 
+
   /// 监听播放进度
   void _listenPositionChanged(){
     _audioPlayer.onAudioPositionChanged.listen((position){
@@ -118,8 +137,9 @@ class MusicGlobalPlayListState extends ChangeNotifier{
   }
   void  updatePlayItem(int index){
     _currentIndex = index;
-
+    _currentIndexController.add(_currentIndex);
     music_play();
+
   }
 
 

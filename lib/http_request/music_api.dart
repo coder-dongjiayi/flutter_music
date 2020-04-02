@@ -83,12 +83,22 @@ class MusicApi{
     /// 3. 为了把返回的歌曲url跟歌曲信息对应上 这里使用了 map 为了最后能够降低时间复杂度 提高效率
    Map<String,TrackItemModel> trackMap = Map();
 
-   List<String> trackIdList = trackItemList.map((value){
-     String trackId =  value.id.toString();
-      trackMap[trackId] = value;
-     return trackId;
+   List<String> trackIdList = List<String>();
 
-    }).toList();
+  List<TrackItemModel> exitList =   trackItemList.where((value){
+
+    String trackId =  value.id.toString();
+
+    trackMap[trackId] = value;
+
+    trackIdList.add(trackId);
+
+     return value.musicItemModel != null;
+   }).toList();
+
+  if(exitList.length == trackItemList.length){
+    return trackItemList;
+  }
 
 
     String trackIds  = trackIdList.join(",");

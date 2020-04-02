@@ -25,22 +25,53 @@ class _MusicPlayBodyWidget extends State<MusicPlayBodyWidget> with TickerProvide
   MusicGlobalPlayListState _musicGlobalPlayListState;
 
   double _screenWidth = 0.0;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-
     _musicGlobalPlayListState =  MusicGlobalPlayListState.musicPlayState(context);
 
-    _musicGlobalPlayListState.addListener((){
-      if(_musicGlobalPlayListState.audioPlayerState == AudioPlayerState.COMPLETED){
-        _pageViewAnimatePage();
-      }
-    });
+
     _animationController = AnimationController(duration: Duration(milliseconds: 200),vsync: this)..forward();
 
+
+
     _rotationAnimationController = AnimationController(duration: Duration(seconds: 25),vsync: this);
-    _rotationAnimationController.repeat();
+
+    if(_musicGlobalPlayListState.playerState == AudioPlayerState.PAUSED){
+      _rotationAnimationController.stop();
+    }else{
+      _rotationAnimationController.repeat();
+    }
+
+
+
+  /// 这个state 执行dispose() 会释放相关的资源 但是onPlayerStateChanged的监听还继续
+    /// 这个时候 _rotationAnimationController 已经执行dispose
+    /// 所以不行再调用相关方法了
+    _musicGlobalPlayListState.onPlayerStateChanged.listen((state){
+
+      if(this.mounted == false)return;
+
+      _rotationAnimationController.repeat();
+
+      if(state == AudioPlayerState.COMPLETED){
+        _musicGlobalPlayListState.music_control_next();
+        _pageViewAnimatePage();
+
+      }else if(state == AudioPlayerState.PAUSED){
+        _rotationAnimationController.stop();
+      }
+
+    });
+
+
+    _musicGlobalPlayListState.onUpdateCurrentIndex.listen((currentIndex){
+      if(this.mounted == false)return;
+      _pageViewAnimatePage();
+    });
+
 
     _pageController = PageController(initialPage:_musicGlobalPlayListState.currentIndex);
 
@@ -56,10 +87,17 @@ class _MusicPlayBodyWidget extends State<MusicPlayBodyWidget> with TickerProvide
     });
   }
   @override
+  void didUpdateWidget(MusicPlayBodyWidget oldWidget) {
+    // TODO: implement didUpdateWidget
+    super.didUpdateWidget(oldWidget);
+
+  }
+  @override
   void dispose() {
     // TODO: implement dispose
 
     _rotationAnimationController.dispose();
+
     _animationController.dispose();
     _pageController.dispose();
     super.dispose();

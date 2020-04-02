@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_music/base_music/music_app_bar.dart';
 import 'package:flutter_music/common/music_store.dart';
@@ -12,15 +13,23 @@ class MusicListPage extends StatefulWidget {
 class _MusicListPageState extends State<MusicListPage>  with TickerProviderStateMixin{
 
 
-  MusicGlobalPlayListState musicGlobalPlayListState;
+  MusicGlobalPlayListState _musicGlobalPlayListState;
   AnimationController _rotationAnimationController;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    _musicGlobalPlayListState = MusicGlobalPlayListState.musicPlayState(context);
+
     _rotationAnimationController = AnimationController(duration: Duration(seconds: 25),vsync: this);
-    _rotationAnimationController.repeat();
+    _musicGlobalPlayListState.onPlayerStateChanged.listen((state){
+      if(state == AudioPlayerState.PAUSED){
+        _rotationAnimationController.stop();
+      }else{
+        _rotationAnimationController.repeat();
+      }
+    });
 
   }
   @override
@@ -31,7 +40,6 @@ class _MusicListPageState extends State<MusicListPage>  with TickerProviderState
   }
   @override
   Widget build(BuildContext context) {
-    musicGlobalPlayListState = MusicGlobalPlayListState.musicPlayState(context);
 
     ScreenAdapter.init(context);
     double _width =  ScreenAdapter.getScreenWidth()/4.0;
@@ -51,7 +59,18 @@ class _MusicListPageState extends State<MusicListPage>  with TickerProviderState
         child: Stack(
           children: <Widget>[
             _playCoverImage(_width),
-            _playList(_width)
+            Selector<MusicGlobalPlayListState,int>(
+              builder: (context,currentIndex,_){
+                return _playList(_width);
+              },
+              selector: (context,state){
+                return state.currentIndex;
+              },
+              shouldRebuild: (pre,next){
+                return pre != next;
+              },
+            )
+
           ],
         ),
       )
@@ -63,18 +82,19 @@ class _MusicListPageState extends State<MusicListPage>  with TickerProviderState
       margin: EdgeInsets.only(top: top+40),
       child: ListView.builder(
 
-          itemCount: musicGlobalPlayListState.currentPlayList.length,
+          itemCount: _musicGlobalPlayListState.currentPlayList.length,
           itemBuilder: (context,index){
-          TrackItemModel itemModel = musicGlobalPlayListState.currentPlayList[index];
+          TrackItemModel itemModel = _musicGlobalPlayListState.currentPlayList[index];
 
           var  title = itemModel.name;
           var  subtTitle = itemModel.arList.first.name + itemModel.al.name;
           var  coverImageUrl = itemModel.al.picUrl;
 
             return MusicItemWidget(
-              onTap: (index){
-
+              onTap: (selectedIndex){
+                 _musicGlobalPlayListState.updatePlayItem(selectedIndex);
               },
+              index: index,
               id: itemModel.id,
               title: title,
               subtTitle: subtTitle,
@@ -88,6 +108,7 @@ class _MusicListPageState extends State<MusicListPage>  with TickerProviderState
 
 
   Widget _playCoverImage(width){
+
 
     return Positioned(
       top: 0,
@@ -103,7 +124,7 @@ class _MusicListPageState extends State<MusicListPage>  with TickerProviderState
               animationController: _rotationAnimationController,
               width: width,
               marginTop: 20,
-              coverImageUrl: musicGlobalPlayListState.currentTrackItem.al.picUrl,
+              coverImageUrl: _musicGlobalPlayListState.currentTrackItem.al.picUrl,
             );
           },
           shouldRebuild: (pre,next){

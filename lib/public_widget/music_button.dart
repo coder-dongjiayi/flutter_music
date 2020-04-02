@@ -8,6 +8,7 @@ typedef GestureTapCallback = void Function(bool selected);
 class MusicButton extends StatefulWidget {
   MusicButton({
     Key key,
+    this.selected: false,
     @required this.normalIconData,
     this.showLayer:true,
     this.selectedIconData,
@@ -26,13 +27,14 @@ class MusicButton extends StatefulWidget {
   final bool isEnable;
   final  double size;
   final bool showLayer;
+   bool selected;
   @override
   _MusicButtonState createState() => _MusicButtonState();
 }
 
 class _MusicButtonState extends State<MusicButton> {
 
-  bool _selected = false;
+
   @override
   Widget build(BuildContext context) {
 
@@ -46,11 +48,11 @@ class _MusicButtonState extends State<MusicButton> {
         if (widget.selectedIconData != null){
          setState(() {
 
-           _selected = !_selected;
+           widget.selected = !widget.selected;
          });
         }
         if(widget.onTap != null){
-          widget.onTap(_selected);
+          widget.onTap(widget.selected);
         }
 
 
@@ -77,7 +79,7 @@ class _MusicButtonState extends State<MusicButton> {
                 color: Colors.white, offset: Offset(-5, -5), blurRadius: 11)
 
           ],
-        gradient: _selected == false ? null : LinearGradient(
+        gradient: widget.selected == false ? null : LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
@@ -97,7 +99,7 @@ class _MusicButtonState extends State<MusicButton> {
   IconData _iconData(){
 
     if(widget.selectedIconData != null){
-      return _selected == true ? widget.selectedIconData : widget.normalIconData;
+      return widget.selected == true ? widget.selectedIconData : widget.normalIconData;
     }
     return widget.normalIconData;
   }
