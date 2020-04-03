@@ -20,7 +20,6 @@ class MusicBottomPlay extends StatefulWidget {
 
 class _MusicBottomPlayState extends State<MusicBottomPlay> with TickerProviderStateMixin{
 
-  bool _isPause = false;
 
   MusicGlobalPlayListState _musicGlobalPlayListState;
   @override

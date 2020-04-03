@@ -12,4 +12,10 @@ class RouterPageName{
 
   //歌曲列表页面
   static const String MusicListPage = "music_list_page";
+
+  //登录页面
+  static const String LoginPage = "login_page";
+
+  //输入密码页面
+  static const String LoginPasswordPage = "login_password_page";
 }

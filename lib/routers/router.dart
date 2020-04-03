@@ -1,11 +1,13 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_music/pages/login_page/login_password_page.dart';
 import 'package:flutter_music/tabbar/tababr_page.dart';
 import 'package:flutter_music/pages/library_page/new_library_page/new_library_page.dart';
 import 'package:flutter_music/pages/album_page/album_page.dart';
 import 'package:flutter_music/routers/router_page_name.dart';
 import 'package:flutter_music/pages/music_play_media_page/music_play_meida_page.dart';
 import 'package:flutter_music/pages/music_list_page/music_list_page.dart';
+import 'package:flutter_music/pages/login_page/login_page.dart';
 class MusicRouter{
 
   static final String initialRoute = RouterPageName.initialRoute;
@@ -19,8 +21,11 @@ class MusicRouter{
 
     RouterPageName.MusicPlayMeidaPage:(context) => MusicPlayMeidaPage(),
 
-    RouterPageName.MusicListPage:(context) => MusicListPage()
+    RouterPageName.MusicListPage:(context) => MusicListPage(),
 
+    RouterPageName.LoginPage:(context) => LoginPage(),
+
+   RouterPageName.LoginPasswordPage:(context) => LoginPasswordPage()
   };
 
 
@@ -45,7 +50,7 @@ class MusicRouter{
 
       }else{
         bool fullscreenDialog = false;
-        if(name == RouterPageName.MusicListPage){
+        if(name == RouterPageName.MusicListPage || name == RouterPageName.LoginPage){
           fullscreenDialog = true;
         }
         final Route route =

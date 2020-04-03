@@ -79,7 +79,9 @@ class MusicGlobalPlayListState extends ChangeNotifier{
     _audioPlayer.onPlayerStateChanged.listen((state) {
       playerState = state;
       _playerStateController.add(state);
-
+     if(state == AudioPlayerState.COMPLETED){
+       music_control_next();
+     }
     });
   }
 

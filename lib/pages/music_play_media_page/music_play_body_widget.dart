@@ -56,7 +56,7 @@ class _MusicPlayBodyWidget extends State<MusicPlayBodyWidget> with TickerProvide
       _rotationAnimationController.repeat();
 
       if(state == AudioPlayerState.COMPLETED){
-        _musicGlobalPlayListState.music_control_next();
+
         _pageViewAnimatePage();
 
       }else if(state == AudioPlayerState.PAUSED){
