@@ -1,7 +1,6 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_music/common/music_store.dart';
-import 'package:flutter_music/pages/library_page/library_state/library_list_state.dart';
 import 'package:flutter_music/pages/music_play_media_page/music_play_slider_widget.dart';
 import 'package:flutter_music/pages/music_play_media_page/music_play_info_widget.dart';
 import 'package:flutter_music/pages/music_play_media_page/music_play_control_widget.dart';

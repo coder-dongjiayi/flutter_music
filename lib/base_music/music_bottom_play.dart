@@ -22,6 +22,27 @@ class _MusicBottomPlayState extends State<MusicBottomPlay> with TickerProviderSt
 
   bool _isPause = false;
 
+  MusicGlobalPlayListState _musicGlobalPlayListState;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _musicGlobalPlayListState = MusicGlobalPlayListState.musicPlayState(context);
+
+
+    _musicGlobalPlayListState.onPlayerStateChanged.listen((state){
+
+      if(this.mounted == false)return;
+
+       if(state == AudioPlayerState.PAUSED){
+         widget.animationController.stop();
+
+      }else{
+         widget.animationController.repeat();
+       }
+
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -73,29 +94,34 @@ class _MusicBottomPlayState extends State<MusicBottomPlay> with TickerProviderSt
   }
 
   Widget _pause() {
-    return MusicGestureDetector(
-      onTap: (){
-
-
-        setState(() {
-          _isPause = !_isPause;
-          if(_isPause == true){
-            widget.animationController.stop();
-            MusicGlobalPlayListState.musicPlayState(context).music_pause();
-          }else{
-            widget.animationController.repeat();
-            MusicGlobalPlayListState.musicPlayState(context).music_resume();
-          }
-
-        });
-
+    return Selector<MusicGlobalPlayListState,AudioPlayerState>(
+      shouldRebuild: (pre,next){
+        return pre != next;
       },
-      child: Padding(
-        padding: EdgeInsets.only(right: 10, left: 10),
-        child:  Icon( _isPause == true ? Icons.play_circle_outline : Icons.pause ,
-            size: ScreenAdapter.setHeight(70),
-            color: MusicStore.Theme.of(context).titleColor),
-      ),
+      selector: (context,state){
+        return state.playerState;
+      },
+      builder: (context,audioState,_){
+        return MusicGestureDetector(
+          onTap: (){
+
+            if(audioState == AudioPlayerState.PLAYING){
+              _musicGlobalPlayListState.music_pause();
+            }
+            if(audioState == AudioPlayerState.PAUSED){
+              _musicGlobalPlayListState.music_resume();
+            }
+
+
+          },
+          child: Padding(
+            padding: EdgeInsets.only(right: 10, left: 10),
+            child:  Icon( audioState == AudioPlayerState.PAUSED ? Icons.play_circle_outline : Icons.pause ,
+                size: ScreenAdapter.setHeight(70),
+                color: MusicStore.Theme.of(context).titleColor),
+          ),
+        );
+      },
     );
   }
 

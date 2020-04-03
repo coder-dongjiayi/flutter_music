@@ -5,7 +5,7 @@ import 'package:flutter_music/models/track_list_model.dart';
 import 'package:provider/provider.dart';
 export 'package:flutter_music/models/track_list_model.dart';
 import 'package:audioplayers/audioplayers.dart';
-
+export 'package:audioplayers/audioplayers.dart';
 
 class MusicGlobalPlayListState extends ChangeNotifier{
 
