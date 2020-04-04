@@ -1,6 +1,6 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_music/common/music_global_play_list_state.dart';
+import 'package:flutter_music/common/state/music_global_play_list_state.dart';
 import 'package:flutter_music/public_widget/music_button.dart';
 
 typedef GestureTapCallback = void Function();

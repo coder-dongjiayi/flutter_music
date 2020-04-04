@@ -1,10 +1,13 @@
 
+import 'dart:convert';
 import 'package:flutter/material.dart';
 
+import 'package:flutter_music/http_request/http_request_manager.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:flutter_music/common/music_profile.dart';
+import 'package:flutter_music/models/user_model.dart';
 export 'package:flutter_music/routers/router_page_name.dart';
 
 const _musicLightColor =  Color.fromRGBO(241, 243, 246, 1.0);
@@ -52,14 +55,50 @@ class MusicGlobal {
   static List<Color> get themes => _musicThemes;
 
 
-  static SharedPreferences _preferences;
+  static SharedPreferences _userPreferences;
+
+  static UserModel userModel;
 
   static MusicProfile profile = MusicProfile();
 
 
-  static saveProfile(){
+    static Future init() async {
+      /// step1  读取用户信息
 
-  }
+      _userPreferences = await SharedPreferences.getInstance();
+
+      var userInfo = _userPreferences.getString("userInfo");
+
+      if(userInfo != null){
+
+
+       Map result = json.decode(userInfo);
+
+        userModel = UserModel.fromJson(result);
+
+        HttpRequestManager.instance.registerPublicParams(
+            {"uid":userModel.userId,"token":userModel.token}
+            );
+      }
+
+     }
+
+    static saveUserInfo(UserModel userModel) {
+
+      HttpRequestManager.instance.registerPublicParams(
+          {"uid":userModel.userId,"token":userModel.token}
+      );
+
+      _userPreferences.setString("userInfo", userModel.toJson()).whenComplete((){
+         print("保存完毕");
+       });
+
+    }
+
+
+    static saveProfile(){
+
+    }
 
 
 }

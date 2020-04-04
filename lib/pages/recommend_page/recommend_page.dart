@@ -43,7 +43,12 @@ class _CommendPageState extends State<CommendPage> with AutomaticKeepAliveClient
         title: "推荐",
         rightIconData: Icons.person_pin,
         rightOnTap: (){
-          Navigator.of(context).pushNamed(RouterPageName.LoginPage);
+          if(MusicStore.User.of(context).isLogin == false){
+            Navigator.of(context).pushNamed(RouterPageName.LoginPage);
+          }else{
+            print("已登录");
+          }
+
         },
       ),
 

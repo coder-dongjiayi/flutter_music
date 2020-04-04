@@ -2,22 +2,27 @@ import 'package:flutter_music/http_request/config.dart';
 import 'package:dio/dio.dart';
 
 class HttpRequestManager{
-//
-//  factory  HttpRequestManager() => _getInstance();
-//
-//  static  HttpRequestManager get instance => _getInstance();
-//
-//  static HttpRequestManager _instance;
-//
-//  HttpRequestManager._internal();
-//
-//  static HttpRequestManager _getInstance(){
-//    if(_instance == null){
-//      _instance = new HttpRequestManager._internal();
-//    }
-//    return _instance;
-//  }
 
+  factory  HttpRequestManager() => _getInstance();
+
+  static  HttpRequestManager get instance => _getInstance();
+
+  static HttpRequestManager _instance;
+
+  HttpRequestManager._internal();
+
+  static HttpRequestManager _getInstance(){
+    if(_instance == null){
+      _instance = new HttpRequestManager._internal();
+    }
+    return _instance;
+  }
+
+  Map<String, dynamic> _publicParams;
+
+  void registerPublicParams(Map<String, dynamic> params){
+    _publicParams = params;
+  }
 
   static final BaseOptions baseOptions = BaseOptions(
     baseUrl: HttpConfig.baseURL,
@@ -37,7 +42,7 @@ class HttpRequestManager{
          Interceptor inter
       } ) async {
 
-    params  = params ?? Map();
+    params  = params ?? Map<String, dynamic>();
 
     final options = Options(method: method);
     // 全局拦截器
@@ -68,8 +73,10 @@ class HttpRequestManager{
     dio.interceptors.addAll(inters);
 
     //添加公共参数
-     params["uid"] = "300175285";
-     params ["token"] = "7f7101fb8c35389a62aeba36a9137439182431def75947bd7fc789769c1233fd67541602d89e7826c01baea5eec646a941049cea1c6bb9b6";
+    if(HttpRequestManager.instance._publicParams != null){
+      params.addAll(HttpRequestManager.instance._publicParams);
+
+    }
 
     try {
       Response response = await dio.request(url, queryParameters: params, options: options);

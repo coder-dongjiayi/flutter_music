@@ -95,6 +95,8 @@ class _LoginPasswordPageState extends State<LoginPasswordPage> {
                       icon: ICON.SUCCESS,
                       timeInSeconds: 5);
 
+                  MusicStore.User.of(context).setUser(userModel);
+
                   Navigator.of(context).popUntil(ModalRoute.withName(RouterPageName.initialRoute));
                 }
 

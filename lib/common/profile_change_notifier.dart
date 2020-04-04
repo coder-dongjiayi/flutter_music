@@ -6,10 +6,12 @@ import 'package:flutter_music/common/music_global.dart';
 class ProfileChangeNotifiter extends ChangeNotifier{
 
   MusicProfile get profile =>  MusicGlobal.profile;
+
   @override
   void notifyListeners() {
 
     MusicGlobal.saveProfile();
+
 
     super.notifyListeners();
   }

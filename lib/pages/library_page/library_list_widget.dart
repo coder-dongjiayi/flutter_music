@@ -9,6 +9,7 @@ import 'package:flutter_music/http_request/music_api.dart';
 import 'package:flutter_music/common/screen_adapter.dart';
 import 'package:flutter_music/pages/library_page/library_item_widget.dart';
 import 'package:flutter_music/pages/library_page/library_state/library_list_state.dart';
+import 'package:flutter_music/public_widget/music_submit_button.dart';
 
 class LibraryListWidget extends StatefulWidget {
   LibraryListWidget({Key key}) : super(key: key);
@@ -20,7 +21,7 @@ class LibraryListWidget extends StatefulWidget {
 
 class _LibraryListWidgetState extends State<LibraryListWidget>
     with TickerProviderStateMixin {
-  Future _future = MusicApi.requestPlayList();
+
 
   @override
   void initState() {
@@ -36,8 +37,23 @@ class _LibraryListWidgetState extends State<LibraryListWidget>
 
     ScreenAdapter.init(context);
 
+    if(MusicStore.User.of(context).isLogin == false){
+
+      return Center(
+        child: MusicSubmitButton(
+          margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+         onTap: (state){
+           Navigator.of(context).pushNamed(RouterPageName.LoginPage);
+         },
+          title: "登录查看歌单",
+        ),
+
+      );
+    }
+
+
     return FutureBuilderWidget<List<PlayItemModel>>(
-      future: _future,
+      future:  MusicApi.requestPlayList(),
       emptydBuilder:
           (BuildContext context, AsyncSnapshot<List<PlayItemModel>> snapshot) {
         return LibraryEmptyWidget();
