@@ -4,12 +4,14 @@ import 'package:flutter_music/models/play_list_model.dart';
 import 'package:flutter_music/models/song_list_model.dart';
 import 'package:flutter_music/models/track_list_model.dart';
 import 'package:flutter_music/models/song_detail_model.dart';
+import 'package:flutter_music/models/user_model.dart';
 
 export  'package:flutter_music/models/play_list_model.dart';
 export 'package:flutter_music/models/track_list_model.dart';
 export 'package:flutter_music/models/song_detail_model.dart';
 
 export 'package:flutter_music/public_widget/future_builder_widget.dart';
+
 class MusicApi{
 
 /// 我的歌单
@@ -74,6 +76,36 @@ class MusicApi{
 
    return SongDetailModel.fromJson(response["playlist"]);
  }
+
+
+ /// 验证手机号是否已经注册 如果已经注册了返回nickName 否则 为null
+ static Future<String> existenceMobile(String mobile) async{
+
+   final response = await HttpRequestManager.request("/cellphone/existence/check",
+       params: {"phone":mobile}
+   );
+   int exist = response["exist"];
+
+   return exist == 1 ? response["nickname"] : null;
+
+ }
+
+
+ /// 登录接口
+ static Future<UserModel> login(String mobile,String password) async {
+
+      final response = await HttpRequestManager.request("/login/cellphone",
+          params: {"phone":mobile,"password":password}
+      );
+
+      if(response["code"] != 200){
+        return null;
+      }
+      UserModel userModel = UserModel.fromJson(response);
+
+
+      return userModel;
+    }
 
  /// 获取音乐的mp3路径
   static Future<List<TrackItemModel>> musicMp3Item(List<TrackItemModel> trackItemList) async{

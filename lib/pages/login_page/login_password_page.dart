@@ -1,8 +1,60 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_music/base_music/music_app_bar.dart';
 import 'package:flutter_music/common/music_store.dart';
+import 'package:flutter_music/http_request/music_api.dart';
+import 'package:flutter_music/models/user_model.dart';
 import 'package:flutter_music/public_widget/music_submit_button.dart';
-class LoginPasswordPage extends StatelessWidget {
+
+
+class LoginPasswordPage extends StatefulWidget {
+  LoginPasswordPage({
+    Key key,
+    this.nickName,
+    this.mobile
+
+  }): super(key:key);
+
+  final String nickName;
+  final String mobile;
+
+  @override
+  _LoginPasswordPageState createState() => _LoginPasswordPageState();
+}
+
+class _LoginPasswordPageState extends State<LoginPasswordPage> {
+
+
+  TextEditingController editingController;
+
+  bool _isEnable = false;
+  @override
+  void initState() {
+    // TODO: implement initState
+
+
+    super.initState();
+    editingController = TextEditingController();
+
+    editingController.addListener((){
+      if(editingController.text.length > 0 && _isEnable == false){
+        setState(() {
+          _isEnable = true;
+        });
+      }
+      if(editingController.text.length == 0){
+        setState(() {
+          _isEnable = false;
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    editingController.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return MusicScaffold(
@@ -18,14 +70,44 @@ class LoginPasswordPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text("App并不会劫持你的用户信息,请放心输入",style: TextStyle(color: MusicStore.Theme.of(context).subtTitleColor,fontSize: 12),),
+            Text(widget.nickName + " 你好",style: TextStyle(color: MusicStore.Theme.of(context).subtTitleColor,fontSize: 12),),
 
             _password(context),
-            MusicSubmitButton(
-              onTap: (){
+            MusicSubmitButton<UserModel>(
+              isEnable: _isEnable,
+
+              successCallback: (userModel){
+
+                if(userModel == null){
+                  FlutterFlexibleToast.showToast(
+                      message: "密码错误",
+                      toastLength: Toast.LENGTH_SHORT,
+                      toastGravity: ToastGravity.TOP,
+                      backgroundColor: Colors.red,
+                      icon: ICON.WARNING,
+                      timeInSeconds: 2);
+                }else{
+                  FlutterFlexibleToast.showToast(
+                      message: "欢迎来到iMusic",
+                      toastLength: Toast.LENGTH_SHORT,
+                      toastGravity: ToastGravity.TOP,
+                      backgroundColor: Colors.greenAccent,
+                      icon: ICON.SUCCESS,
+                      timeInSeconds: 5);
+
+                  Navigator.of(context).popUntil(ModalRoute.withName(RouterPageName.initialRoute));
+                }
+
+
+              },
+
+
+              onTap: (state){
+                state.requestFuture(MusicApi.login(widget.mobile, editingController.text));
 
               },
               title: "登录",
+              loadingText: "正在登录...",
 
             )
           ],
@@ -47,6 +129,7 @@ class LoginPasswordPage extends StatelessWidget {
       ),
       child: TextField(
 
+        controller: editingController,
           autofocus: true,
           obscureText:true,
           style: TextStyle(fontSize: 17),
@@ -60,4 +143,7 @@ class LoginPasswordPage extends StatelessWidget {
     );
   }
 }
+
+
+
 

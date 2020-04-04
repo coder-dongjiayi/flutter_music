@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
 
             initialRoute: MusicRouter.initialRoute,
 
+
             onGenerateRoute: MusicRouter.generateRoute,
 
             theme: ThemeData(primaryColor:state.theme),

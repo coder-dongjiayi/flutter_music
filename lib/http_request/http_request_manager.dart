@@ -73,6 +73,7 @@ class HttpRequestManager{
 
     try {
       Response response = await dio.request(url, queryParameters: params, options: options);
+
       return response.data;
     } on DioError catch(e) {
       return Future.error(e);

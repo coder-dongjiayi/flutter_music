@@ -84,6 +84,7 @@ class FutureBuilderWidget<T> extends StatelessWidget {
 
     return FutureBuilder(
       future: future,
+
       builder: (BuildContext context, AsyncSnapshot<T> snapshot){
 
         if(snapshot.connectionState == ConnectionState.done){
