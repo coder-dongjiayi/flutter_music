@@ -47,7 +47,7 @@ class _MusicBottomPlayState extends State<MusicBottomPlay> with TickerProviderSt
     return Container(
       decoration: BoxDecoration(
         color: MusicStore.Theme.of(context).theme,
-        border: Border(top: BorderSide(color: Colors.white,width: 0.5))
+        border: Border(top: BorderSide(color: MusicStore.Theme.of(context).topShadowColor,width: 0.5))
       ),
       padding: EdgeInsets.only(top: 5,bottom: 5),
       margin: EdgeInsets.only(bottom: 40),
@@ -157,7 +157,7 @@ class _MusicBottomPlayState extends State<MusicBottomPlay> with TickerProviderSt
           imageUrl: "$imageUrl",
           fit: BoxFit.cover,
           placeholder: (context,url){
-            return Icon(Icons.music_note,size: ScreenAdapter.setWidth(70),color:MusicStore.Theme.of(context).shadowColor);
+            return Icon(Icons.music_note,size: ScreenAdapter.setWidth(70),color:MusicStore.Theme.of(context).bottomShadowColor);
           },
         )
 

@@ -42,36 +42,32 @@ class MusicTabItem extends StatelessWidget {
 
     final iconColor = colorTween.evaluate(colorAnimation);
 
-    return InkWell(
+    return MusicGestureDetector(
       onTap: (){
         onTap(index);
-
       },
       child: Container(
         padding: EdgeInsets.fromLTRB(15, 8, 15, 8),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: MusicStore.Theme.of(context).theme,
-            boxShadow: [
-              BoxShadow(color:MusicStore.Theme.of(context).shadowColor,offset: Offset(5,5),blurRadius: 10),
-              BoxShadow(color: Colors.white,offset: Offset(-2,-2),blurRadius: 4)
-            ]
+            boxShadow: MusicStore.boxShow(context, -2, 5)
         ),
         child: Row(
           children: <Widget>[
             Icon(iconData,color: iconColor),
             SizedBox(
-              width: animation.value,
-              child: Text(
-                  "${title}",
-                  style: TextStyle(
-                    color:MusicStore.Theme.of(context).titleColor,
-                    fontSize: 14,
-                  ),
-                  textAlign:TextAlign.center,
-                  maxLines: 1,
+                width: animation.value,
+                child: Text(
+                    "${title}",
+                    style: TextStyle(
+                      color:MusicStore.Theme.of(context).tabItemSelectedColor,
+                      fontSize: 14,
+                    ),
+                    textAlign:TextAlign.center,
+                    maxLines: 1,
 
-                  overflow: TextOverflow.clip)
+                    overflow: TextOverflow.clip)
 
             )
           ],

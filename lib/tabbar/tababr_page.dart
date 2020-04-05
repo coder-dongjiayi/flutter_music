@@ -46,7 +46,6 @@ class _TabbarPageState extends State<TabbarPage> {
       bottomNavigationBar: BottomTabar(
         currentIndex: _currentIndex,
         onTap: (index){
-          Vibrate.feedback(FeedbackType.impact);
           setState(() {
             _currentIndex = index;
             _pageController.animateToPage(index,

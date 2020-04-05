@@ -1,8 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_music/common/profile_change_notifier.dart';
 import 'package:flutter_music/common/music_global.dart';
 import 'package:flutter_music/models/user_model.dart';
-class UserSate extends ProfileChangeNotifiter{
+class UserSate extends ChangeNotifier{
 
 
   UserModel get user => MusicGlobal.userModel;
@@ -15,6 +15,10 @@ class UserSate extends ProfileChangeNotifiter{
     notifyListeners();
   }
 
+  logoOut(){
+    MusicGlobal.logout();
+    notifyListeners();
+  }
     UserSate of(context){
 
         return Provider.of<UserSate>(context,listen: false);

@@ -88,8 +88,8 @@ class _BottomTabarState extends State<BottomTabar> with TickerProviderStateMixin
   List<Widget> _createMusicTableItem(){
 
     ColorTween colorTween = ColorTween(
-      begin:  Color.fromRGBO(222, 227, 233 , 1.0),
-      end:  Color.fromRGBO(92, 122, 170 , 1.0)
+      begin:  MusicStore.Theme.of(context).tabItemNormalColor,
+      end:  MusicStore.Theme.of(context).tabItemSelectedColor
     );
 
     List<MusicTabItem> _list  = List<MusicTabItem>.generate(_itemList.length, (int index){
@@ -101,8 +101,8 @@ class _BottomTabarState extends State<BottomTabar> with TickerProviderStateMixin
         animationController: _animationControllers[index],
         title: _itemList[index]["title"],
         iconData: _itemList[index]["iconData"],
-        normalColor: Color.fromRGBO(222, 227, 233 , 1.0),
-        selectedColor:Color.fromRGBO(92, 122, 170 , 1.0),
+        normalColor: MusicStore.Theme.of(context).tabItemNormalColor,
+        selectedColor:MusicStore.Theme.of(context).tabItemSelectedColor,
         colorTween: colorTween,
         onTap: (index){
           if (widget.onTap != null)

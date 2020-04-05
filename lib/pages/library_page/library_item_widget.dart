@@ -129,14 +129,7 @@ class _LibraryItemWidgetState extends State<LibraryItemWidget> with TickerProvid
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: MusicStore.Theme.of(context).theme,
-            boxShadow: [
-              BoxShadow(
-                  color: MusicStore.Theme.of(context).shadowColor,
-                  offset: Offset(10, 10),
-                  blurRadius: 10),
-              BoxShadow(
-                  color: Colors.white, offset: Offset(-10, -10), blurRadius: 26)
-            ]),
+            boxShadow: MusicStore.boxShow(context,-10, 10)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
@@ -160,14 +153,7 @@ class _LibraryItemWidgetState extends State<LibraryItemWidget> with TickerProvid
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
           color: MusicStore.Theme.of(context).theme,
-          boxShadow: [
-            BoxShadow(
-                color: MusicStore.Theme.of(context).shadowColor,
-                offset: Offset(10, 10),
-                blurRadius: 10),
-            BoxShadow(
-                color: Colors.white, offset: Offset(-10, -10), blurRadius: 26)
-          ]),
+          boxShadow: MusicStore.boxShow(context, -10, 10)),
       child: ClipRRect(
           borderRadius: BorderRadius.circular(5),
           child: CachedNetworkImage(

@@ -42,7 +42,8 @@ class MusicItemWidget extends StatelessWidget {
 
 
     bool _selected = false;
-    if(musicGlobalPlayListState.currentPlayList.length > 0){
+
+    if(musicGlobalPlayListState.currentPlayList != null && musicGlobalPlayListState.currentPlayList.length > 0){
      _selected = musicGlobalPlayListState.currentTrackItem.id == id;
     }
 
@@ -51,13 +52,8 @@ class MusicItemWidget extends StatelessWidget {
       decoration:
           BoxDecoration(
               color: MusicStore.Theme.of(context).theme,
-              boxShadow: _selected == false ? null : [
-        BoxShadow(
-            color: MusicStore.Theme.of(context).shadowColor,
-            offset: Offset(10, 10),
-            blurRadius: 10),
-        BoxShadow(color: Colors.white, offset: Offset(-10, -10), blurRadius: 26)
-      ]
+              boxShadow: _selected == false ? null : MusicStore.boxShow(context, -10,10)
+
           ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -90,15 +86,8 @@ class MusicItemWidget extends StatelessWidget {
         padding: EdgeInsets.fromLTRB(2, 2, 2, 2),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                  color: MusicStore.Theme.of(context).shadowColor,
-                  offset: Offset(10, 10),
-                  blurRadius: 10),
-              BoxShadow(
-                  color: Colors.white, offset: Offset(-10, -10), blurRadius: 26)
-            ]),
+            color:  MusicStore.Theme.of(context).topShadowColor,
+            boxShadow: MusicStore.boxShow(context, -10, 10)),
         child: ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: CachedNetworkImage(

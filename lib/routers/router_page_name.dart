@@ -6,6 +6,7 @@ class RouterPageName{
   static const String initialRoute = "/";
 
 
+
   static const String LibraryPage = "/library_page";
 
   static const String  CommendPage = "/commend_page";
@@ -28,4 +29,7 @@ class RouterPageName{
 
   //输入密码页面
   static const String LoginPasswordPage = "/login_password_page";
+
+  //个人中心
+  static const String PersonPage = "/person_page";
 }

@@ -16,7 +16,7 @@ class MusicButton extends StatefulWidget {
     this.isEnable : true,
     this.padding : const EdgeInsets.fromLTRB(10, 10, 10, 10),
     this.margin :  const EdgeInsets.fromLTRB(0, 0, 0, 0),
-    this.size : 20
+    this.size : 25
   }): super(key:key);
 
   final IconData normalIconData;
@@ -44,7 +44,10 @@ class _MusicButtonState extends State<MusicButton> {
 
 
       onTap:  widget.isEnable == false ? null : (){
-        Vibrate.feedback(FeedbackType.impact);
+        if(MusicStore.isVibrate == true){
+          Vibrate.feedback(FeedbackType.impact);
+        }
+
         if (widget.selectedIconData != null){
          setState(() {
 
@@ -67,24 +70,17 @@ class _MusicButtonState extends State<MusicButton> {
       margin: widget.margin,
       padding: widget.padding,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(15),
           color: MusicStore.Theme
               .of(context)
               .theme,
-          boxShadow: widget.showLayer == false ? null : [
-            BoxShadow(color: MusicStore.Theme.of(context).shadowColor,
-                spreadRadius: 2,
-                offset: Offset(5, 5), blurRadius: 11),
-            BoxShadow(
-                color: Colors.white, offset: Offset(-5, -5), blurRadius: 11)
-
-          ],
+          boxShadow: widget.showLayer == false ? null : MusicStore.boxShow(context, -5, 5),
         gradient: widget.selected == false ? null : LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            MusicStore.Theme.of(context).shadowColor,
-            Colors.white
+            MusicStore.Theme.of(context).bottomShadowColor,
+            MusicStore.Theme.of(context).topShadowColor
           ],
 
         )

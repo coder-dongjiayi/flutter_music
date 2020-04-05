@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_music/common/music_store.dart';
 import 'package:vibrate/vibrate.dart';
 
 typedef GestureTapCallback = void Function();
@@ -19,7 +20,10 @@ class MusicGestureDetector extends StatelessWidget {
       child: child,
       onTap: (){
         if(onTap != null){
-          Vibrate.feedback(FeedbackType.impact);
+          if(MusicStore.isVibrate){
+            Vibrate.feedback(FeedbackType.impact);
+          }
+
           onTap();
         }
       },

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_music/common/music_store.dart';
 import 'package:provider/provider.dart';
-import 'dart:math';
 import 'package:flutter_music/public_widget/music_gestureDetector.dart';
 class _IntroductionState extends ChangeNotifier{
 
@@ -120,11 +119,8 @@ class AlbumHeaderWidget extends StatelessWidget {
       padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(color:MusicStore.Theme.of(context).shadowColor,offset: Offset(10,10),blurRadius: 10),
-            BoxShadow(color: Colors.white,offset: Offset(-10,-10),blurRadius: 26)
-          ]
+          color: MusicStore.Theme.of(context).topShadowColor,
+          boxShadow: MusicStore.boxShow(context, -10, 10)
       ),
 
       child: ClipRRect(

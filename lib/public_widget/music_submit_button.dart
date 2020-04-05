@@ -20,7 +20,10 @@ class MusicSubmitButton<T> extends StatefulWidget {
     this.loadingText: "正在加载...",
     this.waitingCallback,
     this.successCallback,
-    this.filedCallback
+    this.filedCallback,
+    this.backGroundColor,
+    this.titleStyle,
+    this.loadingStyle
 
   }): super(key :key);
 
@@ -32,6 +35,9 @@ class MusicSubmitButton<T> extends StatefulWidget {
   final WaitingCallback<T> waitingCallback;
   final SuccessCallback<T> successCallback;
   final FiledCallback<T>  filedCallback;
+  final TextStyle titleStyle;
+  final TextStyle loadingStyle;
+  final Color backGroundColor;
   final bool isEnable;
   @override
   _MusicSubmitButtonState createState() => _MusicSubmitButtonState<T>();
@@ -56,7 +62,7 @@ class _MusicSubmitButtonState<T> extends State<MusicSubmitButton<T>> {
       if(widget.waitingCallback != null){
         widget.waitingCallback();
       }
-      Future.delayed(Duration(seconds: 1), (){
+      Future.delayed(Duration(milliseconds: 500), (){
         future.then<void>((T data){
 
           if(widget.successCallback != null){
@@ -88,6 +94,7 @@ class _MusicSubmitButtonState<T> extends State<MusicSubmitButton<T>> {
 
 
   Widget _activityIndicator(){
+    TextStyle loadingStyle = widget.loadingStyle ?? TextStyle(color: MusicStore.Theme.of(context).titleColor,fontWeight: FontWeight.w600,fontSize: 17);
     return  Center(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -97,7 +104,7 @@ class _MusicSubmitButtonState<T> extends State<MusicSubmitButton<T>> {
           ),
           Padding(
             padding: EdgeInsets.only(left: 10),
-            child: Text(widget.loadingText,style:TextStyle(color: MusicStore.Theme.of(context).titleColor,fontWeight: FontWeight.w600,fontSize: 17) ,)
+            child: Text(widget.loadingText,style: loadingStyle,)
 
           )
         ],
@@ -107,12 +114,14 @@ class _MusicSubmitButtonState<T> extends State<MusicSubmitButton<T>> {
 
   Widget _titleText(){
 
+    TextStyle titleStyle = widget.titleStyle ?? TextStyle(color: MusicStore.Theme.of(context).titleColor,fontWeight: FontWeight.w600,fontSize: 17);
     return Text(widget.title,textAlign: TextAlign.center,
-      style: TextStyle(color: MusicStore.Theme.of(context).titleColor,fontWeight: FontWeight.w600,fontSize: 17),);
+      style: titleStyle,);
   }
 
   @override
   Widget build(BuildContext context) {
+    Color backGrounColor = widget.backGroundColor ?? MusicStore.Theme.of(context).theme;
     return MusicGestureDetector(
       onTap: widget.isEnable == false ? null : (){
 
@@ -131,15 +140,8 @@ class _MusicSubmitButtonState<T> extends State<MusicSubmitButton<T>> {
             decoration:
             BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: MusicStore.Theme.of(context).theme,
-                boxShadow: [
-                  BoxShadow(
-                      color: MusicStore.Theme.of(context).shadowColor,
-                      offset: Offset(10, 10),
-                      blurRadius: 10),
-                  BoxShadow(
-                      color: Colors.white, offset: Offset(-10, -10), blurRadius: 26)
-                ])
+                color: backGrounColor,
+                boxShadow: MusicStore.boxShow(context, -10, 10))
 
         ),
       )

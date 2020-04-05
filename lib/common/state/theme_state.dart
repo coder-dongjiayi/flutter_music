@@ -1,34 +1,81 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_music/common/profile_change_notifier.dart';
 import 'package:flutter_music/common/music_global.dart';
 
-class ThemeState extends ProfileChangeNotifiter{
+class ThemeState extends ChangeNotifier{
 
 
 
-  Color get theme => profile.theme ?? MusicGlobal.light;
+  Color _theme = MusicGlobal.theme;
 
-  Color get titleColor => profile.titleColor ?? MusicGlobal.titleColor;
+  bool  get isDarkTheme => _theme ==  MusicGlobal.light ? false : true;
 
-  Color get shadowColor => profile.shadowColor ?? MusicGlobal.shadowColor;
+  Color get theme => _theme;
 
-  Color get subtTitleColor => profile.subtTitleColor ?? MusicGlobal.subTitleColor;
-
-  Color get goldenColor => profile.goldenColor ?? MusicGlobal.goldenColor;
-
-  setTheme(Color color){
-    if(color != theme){
-         profile.theme = color;
+  Color get titleColor{
+    if(theme == MusicGlobal.light){
+      return MusicGlobal.lightTitleColor;
     }
+    return MusicGlobal.darkTitleColor;
+  }
+
+  Color get bottomShadowColor {
+    if(theme== MusicGlobal.light){
+      return MusicGlobal.lightBottomShadowColor;
+    }
+    return MusicGlobal.darkBottomShadowColor;
+  }
+
+  Color get topShadowColor{
+    if(theme == MusicGlobal.light){
+      return MusicGlobal.lightTopShadowColor;
+    }
+    return MusicGlobal.darkTopShadowColor;
+  }
+  Color get textFieldColor{
+    if(theme == MusicGlobal.light){
+      return Color.fromRGBO(0, 0, 0, 1.0);
+    }
+    return Color.fromRGBO(255, 255, 255, 1.0);
+  }
+
+
+  Color get tabItemNormalColor{
+    if(theme == MusicGlobal.light){
+      return Color.fromRGBO(222, 227, 233, 1.0);
+    }
+    return MusicGlobal.darkTitleColor;
+  }
+
+  Color get tabItemSelectedColor{
+    if(theme == MusicGlobal.light){
+       return MusicGlobal.lightTitleColor;
+    }
+    return MusicGlobal.goldenColor;
+  }
+
+  Color get subtTitleColor =>  MusicGlobal.subTitleColor;
+
+  Color get goldenColor =>  MusicGlobal.goldenColor;
+
+
+  switchTheme(){
+    if(_theme == MusicGlobal.light){
+      _theme = MusicGlobal.dark;
+    }else{
+      _theme = MusicGlobal.light;
+    }
+    MusicGlobal.saveTheme(_theme);
+
     notifyListeners();
   }
 
 
 
-   ThemeState of(context,{bool listen = true}){
+   ThemeState of(context){
 
-        return Provider.of<ThemeState>(context,listen: listen);
+        return Provider.of<ThemeState>(context,listen: false);
   }
 
 }

@@ -46,7 +46,7 @@ class _CommendPageState extends State<CommendPage> with AutomaticKeepAliveClient
           if(MusicStore.User.of(context).isLogin == false){
             Navigator.of(context).pushNamed(RouterPageName.LoginPage);
           }else{
-            print("已登录");
+            Navigator.of(context).pushNamed(RouterPageName.PersonPage);
           }
 
         },

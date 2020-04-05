@@ -60,7 +60,7 @@ class _LoginPasswordPageState extends State<LoginPasswordPage> {
     return MusicScaffold(
       appBar: MusicAppBar(
         title: "手机号登录",
-        rightIconData: Icons.arrow_back,
+        rightIconData: Icons.chevron_left,
         rightOnTap: (){
           Navigator.of(context).pop();
         },
@@ -126,7 +126,7 @@ class _LoginPasswordPageState extends State<LoginPasswordPage> {
       decoration: BoxDecoration(
 
           border: Border(
-              bottom: BorderSide(width: 1,color: MusicStore.Theme.of(context).shadowColor)
+              bottom: BorderSide(width: 1,color: MusicStore.Theme.of(context).bottomShadowColor)
           )
       ),
       child: TextField(
@@ -134,11 +134,11 @@ class _LoginPasswordPageState extends State<LoginPasswordPage> {
         controller: editingController,
           autofocus: true,
           obscureText:true,
-          style: TextStyle(fontSize: 17),
+          style: TextStyle(fontSize: 17,color: MusicStore.Theme.of(context).textFieldColor),
 
           decoration:InputDecoration(
               hintText: "请输入密码",
-              hintStyle: TextStyle(color: MusicStore.Theme.of(context).subtTitleColor),
+              hintStyle: TextStyle(color: MusicStore.Theme.of(context).textFieldColor),
               border: InputBorder.none
           )
       ),

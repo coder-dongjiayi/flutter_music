@@ -18,10 +18,7 @@ class CommentMoreItemWidget extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: MusicStore.Theme.of(context).theme,
-            boxShadow: [
-              BoxShadow(color:MusicStore.Theme.of(context).shadowColor,offset: Offset(10,10),blurRadius: 10),
-              BoxShadow(color: Colors.white,offset: Offset(-10,-10),blurRadius: 26)
-            ]
+            boxShadow: MusicStore.boxShow(context, -10, 10)
 
         ),
       child: Row(

@@ -49,20 +49,12 @@ class _NewLibraryPageState extends State<NewLibraryPage> {
           color: MusicStore.Theme
               .of(context)
               .theme,
-        boxShadow: [
-          BoxShadow(color: MusicStore.Theme
-              .of(context)
-              .shadowColor,
-              spreadRadius: 2,
-              offset: Offset(10, 10), blurRadius: 10),
-          BoxShadow(
-              color: Colors.white, offset: Offset(-10, -10), blurRadius: 10)
-        ],
+        boxShadow: MusicStore.boxShow(context, -10, 10),
           gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-               MusicStore.Theme.of(context).shadowColor,
+               MusicStore.Theme.of(context).bottomShadowColor,
 
                 Colors.white
               ],

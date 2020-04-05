@@ -14,7 +14,7 @@ class MusicGlobalPlayListState extends ChangeNotifier{
 
 
   int _currentIndex = 0;
-  int _currentPlayId;
+  int _currentPlayId = 0;
 
   /// 当前播放列表
   List<TrackItemModel> _currentPlayList = List<TrackItemModel>();
@@ -144,6 +144,13 @@ class MusicGlobalPlayListState extends ChangeNotifier{
 
   }
 
+  void music_clear(){
+    music_stop();
+
+    _currentPlayList = null;
+    _currentIndex = 0;
+    _currentPlayId = 0;
+  }
 
   ///播放当前的歌曲
   void music_play(){
@@ -160,6 +167,10 @@ class MusicGlobalPlayListState extends ChangeNotifier{
     _resume();
   }
 
+  /// 停止播放
+  void music_stop(){
+    _stop();
+  }
   /// 更新播放进度
   void music_seek(double value){
 
@@ -181,6 +192,9 @@ class MusicGlobalPlayListState extends ChangeNotifier{
 
     int result =  await _audioPlayer.pause();
 
+  }
+  void _stop() async{
+    int result = await _audioPlayer.stop();
   }
 
   void _play() async{

@@ -93,6 +93,6 @@ class _MusicAppBarState extends State<MusicAppBar> {
 
 
   Widget _title(){
-    return Text("${widget.title}",style: TextStyle(fontSize: 20,color: MusicStore.Theme.of(context).titleColor,fontWeight: FontWeight.w500),);
+    return Text("${widget.title}",style: TextStyle(fontSize: 25,color: MusicStore.Theme.of(context).titleColor,fontWeight: FontWeight.w500),);
   }
 }

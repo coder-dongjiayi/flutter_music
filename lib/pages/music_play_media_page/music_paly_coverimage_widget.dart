@@ -23,17 +23,9 @@ class MusicPlayCoverimageWidget extends StatelessWidget {
         margin: EdgeInsets.only(top: marginTop),
 
         decoration: ShapeDecoration(
-            color: Colors.white,
+            color: MusicStore.Theme.of(context).topShadowColor,
             shape: CircleBorder(),
-            shadows: [
-              BoxShadow(color: MusicStore.Theme
-                  .of(context)
-                  .shadowColor, offset: Offset(10, 10), blurRadius: 20),
-              BoxShadow(
-                  color: MusicStore.Theme
-                      .of(context)
-                      .shadowColor, offset: Offset(-10, -10), blurRadius: 20)
-            ]
+            shadows: MusicStore.boxShow(context,-10, 10)
         ),
         //margin: EdgeInsets.fromLTRB(60, 60, 60, 60),
 
@@ -53,7 +45,7 @@ class MusicPlayCoverimageWidget extends StatelessWidget {
           imageUrl: coverImageUrl,
           fit: BoxFit.cover,
           placeholder: (context,url){
-            return Icon(Icons.music_note,size: width,color:MusicStore.Theme.of(context).shadowColor);
+            return Icon(Icons.music_note,size: width,color:MusicStore.Theme.of(context).bottomShadowColor);
           },
         )
 

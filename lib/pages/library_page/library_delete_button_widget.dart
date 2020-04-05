@@ -61,20 +61,13 @@ class LibraryDeleteButtonWidget extends StatelessWidget {
             color: MusicStore.Theme
                 .of(context)
                 .theme,
-            boxShadow: [
-              BoxShadow(color: MusicStore.Theme.of(context).shadowColor,
-                  spreadRadius: 2,
-                  offset: Offset(3, 3), blurRadius: 7),
-              BoxShadow(
-                  color: Colors.white, offset: Offset(-3, -3), blurRadius: 7)
-
-            ],
+            boxShadow: MusicStore.boxShow(context,-3, 3),
             gradient:LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                MusicStore.Theme.of(context).shadowColor,
-                Colors.white
+                MusicStore.Theme.of(context).bottomShadowColor,
+                MusicStore.Theme.of(context).topShadowColor
               ],
 
             )

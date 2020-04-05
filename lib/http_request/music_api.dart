@@ -91,6 +91,17 @@ class MusicApi{
  }
 
 
+ /// 退出登录
+
+   static Future<int> logout() async{
+      final response = await HttpRequestManager.request("/logout");
+      if(response["code"] != 200){
+        return 0;
+      }
+      return 1;
+   
+    }
+
  /// 登录接口
  static Future<UserModel> login(String mobile,String password) async {
 

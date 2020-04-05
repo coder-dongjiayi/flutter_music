@@ -108,25 +108,25 @@ class _LoginPageState extends State<LoginPage> {
       decoration: BoxDecoration(
 
           border: Border(
-              bottom: BorderSide(width: 1,color: MusicStore.Theme.of(context).shadowColor)
+              bottom: BorderSide(width: 1,color: MusicStore.Theme.of(context).bottomShadowColor)
           )
       ),
       child: Row(
         children: <Widget>[
           Padding(
             padding: EdgeInsets.only(right: 10),
-            child:  Text("+86",style: TextStyle(fontSize: 20),),
+            child:  Text("+86",style: TextStyle(fontSize: 20,color: MusicStore.Theme.of(context).textFieldColor),),
           ),
           Expanded(
             flex: 1,
             child: TextField(
                 controller: editingController,
                 autofocus: true,
-                style: TextStyle(fontSize: 17),
+                style: TextStyle(fontSize: 17,color: MusicStore.Theme.of(context).textFieldColor),
                 keyboardType: TextInputType.number,
                 decoration:InputDecoration(
                     hintText: "请输入手机号",
-                    hintStyle: TextStyle(color: MusicStore.Theme.of(context).subtTitleColor),
+                    hintStyle: TextStyle(color: MusicStore.Theme.of(context).textFieldColor),
                     border: InputBorder.none
                 )
             ),

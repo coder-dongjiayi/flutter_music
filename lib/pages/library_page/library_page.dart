@@ -5,7 +5,7 @@ import 'package:flutter_music/common/music_store.dart';
 import 'package:flutter_music/base_music/music_app_bar.dart';
 
 import 'package:flutter_music/pages/library_page/library_list_widget.dart';
-
+import 'package:flutter_music/public_widget/music_submit_button.dart';
 import 'package:flutter_music/pages/library_page/library_state/library_list_state.dart';
 
 class LibraryPage extends StatefulWidget {
@@ -53,7 +53,7 @@ class _LibraryPageState extends State<LibraryPage> with AutomaticKeepAliveClient
 
            },
          ),
-         body:LibraryListWidget() ,
+         body: MusicStore.User.of(context).isLogin == false ? _unLogin() : LibraryListWidget() ,
        );
 
      },
@@ -61,6 +61,21 @@ class _LibraryPageState extends State<LibraryPage> with AutomaticKeepAliveClient
 
  );
   }
+
+
+  Widget _unLogin(){
+    return Center(
+      child: MusicSubmitButton(
+        margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+        onTap: (state){
+          Navigator.of(context).pushNamed(RouterPageName.LoginPage);
+        },
+        title: "登录查看歌单",
+      ),
+
+    );
+  }
+
   @override
   void dispose() {
     // TODO: implement dispose

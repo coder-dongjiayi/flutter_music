@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_music/common/music_store.dart';
 import 'package:flutter_music/routers/router.dart';
 import 'package:flutter_music/common/music_global.dart';
 import 'package:flutter_music/common/state/theme_state.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
         builder: (context,state,widget){
           return MaterialApp(
 
+            color: state.theme,
             initialRoute: MusicRouter.initialRoute,
 
 

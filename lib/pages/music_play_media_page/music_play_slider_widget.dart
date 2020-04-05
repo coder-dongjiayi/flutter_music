@@ -67,7 +67,7 @@ class _MusicPlaySliderWidgetState extends State<MusicPlaySliderWidget> {
 
       data: SliderTheme.of(context).copyWith(
         activeTrackColor: Color.fromRGBO(151, 160, 235, 1.0),
-        inactiveTrackColor: MusicStore.Theme.of(context).shadowColor,
+        inactiveTrackColor: MusicStore.Theme.of(context).bottomShadowColor,
         trackHeight: 3,
         overlayColor:Colors.white,
         thumbColor:Color.fromRGBO(151, 160, 235, 1.0),
