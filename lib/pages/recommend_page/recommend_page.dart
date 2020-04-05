@@ -37,13 +37,16 @@ class _CommendPageState extends State<CommendPage> with AutomaticKeepAliveClient
   @override
   Widget build(BuildContext context) {
 
+    bool isLogin = MusicStore.User.of(context).isLogin;
+
     return MusicScaffold(
      showFloatingActionButton: false,
       appBar: MusicAppBar(
         title: "推荐",
-        rightIconData: Icons.person_pin,
+        rightImageURL: isLogin == true ?  MusicStore.User.of(context).user.avatarUrl : null,
+        rightIconData: isLogin == true ? null : Icons.person_pin,
         rightOnTap: (){
-          if(MusicStore.User.of(context).isLogin == false){
+          if(isLogin == false){
             Navigator.of(context).pushNamed(RouterPageName.LoginPage);
           }else{
             Navigator.of(context).pushNamed(RouterPageName.PersonPage);

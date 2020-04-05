@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_music/common/music_store.dart';
 import 'package:vibrate/vibrate.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 typedef GestureTapCallback = void Function(bool selected);
 
@@ -16,7 +17,8 @@ class MusicButton extends StatefulWidget {
     this.isEnable : true,
     this.padding : const EdgeInsets.fromLTRB(10, 10, 10, 10),
     this.margin :  const EdgeInsets.fromLTRB(0, 0, 0, 0),
-    this.size : 25
+    this.size : 25,
+    this.imageURL
   }): super(key:key);
 
   final IconData normalIconData;
@@ -27,6 +29,7 @@ class MusicButton extends StatefulWidget {
   final bool isEnable;
   final  double size;
   final bool showLayer;
+  final String imageURL;
    bool selected;
   @override
   _MusicButtonState createState() => _MusicButtonState();
@@ -86,10 +89,19 @@ class _MusicButtonState extends State<MusicButton> {
         )
       ),
 
-      child: Icon(_iconData(), size: widget.size, color: MusicStore.Theme
+      child: widget.imageURL != null ? _image() : Icon(_iconData(), size: widget.size, color: MusicStore.Theme
           .of(context)
           .titleColor),
     );
+  }
+
+  Widget _image(){
+    return ClipRRect(
+        borderRadius: BorderRadius.circular(15),
+        child: CachedNetworkImage(
+          imageUrl: widget.imageURL,
+          fit: BoxFit.cover,
+        ));
   }
 
   IconData _iconData(){

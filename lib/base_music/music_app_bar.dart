@@ -14,7 +14,8 @@ class MusicAppBar extends StatefulWidget implements PreferredSizeWidget{
     this.rightIconData,
     this.rightSelectedIconData,
     this.leftOnTap,
-    this.rightOnTap
+    this.rightOnTap,
+    this.rightImageURL
   }) : preferredSize = Size.fromHeight(kToolbarHeight), super(key:key);
 
 
@@ -27,6 +28,7 @@ class MusicAppBar extends StatefulWidget implements PreferredSizeWidget{
   final IconData rightIconData;
 
   final IconData rightSelectedIconData;
+  final String rightImageURL;
 
   @override
   _MusicAppBarState createState() => _MusicAppBarState();
@@ -45,6 +47,9 @@ class _MusicAppBarState extends State<MusicAppBar> {
     }
     if(widget.rightIconData != null){
       _list.add(_rightItem());
+    }
+    if(widget.rightImageURL != null){
+      _list.add(_image());
     }
 
     return SafeArea(
@@ -76,11 +81,40 @@ class _MusicAppBarState extends State<MusicAppBar> {
       },
     );
   }
+
+  Widget _image(){
+    return MusicGestureDetector(
+      onTap: (){
+        if(widget.rightOnTap != null){
+          widget.rightOnTap();
+        }
+      },
+      child: Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(40),
+          color: MusicStore.Theme.of(context).theme,
+          boxShadow: MusicStore.boxShow(context, -10, 10)
+        ),
+        child: SizedBox(
+          width: ScreenAdapter.setWidth(80),
+          height: ScreenAdapter.setHeight(80),
+          child: ClipRRect(
+              borderRadius: BorderRadius.circular(40),
+              child: CachedNetworkImage(
+                imageUrl: widget.rightImageURL,
+                fit: BoxFit.cover,
+              )),
+        ),
+      )
+    );
+  }
+
   Widget _rightItem(){
-    if (widget.rightIconData == null){
+    if (widget.rightIconData == null && widget.rightImageURL == null){
       return Text("");
     }
     return MusicButton(
+      imageURL: widget.rightImageURL,
       normalIconData: widget.rightIconData,
       selectedIconData: widget.rightSelectedIconData,
       onTap: (selected){
