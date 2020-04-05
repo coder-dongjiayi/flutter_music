@@ -47,6 +47,7 @@ class LibraryListState extends ChangeNotifier{
 
   void deleteAction(){
 
+    if(dataSource.length == 0) return;
 
    if(editAnimationController.status == AnimationStatus.completed){
      editAnimationController.reverse().whenComplete((){

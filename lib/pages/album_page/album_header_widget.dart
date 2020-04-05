@@ -63,7 +63,7 @@ class AlbumHeaderWidget extends StatelessWidget {
                           child: Text(
                             "$desc",
                             textAlign:TextAlign.left,
-                            style: TextStyle(fontSize: 12,color: MusicStore.Theme.of(context).subtTitleColor),
+                            style: TextStyle(fontSize: 12,color: MusicStore.Theme(context).subtTitleColor),
                             maxLines: state.mainLine,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -105,7 +105,7 @@ class AlbumHeaderWidget extends StatelessWidget {
         "$title",
 
 
-        style: TextStyle(fontSize: 24,fontWeight: FontWeight.w600,color: MusicStore.Theme.of(context).titleColor),
+        style: TextStyle(fontSize: 24,fontWeight: FontWeight.w600,color: MusicStore.Theme(context).titleColor),
 
       ),
     );
@@ -119,7 +119,7 @@ class AlbumHeaderWidget extends StatelessWidget {
       padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: MusicStore.Theme.of(context).topShadowColor,
+          color: MusicStore.Theme(context).topShadowColor,
           boxShadow: MusicStore.boxShow(context, -10, 10)
       ),
 

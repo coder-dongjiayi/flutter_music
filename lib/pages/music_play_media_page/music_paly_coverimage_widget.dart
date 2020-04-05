@@ -23,7 +23,7 @@ class MusicPlayCoverimageWidget extends StatelessWidget {
         margin: EdgeInsets.only(top: marginTop),
 
         decoration: ShapeDecoration(
-            color: MusicStore.Theme.of(context).topShadowColor,
+            color: MusicStore.Theme(context).topShadowColor,
             shape: CircleBorder(),
             shadows: MusicStore.boxShow(context,-10, 10)
         ),
@@ -45,7 +45,7 @@ class MusicPlayCoverimageWidget extends StatelessWidget {
           imageUrl: coverImageUrl,
           fit: BoxFit.cover,
           placeholder: (context,url){
-            return Icon(Icons.music_note,size: width,color:MusicStore.Theme.of(context).bottomShadowColor);
+            return Icon(Icons.music_note,size: width,color:MusicStore.Theme(context).bottomShadowColor);
           },
         )
 

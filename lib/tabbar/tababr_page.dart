@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_music/base_music/music_scaffold.dart';
+import 'package:flutter_music/common/music_store.dart';
 import 'package:flutter_music/pages/library_page/library_page.dart';
 import 'package:flutter_music/pages/recommend_page/recommend_page.dart';
 import 'package:flutter_music/pages/browse_page/browse_page.dart';

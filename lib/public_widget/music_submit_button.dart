@@ -94,7 +94,7 @@ class _MusicSubmitButtonState<T> extends State<MusicSubmitButton<T>> {
 
 
   Widget _activityIndicator(){
-    TextStyle loadingStyle = widget.loadingStyle ?? TextStyle(color: MusicStore.Theme.of(context).titleColor,fontWeight: FontWeight.w600,fontSize: 17);
+    TextStyle loadingStyle = widget.loadingStyle ?? TextStyle(color: MusicStore.Theme(context).titleColor,fontWeight: FontWeight.w600,fontSize: 17);
     return  Center(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -114,14 +114,14 @@ class _MusicSubmitButtonState<T> extends State<MusicSubmitButton<T>> {
 
   Widget _titleText(){
 
-    TextStyle titleStyle = widget.titleStyle ?? TextStyle(color: MusicStore.Theme.of(context).titleColor,fontWeight: FontWeight.w600,fontSize: 17);
+    TextStyle titleStyle = widget.titleStyle ?? TextStyle(color: MusicStore.Theme(context).titleColor,fontWeight: FontWeight.w600,fontSize: 17);
     return Text(widget.title,textAlign: TextAlign.center,
       style: titleStyle,);
   }
 
   @override
   Widget build(BuildContext context) {
-    Color backGrounColor = widget.backGroundColor ?? MusicStore.Theme.of(context).theme;
+    Color backGrounColor = widget.backGroundColor ?? MusicStore.Theme(context).theme;
     return MusicGestureDetector(
       onTap: widget.isEnable == false ? null : (){
 

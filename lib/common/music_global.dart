@@ -107,6 +107,7 @@ class MusicGlobal {
 
       /// step2 读取主题信息
       if(themeInfo != null){
+        print(themeInfo);
         theme = themeInfo == "light" ? light : dark;
       }
 

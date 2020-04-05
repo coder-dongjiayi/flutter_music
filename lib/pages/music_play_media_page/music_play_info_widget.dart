@@ -107,7 +107,7 @@ class MusicPlayInfoWidget extends StatelessWidget {
                 maxLines: 1,
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(color: MusicStore.Theme.of(context).titleColor,fontSize: 17,fontWeight: FontWeight.w600),
+                style: TextStyle(color: MusicStore.Theme(context).titleColor,fontSize: 17,fontWeight: FontWeight.w600),
               ),
             ),
           ),
@@ -119,7 +119,7 @@ class MusicPlayInfoWidget extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(top: _playerArtistTop),
       child: Text(artist,
-        style: TextStyle(color: MusicStore.Theme.of(context).subtTitleColor,fontSize: 12),
+        style: TextStyle(color: MusicStore.Theme(context).subtTitleColor,fontSize: 12),
       ),
     );
   }

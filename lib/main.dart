@@ -31,7 +31,9 @@ class MyApp extends StatelessWidget {
       ],
       child: Consumer<ThemeState>(
         builder: (context,state,widget){
+
           return MaterialApp(
+
 
             color: state.theme,
             initialRoute: MusicRouter.initialRoute,

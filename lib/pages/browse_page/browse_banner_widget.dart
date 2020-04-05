@@ -86,7 +86,7 @@ class BrowseBannerWidget extends StatelessWidget {
           margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
-              color:index ==  Provider.of<BanerScrollState>(context).currentIndex ? MusicStore.Theme.of(context).tabItemSelectedColor: Color.fromRGBO(223, 230, 235, 1.0)
+              color:index ==  Provider.of<BanerScrollState>(context).currentIndex ? MusicStore.Theme(context).tabItemSelectedColor: Color.fromRGBO(223, 230, 235, 1.0)
           ),
         );
       },

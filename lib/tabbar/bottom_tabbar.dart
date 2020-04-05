@@ -88,8 +88,8 @@ class _BottomTabarState extends State<BottomTabar> with TickerProviderStateMixin
   List<Widget> _createMusicTableItem(){
 
     ColorTween colorTween = ColorTween(
-      begin:  MusicStore.Theme.of(context).tabItemNormalColor,
-      end:  MusicStore.Theme.of(context).tabItemSelectedColor
+      begin:  MusicStore.Theme(context).tabItemNormalColor,
+      end:  MusicStore.Theme(context).tabItemSelectedColor
     );
 
     List<MusicTabItem> _list  = List<MusicTabItem>.generate(_itemList.length, (int index){
@@ -101,8 +101,8 @@ class _BottomTabarState extends State<BottomTabar> with TickerProviderStateMixin
         animationController: _animationControllers[index],
         title: _itemList[index]["title"],
         iconData: _itemList[index]["iconData"],
-        normalColor: MusicStore.Theme.of(context).tabItemNormalColor,
-        selectedColor:MusicStore.Theme.of(context).tabItemSelectedColor,
+        normalColor: MusicStore.Theme(context).tabItemNormalColor,
+        selectedColor:MusicStore.Theme(context).tabItemSelectedColor,
         colorTween: colorTween,
         onTap: (index){
           if (widget.onTap != null)
@@ -119,7 +119,7 @@ class _BottomTabarState extends State<BottomTabar> with TickerProviderStateMixin
     final double additionalBottomPadding = math.max(MediaQuery.of(context).padding.bottom, 0.0);
 
     return Material(
-      color: MusicStore.Theme.of(context).theme,
+      color: MusicStore.Theme(context).theme,
       child: ConstrainedBox(
 
           constraints:BoxConstraints(minHeight: kBottomNavigationBarHeight+additionalBottomPadding),

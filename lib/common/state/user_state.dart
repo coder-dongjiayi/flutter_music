@@ -19,7 +19,7 @@ class UserSate extends ChangeNotifier{
     MusicGlobal.logout();
     notifyListeners();
   }
-    UserSate of(context){
+   static UserSate of(context){
 
         return Provider.of<UserSate>(context,listen: false);
     }

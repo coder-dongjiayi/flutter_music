@@ -13,7 +13,7 @@ class _NewLibraryPageState extends State<NewLibraryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MusicStore.Theme.of(context).theme,
+      backgroundColor: MusicStore.Theme(context).theme,
       appBar: MusicAppBar(
         leftIconData: Icons.arrow_back_ios,
         rightIconData: Icons.check,
@@ -45,16 +45,16 @@ class _NewLibraryPageState extends State<NewLibraryPage> {
       decoration: BoxDecoration(
 
           borderRadius: BorderRadius.circular(15),
-          border: Border.all(color: MusicStore.Theme.of(context).theme,width: 1),
+          border: Border.all(color: MusicStore.Theme(context).theme,width: 1),
           color: MusicStore.Theme
-              .of(context)
+              (context)
               .theme,
         boxShadow: MusicStore.boxShow(context, -10, 10),
           gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-               MusicStore.Theme.of(context).bottomShadowColor,
+               MusicStore.Theme(context).bottomShadowColor,
 
                 Colors.white
               ],
@@ -63,7 +63,7 @@ class _NewLibraryPageState extends State<NewLibraryPage> {
           )
       ),
       child: Icon(Icons.play_arrow, size: 20, color: MusicStore.Theme
-          .of(context)
+          (context)
           .titleColor),
     );
   }

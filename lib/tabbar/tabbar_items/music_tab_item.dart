@@ -50,7 +50,7 @@ class MusicTabItem extends StatelessWidget {
         padding: EdgeInsets.fromLTRB(15, 8, 15, 8),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: MusicStore.Theme.of(context).theme,
+            color: MusicStore.Theme(context).theme,
             boxShadow: MusicStore.boxShow(context, -2, 5)
         ),
         child: Row(
@@ -61,7 +61,7 @@ class MusicTabItem extends StatelessWidget {
                 child: Text(
                     "${title}",
                     style: TextStyle(
-                      color:MusicStore.Theme.of(context).tabItemSelectedColor,
+                      color:MusicStore.Theme(context).tabItemSelectedColor,
                       fontSize: 14,
                     ),
                     textAlign:TextAlign.center,

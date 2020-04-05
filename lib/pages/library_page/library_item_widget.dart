@@ -128,7 +128,7 @@ class _LibraryItemWidgetState extends State<LibraryItemWidget> with TickerProvid
         padding: EdgeInsets.only(left: 10, right: 10, bottom: 10, top: 10),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: MusicStore.Theme.of(context).theme,
+            color: MusicStore.Theme(context).theme,
             boxShadow: MusicStore.boxShow(context,-10, 10)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -139,7 +139,7 @@ class _LibraryItemWidgetState extends State<LibraryItemWidget> with TickerProvid
               child: _itemTitle(context, name, desc),
             ),
             Icon(Icons.keyboard_arrow_right,
-                size: 20, color: MusicStore.Theme.of(context).titleColor)
+                size: 20, color: MusicStore.Theme(context).titleColor)
           ],
         ),
       );
@@ -152,7 +152,7 @@ class _LibraryItemWidgetState extends State<LibraryItemWidget> with TickerProvid
       height: ScreenAdapter.setHeight(140),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
-          color: MusicStore.Theme.of(context).theme,
+          color: MusicStore.Theme(context).theme,
           boxShadow: MusicStore.boxShow(context, -10, 10)),
       child: ClipRRect(
           borderRadius: BorderRadius.circular(5),
@@ -176,7 +176,7 @@ class _LibraryItemWidgetState extends State<LibraryItemWidget> with TickerProvid
               style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w500,
-                  color: MusicStore.Theme.of(context).titleColor)),
+                  color: MusicStore.Theme(context).titleColor)),
           Padding(
               padding: EdgeInsets.only(top: 3, right: 60),
               child: Text(
@@ -185,7 +185,7 @@ class _LibraryItemWidgetState extends State<LibraryItemWidget> with TickerProvid
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                     fontSize: 12,
-                    color: MusicStore.Theme.of(context).subtTitleColor),
+                    color: MusicStore.Theme(context).subtTitleColor),
               ))
         ],
       ),

@@ -70,7 +70,7 @@ class _LoginPasswordPageState extends State<LoginPasswordPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(widget.nickName + " 你好",style: TextStyle(color: MusicStore.Theme.of(context).subtTitleColor,fontSize: 12),),
+            Text(widget.nickName + " 你好",style: TextStyle(color: MusicStore.Theme(context).subtTitleColor,fontSize: 12),),
 
             _password(context),
             MusicSubmitButton<UserModel>(
@@ -90,12 +90,12 @@ class _LoginPasswordPageState extends State<LoginPasswordPage> {
                   FlutterFlexibleToast.showToast(
                       message: "欢迎来到iMusic",
                       toastLength: Toast.LENGTH_SHORT,
-                      toastGravity: ToastGravity.TOP,
+                      toastGravity: ToastGravity.CENTER,
                       backgroundColor: Colors.greenAccent,
                       icon: ICON.SUCCESS,
                       timeInSeconds: 5);
 
-                  MusicStore.User.of(context).setUser(userModel);
+                  MusicStore.User(context).setUser(userModel);
 
                   Navigator.of(context).popUntil(ModalRoute.withName(RouterPageName.initialRoute));
                 }
@@ -126,7 +126,7 @@ class _LoginPasswordPageState extends State<LoginPasswordPage> {
       decoration: BoxDecoration(
 
           border: Border(
-              bottom: BorderSide(width: 1,color: MusicStore.Theme.of(context).bottomShadowColor)
+              bottom: BorderSide(width: 1,color: MusicStore.Theme(context).topShadowColor)
           )
       ),
       child: TextField(
@@ -134,11 +134,11 @@ class _LoginPasswordPageState extends State<LoginPasswordPage> {
         controller: editingController,
           autofocus: true,
           obscureText:true,
-          style: TextStyle(fontSize: 17,color: MusicStore.Theme.of(context).textFieldColor),
+          style: TextStyle(fontSize: 18,color: MusicStore.Theme(context).textFieldColor),
 
           decoration:InputDecoration(
               hintText: "请输入密码",
-              hintStyle: TextStyle(color: MusicStore.Theme.of(context).textFieldColor),
+              hintStyle: TextStyle(color: MusicStore.Theme(context).textFieldColor),
               border: InputBorder.none
           )
       ),

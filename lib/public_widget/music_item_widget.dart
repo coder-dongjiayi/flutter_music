@@ -51,7 +51,7 @@ class MusicItemWidget extends StatelessWidget {
       margin: EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 20),
       decoration:
           BoxDecoration(
-              color: MusicStore.Theme.of(context).theme,
+              color: MusicStore.Theme(context).theme,
               boxShadow: _selected == false ? null : MusicStore.boxShow(context, -10,10)
 
           ),
@@ -86,7 +86,7 @@ class MusicItemWidget extends StatelessWidget {
         padding: EdgeInsets.fromLTRB(2, 2, 2, 2),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color:  MusicStore.Theme.of(context).topShadowColor,
+            color:  MusicStore.Theme(context).topShadowColor,
             boxShadow: MusicStore.boxShow(context, -10, 10)),
         child: ClipRRect(
             borderRadius: BorderRadius.circular(10),
@@ -109,7 +109,7 @@ class MusicItemWidget extends StatelessWidget {
             style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w500,
-                color: MusicStore.Theme.of(context).titleColor),
+                color: MusicStore.Theme(context).titleColor),
             overflow: TextOverflow.ellipsis,
           ),
           Padding(
@@ -120,7 +120,7 @@ class MusicItemWidget extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                     fontSize: 10,
-                    color: MusicStore.Theme.of(context).subtTitleColor),
+                    color: MusicStore.Theme(context).subtTitleColor),
               ))
         ],
       ),

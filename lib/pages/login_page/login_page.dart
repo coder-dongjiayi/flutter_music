@@ -60,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text("请使用网易云音乐注册的手机号进行登录",style: TextStyle(color: MusicStore.Theme.of(context).subtTitleColor,fontSize: 12),),
+              Text("请使用网易云音乐注册的手机号进行登录",style: TextStyle(color: MusicStore.Theme(context).subtTitleColor,fontSize: 12),),
 
               _mobile(context),
 
@@ -108,25 +108,27 @@ class _LoginPageState extends State<LoginPage> {
       decoration: BoxDecoration(
 
           border: Border(
-              bottom: BorderSide(width: 1,color: MusicStore.Theme.of(context).bottomShadowColor)
+              bottom: BorderSide(width: 1,color: MusicStore.Theme(context).topShadowColor)
           )
       ),
       child: Row(
         children: <Widget>[
           Padding(
             padding: EdgeInsets.only(right: 10),
-            child:  Text("+86",style: TextStyle(fontSize: 20,color: MusicStore.Theme.of(context).textFieldColor),),
+            child:  Text("+86",style: TextStyle(fontSize: 20,color: MusicStore.Theme(context).textFieldColor),),
           ),
           Expanded(
             flex: 1,
             child: TextField(
                 controller: editingController,
+
                 autofocus: true,
-                style: TextStyle(fontSize: 17,color: MusicStore.Theme.of(context).textFieldColor),
+                style: TextStyle(fontSize: 18,color: MusicStore.Theme(context).textFieldColor),
                 keyboardType: TextInputType.number,
                 decoration:InputDecoration(
+
                     hintText: "请输入手机号",
-                    hintStyle: TextStyle(color: MusicStore.Theme.of(context).textFieldColor),
+                    hintStyle: TextStyle(color: MusicStore.Theme(context).textFieldColor),
                     border: InputBorder.none
                 )
             ),

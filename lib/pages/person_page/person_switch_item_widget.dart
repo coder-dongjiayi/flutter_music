@@ -36,14 +36,14 @@ class _PersonSwitchItemWidgetState extends State<PersonSwitchItemWidget> {
         padding: EdgeInsets.fromLTRB(20, 5, 10, 5),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: MusicStore.Theme.of(context).theme,
+            color: MusicStore.Theme(context).theme,
             boxShadow:MusicStore.boxShow(context, -10, 10)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
           children: <Widget>[
 
-            Text(widget.title ,style: TextStyle(color: MusicStore.Theme.of(context).titleColor),),
+            Text(widget.title ,style: TextStyle(color: MusicStore.Theme(context).titleColor),),
 
 
               CupertinoSwitch(

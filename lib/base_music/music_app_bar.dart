@@ -55,7 +55,7 @@ class _MusicAppBarState extends State<MusicAppBar> {
     return SafeArea(
       child: Container(
         padding: EdgeInsets.only(left: 20,right: 20),
-        color: MusicStore.Theme.of(context).theme,
+        color: MusicStore.Theme(context).theme,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: _list
@@ -90,21 +90,20 @@ class _MusicAppBarState extends State<MusicAppBar> {
         }
       },
       child: Container(
+        width: ScreenAdapter.setWidth(80),
+        height: ScreenAdapter.setHeight(80),
+        margin: EdgeInsets.fromLTRB(6, 6, 6, 6),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(40),
-          color: MusicStore.Theme.of(context).theme,
-          boxShadow: MusicStore.boxShow(context, -10, 10)
+          color: MusicStore.Theme(context).theme,
+          boxShadow: MusicStore.boxShow(context, -5, 5)
         ),
-        child: SizedBox(
-          width: ScreenAdapter.setWidth(80),
-          height: ScreenAdapter.setHeight(80),
-          child: ClipRRect(
-              borderRadius: BorderRadius.circular(40),
-              child: CachedNetworkImage(
-                imageUrl: widget.rightImageURL,
-                fit: BoxFit.cover,
-              )),
-        ),
+        child: ClipRRect(
+            borderRadius: BorderRadius.circular(37),
+            child: CachedNetworkImage(
+              imageUrl: widget.rightImageURL,
+              fit: BoxFit.cover,
+            ))
       )
     );
   }
@@ -127,6 +126,6 @@ class _MusicAppBarState extends State<MusicAppBar> {
 
 
   Widget _title(){
-    return Text("${widget.title}",style: TextStyle(fontSize: 25,color: MusicStore.Theme.of(context).titleColor,fontWeight: FontWeight.w500),);
+    return Text("${widget.title}",style: TextStyle(fontSize: 25,color: MusicStore.Theme(context).titleColor,fontWeight: FontWeight.w500),);
   }
 }

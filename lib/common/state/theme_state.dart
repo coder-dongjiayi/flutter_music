@@ -73,7 +73,8 @@ class ThemeState extends ChangeNotifier{
 
 
 
-   ThemeState of(context){
+
+  static ThemeState of(context){
 
         return Provider.of<ThemeState>(context,listen: false);
   }

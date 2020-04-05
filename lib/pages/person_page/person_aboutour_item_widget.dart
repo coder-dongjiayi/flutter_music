@@ -8,14 +8,14 @@ class PersonAboutourItemWidget extends StatelessWidget {
         padding: EdgeInsets.fromLTRB(20, 12, 10, 12),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: MusicStore.Theme.of(context).theme,
+            color: MusicStore.Theme(context).theme,
             boxShadow: MusicStore.boxShow(context, -10,10)
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Text("关于我们" ,style: TextStyle(color: MusicStore.Theme.of(context).titleColor),),
-            Icon(Icons.keyboard_arrow_right,color: MusicStore.Theme.of(context).titleColor,)
+            Text("关于我们" ,style: TextStyle(color: MusicStore.Theme(context).titleColor),),
+            Icon(Icons.keyboard_arrow_right,color: MusicStore.Theme(context).titleColor,)
           ],
         )
     );

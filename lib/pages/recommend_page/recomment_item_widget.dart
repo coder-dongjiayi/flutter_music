@@ -80,7 +80,7 @@ class CommentItemWidget extends StatelessWidget {
       decoration: BoxDecoration(
         
           borderRadius: BorderRadius.circular(10),
-          color:  MusicStore.Theme.of(context).topShadowColor,
+          color:  MusicStore.Theme(context).topShadowColor,
           boxShadow: MusicStore.boxShow(context, -10, 10)
       ),
       child: AspectRatio(

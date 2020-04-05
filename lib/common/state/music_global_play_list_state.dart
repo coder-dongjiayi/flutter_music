@@ -28,7 +28,7 @@ class MusicGlobalPlayListState extends ChangeNotifier{
 
 
 
-  List<TrackItemModel> get currentPlayList => _currentPlayList;
+  List<TrackItemModel> get currentPlayList => _currentPlayList == null ? [] : _currentPlayList;
 
   TrackItemModel get currentTrackItem => _currentPlayList[_currentIndex];
 

@@ -17,7 +17,7 @@ class _PersonPageState extends State<PersonPage> {
 
     return MusicScaffold(
       appBar: MusicAppBar(
-        title: MusicStore.User.of(context).user.nickname,
+        title: MusicStore.User(context).user.nickname,
         rightIconData: Icons.chevron_left,
         rightOnTap: (){
         Navigator.of(context).pop();
@@ -38,12 +38,12 @@ class _PersonPageState extends State<PersonPage> {
                 margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
                 title: "触摸反馈",
               ),
-              _text("主题模式默认会随着操作系统的变化而变化，您也可以手动改变主题模式"),
+              _text("主题模式并不会跟随系统的变化而变化，需要您手动进行设置"),
               PersonSwitchItemWidget(
                 onChanged: (state){
-                  MusicStore.Theme.of(context).switchTheme();
+                  MusicStore.Theme(context).switchTheme();
                 },
-                value: MusicStore.Theme.of(context).isDarkTheme,
+                value: MusicStore.Theme(context).isDarkTheme,
                 margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
                 title: "深色模式",
               ),
@@ -70,7 +70,7 @@ class _PersonPageState extends State<PersonPage> {
       padding: EdgeInsets.fromLTRB(25, 50, 20, 0),
       child: Text("$text",
         textAlign: TextAlign.left,
-        style: TextStyle(color: MusicStore.Theme.of(context).subtTitleColor,fontSize: 11),
+        style: TextStyle(color: MusicStore.Theme(context).subtTitleColor,fontSize: 11),
       ),
     );
   }
@@ -82,7 +82,7 @@ class _PersonPageState extends State<PersonPage> {
         },
         successCallback: (succcess){
           if(succcess == 1){
-            MusicStore.User.of(context).logoOut();
+            MusicStore.User(context).logoOut();
 
             MusicGlobalPlayListState.musicPlayState(context).music_clear();
 

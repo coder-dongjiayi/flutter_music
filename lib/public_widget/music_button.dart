@@ -75,22 +75,22 @@ class _MusicButtonState extends State<MusicButton> {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           color: MusicStore.Theme
-              .of(context)
+              (context)
               .theme,
           boxShadow: widget.showLayer == false ? null : MusicStore.boxShow(context, -5, 5),
         gradient: widget.selected == false ? null : LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            MusicStore.Theme.of(context).bottomShadowColor,
-            MusicStore.Theme.of(context).topShadowColor
+            MusicStore.Theme(context).bottomShadowColor,
+            MusicStore.Theme(context).topShadowColor
           ],
 
         )
       ),
 
       child: widget.imageURL != null ? _image() : Icon(_iconData(), size: widget.size, color: MusicStore.Theme
-          .of(context)
+          (context)
           .titleColor),
     );
   }

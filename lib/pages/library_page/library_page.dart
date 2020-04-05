@@ -42,18 +42,30 @@ class _LibraryPageState extends State<LibraryPage> with AutomaticKeepAliveClient
    child: Builder(
      builder: (context){
 
-       return MusicScaffold(
-         showFloatingActionButton: false,
-         appBar: MusicAppBar(
-           title: "歌单",
-           rightIconData: Icons.edit,
-           rightSelectedIconData: Icons.delete_sweep ,
-           rightOnTap: (){
-             LibraryListState.libraryState(context).deleteAction();
 
-           },
-         ),
-         body: MusicStore.User.of(context).isLogin == false ? _unLogin() : LibraryListWidget() ,
+       return Selector<UserSate,bool>(
+         selector: (context,userState){
+           return  userState.isLogin;
+         },
+         shouldRebuild: (pre,next){
+           return pre != next;
+         },
+         builder: (context,isLogin,_){
+
+           return MusicScaffold(
+             showFloatingActionButton: false,
+             appBar: MusicAppBar(
+               title: "歌单",
+               rightIconData: isLogin == false ? null : Icons.edit,
+               rightSelectedIconData: Icons.delete_sweep ,
+               rightOnTap: (){
+                 LibraryListState.libraryState(context).deleteAction();
+
+               },
+             ),
+             body: isLogin  == false ? _unLogin() : LibraryListWidget() ,
+           );
+         },
        );
 
      },

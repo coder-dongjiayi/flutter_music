@@ -24,7 +24,7 @@ class LibraryDeleteButtonWidget extends StatelessWidget {
   }
   Widget _deleteButton(BuildContext context){
     return Container(
-      color: MusicStore.Theme.of(context).theme,
+      color: MusicStore.Theme(context).theme,
 
       alignment: Alignment.centerLeft,
       width: double.infinity,
@@ -59,15 +59,15 @@ class LibraryDeleteButtonWidget extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(ScreenAdapter.setWidth(15)),
             color: MusicStore.Theme
-                .of(context)
+                (context)
                 .theme,
             boxShadow: MusicStore.boxShow(context,-3, 3),
             gradient:LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                MusicStore.Theme.of(context).bottomShadowColor,
-                MusicStore.Theme.of(context).topShadowColor
+                MusicStore.Theme(context).bottomShadowColor,
+                MusicStore.Theme(context).topShadowColor
               ],
 
             )

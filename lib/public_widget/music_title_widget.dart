@@ -19,8 +19,8 @@ class MusicTitleWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Text("$title",
-              style: TextStyle(color: MusicStore.Theme.of(context).titleColor,fontSize: 17)),
-          Icon(Icons.arrow_forward,size: 20,color: MusicStore.Theme.of(context).goldenColor)
+              style: TextStyle(color: MusicStore.Theme(context).titleColor,fontSize: 17)),
+          Icon(Icons.arrow_forward,size: 20,color: MusicStore.Theme(context).goldenColor)
         ],
       ),
     );

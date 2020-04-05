@@ -21,14 +21,14 @@ class LibraryEmptyWidget extends StatelessWidget {
   }
 
   Widget _text1(BuildContext context){
-    return Text("欢迎来到Muisc",style: TextStyle(fontSize: 14,color: MusicStore.Theme.of(context).titleColor),);
+    return Text("欢迎来到Muisc",style: TextStyle(fontSize: 14,color: MusicStore.Theme(context).titleColor),);
 
   }
   Widget _text2(BuildContext context){
 
     return Padding(
       padding: EdgeInsets.only(top: 5,bottom: 30),
-      child: Text("开始创建你的歌单吧",style: TextStyle(fontSize: 12,color: MusicStore.Theme.of(context).titleColor),),
+      child: Text("开始创建你的歌单吧",style: TextStyle(fontSize: 12,color: MusicStore.Theme(context).titleColor),),
     );
 
   }
@@ -47,11 +47,11 @@ class LibraryEmptyWidget extends StatelessWidget {
 
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: MusicStore.Theme.of(context).theme,
+            color: MusicStore.Theme(context).theme,
             boxShadow: MusicStore.boxShow(context, -10,10)
 
         ),
-        child: Text("创建歌单",style: TextStyle(fontSize: 14,color: MusicStore.Theme.of(context).titleColor),),
+        child: Text("创建歌单",style: TextStyle(fontSize: 14,color: MusicStore.Theme(context).titleColor),),
       ),
     );
   }

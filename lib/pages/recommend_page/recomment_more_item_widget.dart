@@ -17,7 +17,7 @@ class CommentMoreItemWidget extends StatelessWidget {
       padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: MusicStore.Theme.of(context).theme,
+            color: MusicStore.Theme(context).theme,
             boxShadow: MusicStore.boxShow(context, -10, 10)
 
         ),
@@ -26,9 +26,9 @@ class CommentMoreItemWidget extends StatelessWidget {
         children: <Widget>[
           Expanded(
             flex: 1,
-            child: Text("${title}",style: TextStyle(fontSize: 14,color: MusicStore.Theme.of(context).titleColor),),
+            child: Text("${title}",style: TextStyle(fontSize: 14,color: MusicStore.Theme(context).titleColor),),
           ),
-          Icon(Icons.keyboard_arrow_right,size: 20,color: MusicStore.Theme.of(context).titleColor)
+          Icon(Icons.keyboard_arrow_right,size: 20,color: MusicStore.Theme(context).titleColor)
         ],
       ),
     );

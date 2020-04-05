@@ -66,7 +66,7 @@ class _MusicScaffoldState extends State<MusicScaffold>
 
 
     return Scaffold(
-      backgroundColor: MusicStore.Theme.of(context).theme,
+      backgroundColor: MusicStore.Theme(context).theme,
       appBar: widget.appBar,
       body: SafeArea(
         child: Padding(

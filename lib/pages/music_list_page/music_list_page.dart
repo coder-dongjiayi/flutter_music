@@ -54,7 +54,7 @@ class _MusicListPageState extends State<MusicListPage>  with TickerProviderState
 
 
     return Scaffold(
-      backgroundColor: MusicStore.Theme.of(context).theme,
+      backgroundColor: MusicStore.Theme(context).theme,
       appBar: MusicAppBar(
         title: "播放列表",
         leftIconData: Icons.keyboard_arrow_down,

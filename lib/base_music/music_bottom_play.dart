@@ -46,8 +46,8 @@ class _MusicBottomPlayState extends State<MusicBottomPlay> with TickerProviderSt
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: MusicStore.Theme.of(context).theme,
-        border: Border(top: BorderSide(color: MusicStore.Theme.of(context).topShadowColor,width: 0.5))
+        color: MusicStore.Theme(context).theme,
+        border: Border(top: BorderSide(color: MusicStore.Theme(context).topShadowColor,width: 0.5))
       ),
       padding: EdgeInsets.only(top: 5,bottom: 5),
       margin: EdgeInsets.only(bottom: 40),
@@ -86,7 +86,7 @@ class _MusicBottomPlayState extends State<MusicBottomPlay> with TickerProviderSt
         padding: EdgeInsets.only(right: 20),
         child: Icon(Icons.format_list_bulleted,
             size: ScreenAdapter.setHeight(60),
-            color: MusicStore.Theme.of(context).titleColor),
+            color: MusicStore.Theme(context).titleColor),
       ),
     );
 
@@ -117,7 +117,7 @@ class _MusicBottomPlayState extends State<MusicBottomPlay> with TickerProviderSt
             padding: EdgeInsets.only(right: 10, left: 10),
             child:  Icon( audioState == AudioPlayerState.PAUSED ? Icons.play_circle_outline : Icons.pause ,
                 size: ScreenAdapter.setHeight(70),
-                color: MusicStore.Theme.of(context).titleColor),
+                color: MusicStore.Theme(context).titleColor),
           ),
         );
       },
@@ -157,7 +157,7 @@ class _MusicBottomPlayState extends State<MusicBottomPlay> with TickerProviderSt
           imageUrl: "$imageUrl",
           fit: BoxFit.cover,
           placeholder: (context,url){
-            return Icon(Icons.music_note,size: ScreenAdapter.setWidth(70),color:MusicStore.Theme.of(context).bottomShadowColor);
+            return Icon(Icons.music_note,size: ScreenAdapter.setWidth(70),color:MusicStore.Theme(context).bottomShadowColor);
           },
         )
 
@@ -170,7 +170,7 @@ class _MusicBottomPlayState extends State<MusicBottomPlay> with TickerProviderSt
       child: Text(
         "$title",
         maxLines: 2,
-        style: TextStyle(color: MusicStore.Theme.of(context).titleColor),),
+        style: TextStyle(color: MusicStore.Theme(context).titleColor),),
     );
   }
 
