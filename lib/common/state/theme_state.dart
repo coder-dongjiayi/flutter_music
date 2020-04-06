@@ -1,5 +1,6 @@
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_music/common/music_global.dart';
 
@@ -55,6 +56,24 @@ class ThemeState extends ChangeNotifier{
     return MusicGlobal.goldenColor;
   }
 
+  Color get sliderColor{
+    if(theme == MusicGlobal.light){
+      return Color.fromRGBO(151, 160, 235, 1.0);
+    }
+    return Colors.red;
+  }
+  Color get sliderThemeColor{
+    if(theme == MusicGlobal.light){
+      return Color.fromRGBO(151, 160, 235, 1.0);
+    }
+    return Colors.white;
+  }
+  Color get sliderOverlayColor{
+    if(theme == MusicGlobal.light){
+      return Colors.white;
+    }
+    return Colors.red;
+  }
   Color get subtTitleColor =>  MusicGlobal.subTitleColor;
 
   Color get goldenColor =>  MusicGlobal.goldenColor;

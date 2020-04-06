@@ -16,18 +16,19 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget{
         padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
         margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-          color: MusicStore.Theme(context).theme,
-            boxShadow: MusicStore.boxShow(context, -5, 5),
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                MusicStore.Theme(context).bottomShadowColor,
-                MusicStore.Theme(context).topShadowColor
-              ],
-
-            )
+          color: Colors.transparent,
+          boxShadow: [
+             BoxShadow(
+              color: MusicStore.Theme(context).topShadowColor,
+              offset: const Offset(0.0, 0.0),
+            ),
+             BoxShadow(
+              color: MusicStore.Theme(context).theme,
+              offset: const Offset(0.0, 0.0),
+              spreadRadius: -2.0,
+              blurRadius: 2.0,
+            ),
+          ],
         ),
         child: TextField(
             decoration:InputDecoration(

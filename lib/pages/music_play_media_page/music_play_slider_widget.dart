@@ -66,11 +66,11 @@ class _MusicPlaySliderWidgetState extends State<MusicPlaySliderWidget> {
     return SliderTheme(
 
       data: SliderTheme.of(context).copyWith(
-        activeTrackColor: Color.fromRGBO(151, 160, 235, 1.0),
+        activeTrackColor: MusicStore.Theme(context).sliderColor,
         inactiveTrackColor: MusicStore.Theme(context).bottomShadowColor,
         trackHeight: 3,
-        overlayColor:Colors.white,
-        thumbColor:Color.fromRGBO(151, 160, 235, 1.0),
+        overlayColor:MusicStore.Theme(context).sliderOverlayColor,
+        thumbColor:MusicStore.Theme(context).sliderThemeColor,
         overlayShape:RoundSliderOverlayShape(//可继承SliderComponentShape自定义形状
           overlayRadius: 10, //滑块外圈大小
 
