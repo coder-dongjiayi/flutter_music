@@ -28,6 +28,9 @@ class _BrowsePageState extends State<BrowsePage> with AutomaticKeepAliveClientMi
       appBar: MusicAppBar(
         title: "浏览",
         rightIconData: Icons.search,
+        rightOnTap: (){
+          Navigator.of(context).pushNamed(RouterPageName.SearchPage);
+        },
       ),
       body: FutureBuilderWidget<List<TrackItemModel>>(
         future:_future,

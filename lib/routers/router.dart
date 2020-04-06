@@ -1,4 +1,5 @@
 
+
 import 'package:flutter/material.dart';
 import 'package:flutter_music/pages/login_page/login_password_page.dart';
 import 'package:flutter_music/tabbar/tababr_page.dart';
@@ -12,6 +13,7 @@ import 'package:flutter_music/pages/library_page/library_page.dart';
 import 'package:flutter_music/pages/recommend_page/recommend_page.dart';
 import 'package:flutter_music/pages/browse_page/browse_page.dart';
 import 'package:flutter_music/pages/person_page/person_page.dart';
+import 'package:flutter_music/pages/search_page/search_page.dart';
 class MusicRouter{
 
   static final String initialRoute = RouterPageName.initialRoute;
@@ -37,7 +39,10 @@ class MusicRouter{
 
     RouterPageName.LoginPasswordPage:(context) => LoginPasswordPage(),
 
-    RouterPageName.PersonPage:(context) => PersonPage()
+    RouterPageName.PersonPage:(context) => PersonPage(),
+
+    RouterPageName.SearchPage:(context) => SearchPage()
+
   };
 
 

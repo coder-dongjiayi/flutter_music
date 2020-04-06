@@ -32,4 +32,7 @@ class RouterPageName{
 
   //个人中心
   static const String PersonPage = "/person_page";
+
+  //搜索页面
+  static const String SearchPage = "/search_page";
 }

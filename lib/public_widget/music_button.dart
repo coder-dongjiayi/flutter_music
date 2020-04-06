@@ -77,7 +77,7 @@ class _MusicButtonState extends State<MusicButton> {
           color: MusicStore.Theme
               (context)
               .theme,
-          boxShadow: widget.showLayer == false ? null : MusicStore.boxShow(context, -5, 5),
+          boxShadow: widget.showLayer == false ? null : MusicStore.boxShow(context, -3, 3),
         gradient: widget.selected == false ? null : LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
