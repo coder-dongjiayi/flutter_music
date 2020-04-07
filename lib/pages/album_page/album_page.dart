@@ -62,7 +62,7 @@ class _AlbumPageState extends State<AlbumPage> {
                 return MusicItemWidget(
                   onTap: (index){
 
-                    MusicGlobalPlayListState.musicPlayState(context).updatePlayList(tracks, index);
+                    MusicStore.MusicPlayList(context).updatePlayList(tracks, index);
                     Navigator.of(context).pushNamed(
                             RouterPageName.MusicPlayMeidaPage
                     );

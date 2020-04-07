@@ -84,7 +84,7 @@ class _PersonPageState extends State<PersonPage> {
           if(succcess == 1){
             MusicStore.User(context).logoOut();
 
-            MusicGlobalPlayListState.musicPlayState(context).music_clear();
+            MusicStore.MusicPlayList(context).music_clear();
 
             Navigator.of(context).pop();
           }else{

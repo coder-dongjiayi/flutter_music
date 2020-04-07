@@ -55,7 +55,7 @@ class _BrowsePageState extends State<BrowsePage> with AutomaticKeepAliveClientMi
                 return MusicItemWidget(
                   onTap: (_){
 
-                    MusicGlobalPlayListState.musicPlayState(context).updatePlayList(snapshot.data, index-2);
+                    MusicStore.MusicPlayList(context).updatePlayList(snapshot.data, index-2);
 
                     Navigator.of(context).pushNamed(
                         RouterPageName.MusicPlayMeidaPage

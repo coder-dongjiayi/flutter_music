@@ -59,7 +59,7 @@ class FutureBuilderWidget<T> extends StatelessWidget {
 
 
     return Center(
-      child: _fieldBuilder == null ?
+      child:  _fieldBuilder == null ?
           Padding(
             padding: EdgeInsets.only(left: 20,right: 20),
             child: Text("请求失败:"+snapshot.error.toString(),style: TextStyle(color: Colors.red),),
@@ -73,6 +73,7 @@ class FutureBuilderWidget<T> extends StatelessWidget {
     return  Center(
 
       child: activityIndicator != null ? activityIndicator : CupertinoActivityIndicator(
+
 
         radius: 20,
       ),

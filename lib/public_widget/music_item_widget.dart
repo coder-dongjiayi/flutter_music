@@ -38,12 +38,12 @@ class MusicItemWidget extends StatelessWidget {
   }
 
   Widget _musicItem(context) {
-    MusicGlobalPlayListState musicGlobalPlayListState = MusicGlobalPlayListState.musicPlayState(context);
+    MusicGlobalPlayListState musicGlobalPlayListState = MusicStore.MusicPlayList(context);
 
 
     bool _selected = false;
 
-    if(musicGlobalPlayListState.currentPlayList != null && musicGlobalPlayListState.currentPlayList.length > 0){
+    if(MusicStore.MusicPlayList(context).currentPlayList.length > 0){
      _selected = musicGlobalPlayListState.currentTrackItem.id == id;
     }
 

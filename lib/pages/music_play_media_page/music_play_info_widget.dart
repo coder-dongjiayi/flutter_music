@@ -41,7 +41,7 @@ class MusicPlayInfoWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     ScreenAdapter.init(context);
 
-    List<TrackItemModel>  _tracks = MusicGlobalPlayListState.musicPlayState(context).currentPlayList;
+    List<TrackItemModel>  _tracks =MusicStore.MusicPlayList(context).currentPlayList;
 
     double _containerHeight =  ScreenAdapter.getScreenWidth()/3.0
         + _playCovermarginTop *2
@@ -57,11 +57,11 @@ class MusicPlayInfoWidget extends StatelessWidget {
       child: PageView.builder(
           onPageChanged: (index){
 
-            if(index < MusicGlobalPlayListState.musicPlayState(context).currentIndex){
-              MusicGlobalPlayListState.musicPlayState(context).music_control_previous();
+            if(index < MusicStore.MusicPlayList(context).currentIndex){
+              MusicStore.MusicPlayList(context).music_control_previous();
 
-            }else if(index > MusicGlobalPlayListState.musicPlayState(context).currentIndex){
-              MusicGlobalPlayListState.musicPlayState(context).music_control_next();
+            }else if(index > MusicStore.MusicPlayList(context).currentIndex){
+              MusicStore.MusicPlayList(context).music_control_next();
             }
 
           },

@@ -241,10 +241,9 @@ class MusicGlobalPlayListState extends ChangeNotifier{
 
 
 
-
-
-  static MusicGlobalPlayListState musicPlayState (BuildContext context){
+  static MusicGlobalPlayListState of (BuildContext context){
     return  Provider.of<MusicGlobalPlayListState>(context,listen: false);
   }
+
 
 }

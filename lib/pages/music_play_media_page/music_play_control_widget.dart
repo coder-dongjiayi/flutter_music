@@ -2,7 +2,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_music/common/state/music_global_play_list_state.dart';
 import 'package:flutter_music/public_widget/music_button.dart';
-
+import 'package:flutter_music/common/music_store.dart';
 typedef GestureTapCallback = void Function();
 
 typedef GestureStateTapCallback = void Function(bool selected);
@@ -24,7 +24,7 @@ class MusicPlayControlWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MusicGlobalPlayListState musicGlobalPlayListState = MusicGlobalPlayListState.musicPlayState(context);
+    MusicGlobalPlayListState musicGlobalPlayListState = MusicStore.MusicPlayList(context);
 
     return Padding(
       padding: EdgeInsets.only(top: 30),

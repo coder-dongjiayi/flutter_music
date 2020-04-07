@@ -83,12 +83,12 @@ class _MusicPlaySliderWidgetState extends State<MusicPlaySliderWidget> {
       ),
       child: Selector<MusicGlobalPlayListState,double>(
         builder: (context,progress,_){
-        MusicGlobalPlayListState musicGlobalPlayListState =   MusicGlobalPlayListState.musicPlayState(context);
+        MusicGlobalPlayListState musicGlobalPlayListState =  MusicStore.MusicPlayList(context);
           return  Slider(
-            onChanged: (double value) {
-
+            onChangeEnd: (double value){
               musicGlobalPlayListState.music_seek(value);
             },
+           
             value: progress,
           );
         },

@@ -23,7 +23,7 @@ class _MusicPlayMeidaPageState extends State<MusicPlayMeidaPage>  with TickerPro
   void initState() {
     // TODO: implement initState
     super.initState();
-    List<TrackItemModel> trackList =   MusicGlobalPlayListState.musicPlayState(context).currentPlayList;
+    List<TrackItemModel> trackList =  MusicStore.MusicPlayList(context).currentPlayList;
 
     _future = MusicApi.musicMp3Item(trackList);
 
@@ -49,7 +49,8 @@ class _MusicPlayMeidaPageState extends State<MusicPlayMeidaPage>  with TickerPro
               future: _future,
               successBuilder: (BuildContext context, AsyncSnapshot<List<TrackItemModel>> snapshot){
                   Widget musicBody = MusicPlayBodyWidget();
-                MusicGlobalPlayListState.musicPlayState(context).music_play();
+                  MusicStore.MusicPlayList(context).music_play();
+
                 return musicBody;
               },
             )

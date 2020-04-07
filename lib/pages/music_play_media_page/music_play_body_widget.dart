@@ -29,7 +29,7 @@ class _MusicPlayBodyWidget extends State<MusicPlayBodyWidget> with TickerProvide
   void initState() {
     // TODO: implement initState
     super.initState();
-    _musicGlobalPlayListState =  MusicGlobalPlayListState.musicPlayState(context);
+    _musicGlobalPlayListState = MusicStore.MusicPlayList(context);
 
 
     _animationController = AnimationController(duration: Duration(milliseconds: 200),vsync: this)..forward();
@@ -128,7 +128,7 @@ class _MusicPlayBodyWidget extends State<MusicPlayBodyWidget> with TickerProvide
   /// 播放控制 封面图
   Widget _playMusicInfo(){
 
-    MusicGlobalPlayListState musicGlobalPlayListState =   MusicGlobalPlayListState.musicPlayState(context);
+
     return  Padding(
       padding: EdgeInsets.only(top: 0),
       child: Column(
@@ -155,10 +155,10 @@ class _MusicPlayBodyWidget extends State<MusicPlayBodyWidget> with TickerProvide
 
                  if(selected == true){
                    _rotationAnimationController.stop();
-                   musicGlobalPlayListState.music_pause();
+                   _musicGlobalPlayListState.music_pause();
                  } else{
                    _rotationAnimationController.repeat();
-                   musicGlobalPlayListState.music_resume();
+                   _musicGlobalPlayListState.music_resume();
                  }
               },
               nextTap: (){

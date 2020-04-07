@@ -29,7 +29,7 @@ class _MusicScaffoldState extends State<MusicScaffold>
   void initState() {
     // TODO: implement initState
     super.initState();
-    musicGlobalPlayListState =  MusicGlobalPlayListState.musicPlayState(context);
+    musicGlobalPlayListState =  MusicStore.MusicPlayList(context);
     _animationController =
         AnimationController(duration: Duration(seconds: 25), vsync: this);
 

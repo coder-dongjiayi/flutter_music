@@ -21,12 +21,17 @@ export 'package:flutter_music/common/state/user_state.dart';
 
 class MusicStore {
 
+  /// 主题
   static  ThemeState  Theme(context) =>  ThemeState.of(context);
-
+ /// 用户信息
   static  UserSate User(context) => UserSate.of(context);
 
+  /// 当前播放列表
+  static MusicGlobalPlayListState MusicPlayList(context) => MusicGlobalPlayListState.of(context);
 
+  /// 是否有触摸反馈
   static  bool get isVibrate => MusicGlobal.isVibrate;
+
 
   static saveVibrate(bool isVibrate){
     MusicGlobal.saveVibrateInfo(isVibrate);

@@ -20,7 +20,7 @@ class _MusicListPageState extends State<MusicListPage>  with TickerProviderState
   void initState() {
     // TODO: implement initState
     super.initState();
-    _musicGlobalPlayListState = MusicGlobalPlayListState.musicPlayState(context);
+    _musicGlobalPlayListState = MusicStore.MusicPlayList(context);
 
     _rotationAnimationController = AnimationController(duration: Duration(seconds: 25),vsync: this);
 
