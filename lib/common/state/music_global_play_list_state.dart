@@ -53,10 +53,13 @@ class MusicGlobalPlayListState extends ChangeNotifier{
   final StreamController<AudioPlayerState> _playerStateController =
   StreamController<AudioPlayerState>.broadcast();
 
+
   Stream<int> get onUpdateCurrentIndex => _currentIndexController.stream;
 
   Stream<AudioPlayerState> get onPlayerStateChanged =>
       _playerStateController.stream;
+
+
 
   @override
   void dispose() {
@@ -172,14 +175,16 @@ class MusicGlobalPlayListState extends ChangeNotifier{
     _stop();
   }
   /// 更新播放进度
-  void music_seek(double value){
+  Future<int> music_seek(double value){
 
     final position = value * _duration.inMilliseconds;
-    _seek(position);
+
+
+    return _seek(position);
   }
 
-  void _seek(position){
-    _audioPlayer.seek(Duration(milliseconds: position.round()));
+  Future<int> _seek(position){
+   return _audioPlayer.seek(Duration(milliseconds: position.round()));
 
   }
 

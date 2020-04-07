@@ -8,8 +8,12 @@ class MusicPlaySliderWidget extends StatefulWidget {
 
 class _MusicPlaySliderWidgetState extends State<MusicPlaySliderWidget> {
 
+  double changeValue = 0.0;
+  bool startSlider = false;
+  MusicGlobalPlayListState musicGlobalPlayListState;
   @override
   Widget build(BuildContext context) {
+    musicGlobalPlayListState =  MusicStore.MusicPlayList(context);
     return Padding(
       padding: EdgeInsets.fromLTRB(30, 50, 30, 30),
       child: Column(
@@ -83,13 +87,32 @@ class _MusicPlaySliderWidgetState extends State<MusicPlaySliderWidget> {
       ),
       child: Selector<MusicGlobalPlayListState,double>(
         builder: (context,progress,_){
-        MusicGlobalPlayListState musicGlobalPlayListState =  MusicStore.MusicPlayList(context);
-          return  Slider(
-            onChangeEnd: (double value){
-              musicGlobalPlayListState.music_seek(value);
-            },
 
-            value: progress,
+         if(startSlider == false){
+           changeValue = progress;
+         }
+
+          return  Slider(
+            onChangeStart: (double){
+              startSlider = true;
+
+            },
+            onChangeEnd: (double value){
+
+              musicGlobalPlayListState.music_seek(value);
+
+              startSlider = false;
+
+            },
+            onChanged: (double value) {
+
+              setState(() {
+                changeValue = value;
+              });
+
+
+            },
+            value: changeValue,
           );
         },
         selector: (context,state){
