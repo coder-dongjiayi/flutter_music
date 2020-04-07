@@ -34,7 +34,6 @@ class HttpRequestManager{
   static final Dio dio = Dio(baseOptions);
 
 
-
   static Future<T> request<T>(String url,
       {
         String method = "post",
@@ -48,9 +47,11 @@ class HttpRequestManager{
     // 全局拦截器
     // 创建默认的全局拦截器
     Interceptor dInter = InterceptorsWrapper(
-        onRequest: (options) {
+        onRequest: (RequestOptions warpperOptions) {
 
-          return options;
+         // warpperOptions.queryParameters = HttpRequestManager.instance._publicParams;
+
+          return warpperOptions;
         },
         onResponse: (response) {
 
@@ -61,6 +62,7 @@ class HttpRequestManager{
           return err;
         }
     );
+
 
     List<Interceptor> inters = [dInter];
 
