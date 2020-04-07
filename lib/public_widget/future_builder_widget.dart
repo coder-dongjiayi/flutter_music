@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-
+import 'package:flutter_music/public_widget/music_activityIndicator.dart';
+import 'package:flutter_music/common/music_store.dart';
 typedef AsyncWidgetBuilder<T> = Widget Function(BuildContext context, AsyncSnapshot<T> snapshot);
 
 typedef EmptyWidgetBuilder<T>  = bool Function(BuildContext context, AsyncSnapshot<T> snapshot);
@@ -70,13 +70,17 @@ class FutureBuilderWidget<T> extends StatelessWidget {
 
   ///MARK:指示器
   Widget _activityIndicator(){
-    return  Center(
+    return  Builder(
+      builder: (context){
+        return Center(
 
-      child: activityIndicator != null ? activityIndicator : CupertinoActivityIndicator(
 
-
-        radius: 20,
-      ),
+          child: activityIndicator != null ? activityIndicator : MusicActivityIndicator(
+            color: MusicStore.Theme(context).titleColor,
+            radius: 20,
+          ),
+        );
+      },
     );
   }
 

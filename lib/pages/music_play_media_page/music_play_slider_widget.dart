@@ -88,7 +88,7 @@ class _MusicPlaySliderWidgetState extends State<MusicPlaySliderWidget> {
             onChangeEnd: (double value){
               musicGlobalPlayListState.music_seek(value);
             },
-           
+
             value: progress,
           );
         },
