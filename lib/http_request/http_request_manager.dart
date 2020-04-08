@@ -49,7 +49,7 @@ class HttpRequestManager{
     Interceptor dInter = InterceptorsWrapper(
         onRequest: (RequestOptions warpperOptions) {
 
-         // warpperOptions.queryParameters = HttpRequestManager.instance._publicParams;
+        //  warpperOptions.queryParameters = HttpRequestManager.instance._publicParams;
 
           return warpperOptions;
         },
@@ -66,8 +66,10 @@ class HttpRequestManager{
 
     List<Interceptor> inters = [dInter];
 
+
     // 请求单独拦截器
     if (inter != null) {
+
       inters.add(inter);
     }
 

@@ -14,6 +14,7 @@ class ThemeState extends ChangeNotifier{
 
   Color get theme => _theme;
 
+
   Color get indicatorColor{
     if(theme == MusicGlobal.light){
       return Color(0xFF3C3C44);

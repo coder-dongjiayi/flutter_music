@@ -117,6 +117,7 @@ class MusicApi{
 
       return userModel;
     }
+    //http://47.94.5.242:3000/search?keywords=%20%E6%B5%B7%E9%98%94%E5%A4%A9%E7%A9%BA&type=1018
 
  /// 获取音乐的mp3路径
   static Future<List<TrackItemModel>> musicMp3Item(List<TrackItemModel> trackItemList) async{

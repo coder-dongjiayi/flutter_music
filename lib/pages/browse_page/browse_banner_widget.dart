@@ -102,7 +102,7 @@ class BrowseBannerWidget extends StatelessWidget {
           child: Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: Colors.white,
+                  color: MusicStore.Theme(context).topShadowColor,
                   boxShadow: MusicStore.boxShow(context,-15, 10)
               ),
               margin: EdgeInsets.only(left: 20,right: 20,top: 30),

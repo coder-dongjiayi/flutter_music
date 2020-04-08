@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_music/common/music_store.dart';
+import 'package:flutter_music/common/inner_shadow.dart';
+
 class SearchAppBar extends StatelessWidget implements PreferredSizeWidget{
   SearchAppBar({
     Key key,
@@ -10,31 +12,27 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget{
 
   @override
   Widget build(BuildContext context) {
+    ScreenAdapter.init(context);
     return SafeArea(
       child: Container(
-        height: 60,
-        padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-        margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+
         decoration: BoxDecoration(
-          color: Colors.transparent,
-          boxShadow: [
-             BoxShadow(
-              color: MusicStore.Theme(context).topShadowColor,
-              offset: const Offset(0.0, 0.0),
-            ),
-             BoxShadow(
-              color: MusicStore.Theme(context).theme,
-              offset: const Offset(0.0, 0.0),
-              spreadRadius: -2.0,
-              blurRadius: 2.0,
-            ),
-          ],
+          color: MusicStore.Theme(context).theme,
+          border: Border.all(color: Colors.white,width: 2),
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomRight,
+            colors: [
+             Colors.black,
+              Colors.white
+            ],
+
+          )
         ),
-        child: TextField(
-            decoration:InputDecoration(
-              border: InputBorder.none
-            )
-        ),
+        height: ScreenAdapter.setHeight(88),
+        margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+
+
       ),
     );
   }

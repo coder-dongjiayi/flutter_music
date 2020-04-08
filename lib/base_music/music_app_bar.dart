@@ -10,6 +10,7 @@ class MusicAppBar extends StatefulWidget implements PreferredSizeWidget{
   MusicAppBar({
     Key key,
     this.title,
+
     this.leftIconData,
     this.rightIconData,
     this.rightSelectedIconData,
@@ -30,6 +31,7 @@ class MusicAppBar extends StatefulWidget implements PreferredSizeWidget{
   final IconData rightSelectedIconData;
   final String rightImageURL;
 
+
   @override
   _MusicAppBarState createState() => _MusicAppBarState();
 }
@@ -45,6 +47,7 @@ class _MusicAppBarState extends State<MusicAppBar> {
     if(widget.title != null){
       _list.add(_title());
     }
+
     if(widget.rightIconData != null){
       _list.add(_rightItem());
     }
