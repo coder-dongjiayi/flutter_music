@@ -48,6 +48,7 @@ class _MusicAppBarState extends State<MusicAppBar> {
       _list.add(_title());
     }
 
+
     if(widget.rightIconData != null){
       _list.add(_rightItem());
     }

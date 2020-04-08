@@ -91,6 +91,12 @@ class MusicApi{
  }
 
 
+
+ /// 热搜列表
+ static Future<void> searchHot() async{
+   final response = await HttpRequestManager.request("/search/hot");
+   
+ }
  /// 退出登录
 
    static Future<int> logout() async{

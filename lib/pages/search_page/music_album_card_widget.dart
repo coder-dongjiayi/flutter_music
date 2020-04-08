@@ -13,7 +13,7 @@ class MusicVideoCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     ScreenAdapter.init(context);
     return Container(
-        margin: EdgeInsets.fromLTRB(10, 10, 20, 10),
+        margin: EdgeInsets.fromLTRB(0, 10, 20, 10),
         padding: EdgeInsets.fromLTRB(2, 2, 2, 2),
         width: ScreenAdapter.setWidth(280),
         decoration: BoxDecoration(
