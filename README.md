@@ -2,6 +2,6 @@
 
 ### 页面效果预览
 
-| <img src="./imgs/IMG_1557.PNG" /> | ![](./imgs/IMG_1558.PNG) | ![](./imgs/IMG_1559.PNG) | ![](./imgs/IMG_1560.PNG) |
+| <img src="./imgs/IMG_1557.jpg" /> | ![](./imgs/IMG_1558.jpg) | ![](./imgs/IMG_1559.jpg) | ![](./imgs/IMG_1560.jpg) |
 | :-------------------------------: | :----------------------: | :----------------------: | :----------------------: |
-|     ![](./imgs/IMG_1561.PNG)      | ![](./imgs/IMG_1562.PNG) | ![](./imgs/IMG_1563.PNG) | ![](./imgs/IMG_1564.PNG) |
+|     ![](./imgs/IMG_1561.jpg)      | ![](./imgs/IMG_1562.jpg) | ![](./imgs/IMG_1563.jpg) | ![](./imgs/IMG_1564.jpg) |
