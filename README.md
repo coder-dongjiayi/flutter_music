@@ -13,9 +13,6 @@
 
 * flutter 是谷歌2017年推出的一套跨平台解决方案。目前已经支持iOS Android 和 web 端。macOs 也也已经被提上了日程，而且谷歌未来的操作系统FuchsiaOS极大的可能 前端也是用flutter实现 ，flutter 野心很大，有想统一大前端的趋势。
 
-## 感谢
-1. [無我](https://www.ui.cn/detail/518851.html) 
-2. [网易云api](https://github.com/Binaryify/NeteaseCloudMusicApi)
 
 ## 运行环境
 *  ``` Flutter 1.12.13```
@@ -37,6 +34,10 @@
 * ```audioplayers``` 音频播放
 * ```flutter_flexible_toast``` 信息提示 
 
+
+## 最后感谢UI设计师和接口开发团队
+1. [無我](https://www.ui.cn/detail/518851.html) 
+2. [网易云api](https://github.com/Binaryify/NeteaseCloudMusicApi)
   
 
   
