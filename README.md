@@ -22,7 +22,7 @@
 1. ```git clone https://github.com/SHIMLY-GitHub/flutter_music.git```
 2. 部署接口地址 ```https://binaryify.github.io/NeteaseCloudMusicApi/#/?id=%e5%ae%89%e8%a3%85```
 3. 配置服务器地址 ``` lib/http_request/config.dat``` 更改baseURL 为第二步 中配置的接口地址
-4. ```flutter run```默认情况下是debug模式 如果你想获得更好的体验 可以执行```flutter run --release```
+4. 在命令行执行```flutter run``` 默认情况下是debug模式。 如果你想获得更好的体验可以执行```flutter run --release``` release模式下会比debug模式运行更流畅
 
 ## 依赖简介
 *  ```provider``` 状态管理
