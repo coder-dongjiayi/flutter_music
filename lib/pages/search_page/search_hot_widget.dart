@@ -6,6 +6,7 @@ import 'package:flutter_music/http_request/music_api.dart';
 class SearchHotWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
     return FutureBuilderWidget<List<SearchHotItemModel>>(
       future: MusicApi.searchHot(),
       successBuilder: (BuildContext context, AsyncSnapshot<List<SearchHotItemModel>> snapshot){

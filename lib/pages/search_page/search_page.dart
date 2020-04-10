@@ -23,6 +23,9 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
 
 
+  Widget _searchHotWidget;
+
+
   @override
   void initState() {
     // TODO: implement initState
@@ -36,6 +39,7 @@ class _SearchPageState extends State<SearchPage> {
 
   }
 
+
   @override
   Widget build(BuildContext context) {
     ScreenAdapter.init(context);
@@ -46,7 +50,6 @@ class _SearchPageState extends State<SearchPage> {
       child: MusicScaffold(
         appBar: SearchAppBar(
           onChange: (context,value){
-            print(value);
 
             Provider.of<SearchChangeState>(context,listen: false).searchChangeValue(value);
           },

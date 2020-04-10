@@ -85,7 +85,6 @@ class _FutureBuilderWidgetState<T> extends State<FutureBuilderWidget<T>> {
       builder: (context){
         return Center(
 
-
           child: widget.activityIndicator != null ? widget.activityIndicator : MusicActivityIndicator(
             color: MusicStore.Theme(context).titleColor,
             radius: 20,

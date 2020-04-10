@@ -58,6 +58,7 @@ class _SearchAppBarState extends State<SearchAppBar> {
       margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
       padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
       child: TextField(
+          autofocus: true,
           onChanged: (value){
            widget.onChange(context,value);
           },
