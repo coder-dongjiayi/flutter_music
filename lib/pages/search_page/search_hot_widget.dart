@@ -1,32 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_music/common/music_store.dart';
+import 'package:flutter_music/http_request/music_api.dart';
+
 
 class SearchHotWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.fromLTRB(20, 5, 20, 20),
-      child:  CustomScrollView(
+    return FutureBuilderWidget<List<SearchHotItemModel>>(
+      future: MusicApi.searchHot(),
+      successBuilder: (BuildContext context, AsyncSnapshot<List<SearchHotItemModel>> snapshot){
 
-        slivers: <Widget>[
-          SliverToBoxAdapter(
-            child: _title(context),
-          ),
-          SliverGrid(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  mainAxisSpacing: 20,
-                  crossAxisSpacing: 20,
-                  crossAxisCount: 2,
-                  childAspectRatio: 4.5
+        List<SearchHotItemModel> result = snapshot.data;
+
+        return Container(
+          margin: EdgeInsets.fromLTRB(20, 5, 20, 20),
+          child:  CustomScrollView(
+
+            slivers: <Widget>[
+              SliverToBoxAdapter(
+                child: _title(context),
               ),
-              delegate:
-              SliverChildBuilderDelegate((BuildContext context, int index) {
-                return _hotItem(context);
-              }, childCount: 20
+              SliverGrid(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      mainAxisSpacing: 20,
+                      crossAxisSpacing: 20,
+                      crossAxisCount: 2,
+                      childAspectRatio: 4.5
+                  ),
+                  delegate:
+                  SliverChildBuilderDelegate((BuildContext context, int index) {
+                    return _hotItem(context,result[index]);
+                  }, childCount: result.length
+                  )
               )
-          )
-        ],
-      ),
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -44,7 +54,7 @@ class SearchHotWidget extends StatelessWidget {
     );
   }
 
-  Widget _hotItem(context){
+  Widget _hotItem(context,SearchHotItemModel itemModel){
     return Container(
       alignment: Alignment.center,
       padding: EdgeInsets.fromLTRB(8, 5, 8, 5),
@@ -52,7 +62,7 @@ class SearchHotWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(15),
           color: MusicStore.Theme(context).theme,
           boxShadow: MusicStore.boxShow(context, -3, 5)),
-      child: Text("后来",
+      child: Text(itemModel.searchWord,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: TextStyle(

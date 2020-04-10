@@ -69,12 +69,18 @@ class _MusicScaffoldState extends State<MusicScaffold>
       backgroundColor: MusicStore.Theme(context).theme,
       appBar: widget.appBar,
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.only(
-              bottom: (listCount == 0 || widget.bottomNavigationBar != null)
-                  ? 0
-                  : ScreenAdapter.setHeight(90)),
-          child: widget.body,
+        child: GestureDetector(
+
+          onTap: (){
+            FocusScope.of(context).requestFocus(FocusNode());
+          },
+          child: Padding(
+            padding: EdgeInsets.only(
+                bottom: (listCount == 0 || widget.bottomNavigationBar != null)
+                    ? 0
+                    : ScreenAdapter.setHeight(90)),
+            child: widget.body,
+          ),
         ),
       ),
       bottomNavigationBar: widget.bottomNavigationBar,

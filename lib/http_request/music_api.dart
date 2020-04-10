@@ -5,6 +5,8 @@ import 'package:flutter_music/models/song_list_model.dart';
 import 'package:flutter_music/models/track_list_model.dart';
 import 'package:flutter_music/models/song_detail_model.dart';
 import 'package:flutter_music/models/user_model.dart';
+import 'package:flutter_music/models/search_hot_model.dart';
+export 'package:flutter_music/models/search_hot_model.dart';
 
 export  'package:flutter_music/models/play_list_model.dart';
 export 'package:flutter_music/models/track_list_model.dart';
@@ -93,9 +95,12 @@ class MusicApi{
 
 
  /// 热搜列表
- static Future<void> searchHot() async{
-   final response = await HttpRequestManager.request("/search/hot");
-   
+ static Future<List<SearchHotItemModel>> searchHot() async{
+   final response = await HttpRequestManager.request("/search/hot/detail");
+
+   List<SearchHotItemModel> list = SearchHotListModel.fromJson(response).hotList;
+
+   return  list;
  }
  /// 退出登录
 

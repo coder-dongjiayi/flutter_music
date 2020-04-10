@@ -15,8 +15,18 @@ class _BrowsePageState extends State<BrowsePage> with AutomaticKeepAliveClientMi
   @override
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
-
-  Future _future = MusicApi.newSongList();
+  Future _future;
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _future =  MusicApi.newSongList();
+  }
+@override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+   
+  }
 
 
   @override
