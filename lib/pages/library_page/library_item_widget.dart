@@ -147,6 +147,9 @@ class _LibraryItemWidgetState extends State<LibraryItemWidget> with TickerProvid
   }
 
   Widget _itemCover(context, coverImage) {
+
+   String _coverImgUrl = coverImage + "?param="+"140"+"y"+"140";
+
     return Container(
       width: ScreenAdapter.setWidth(140),
       height: ScreenAdapter.setHeight(140),
@@ -157,7 +160,7 @@ class _LibraryItemWidgetState extends State<LibraryItemWidget> with TickerProvid
       child: ClipRRect(
           borderRadius: BorderRadius.circular(5),
           child: CachedNetworkImage(
-            imageUrl: "$coverImage",
+            imageUrl: "$_coverImgUrl",
             fit: BoxFit.cover,
           )),
     );

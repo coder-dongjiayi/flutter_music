@@ -112,6 +112,7 @@ class AlbumHeaderWidget extends StatelessWidget {
   }
 
   Widget _cover(context){
+    String _coverImageURL = coverImageUrl +  "?param="+"316"+"y"+"240";
     return Container(
       width: ScreenAdapter.setWidth(316),
       height: ScreenAdapter.setHeight(240),
@@ -126,7 +127,7 @@ class AlbumHeaderWidget extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: CachedNetworkImage(
-          imageUrl: "$coverImageUrl",
+          imageUrl: "$_coverImageURL",
           fit: BoxFit.cover,
         ),
       ),

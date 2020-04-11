@@ -43,6 +43,7 @@ class PlayItemModel{
     selected = false;
     slideEnd = false;
     coverImgUrl = json["coverImgUrl"];
+
     name        = json["name"];
     id          = json["id"];
     description = json["description"] ?? "";

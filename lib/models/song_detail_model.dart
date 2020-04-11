@@ -23,7 +23,6 @@ class SongDetailModel{
     name        = json["name"];
 
 
-
     if(json["tracks"] != null){
       tracks = List<TrackItemModel>();
       json["tracks"].forEach((v){

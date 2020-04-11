@@ -78,6 +78,9 @@ class MusicItemWidget extends StatelessWidget {
 
   Widget _itemCover(context,selected) {
 
+
+    String _coverImageURL = coverImageUrl  + "?param="+"120"+"y"+"120";
+
     double margin = selected == false ? 0 : 5;
 
     return Container(
@@ -92,7 +95,7 @@ class MusicItemWidget extends StatelessWidget {
         child: ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: CachedNetworkImage(
-              imageUrl: "$coverImageUrl",
+              imageUrl: "$_coverImageURL",
               fit: BoxFit.cover,
             )));
   }

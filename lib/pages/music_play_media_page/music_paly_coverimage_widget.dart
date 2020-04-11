@@ -40,6 +40,7 @@ class MusicPlayCoverimageWidget extends StatelessWidget {
   }
 
   Widget _clipOval(){
+
     return ClipOval(
         child: CachedNetworkImage(
           imageUrl: coverImageUrl,
