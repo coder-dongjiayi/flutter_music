@@ -1,6 +1,8 @@
 
 
+
 import 'package:flutter/material.dart';
+import 'package:flutter_music/pages/search_page/search_result_page.dart';
 import 'package:flutter_music/pages/login_page/login_password_page.dart';
 import 'package:flutter_music/tabbar/tababr_page.dart';
 import 'package:flutter_music/pages/library_page/new_library_page/new_library_page.dart';
@@ -41,7 +43,9 @@ class MusicRouter{
 
     RouterPageName.PersonPage:(context) => PersonPage(),
 
-    RouterPageName.SearchPage:(context) => SearchPage()
+    RouterPageName.SearchPage:(context) => SearchPage(),
+
+    RouterPageName.SearchResultPage:(context) => SearchResultPage()
 
   };
 
@@ -70,6 +74,13 @@ class MusicRouter{
            settings:  RouteSettings(name: name),
              builder: (context) {
                return LoginPasswordPage(nickName: map["nickName"],mobile: map["mobile"]);
+             }
+         );
+       }else if(name == RouterPageName.SearchResultPage){
+         return MaterialPageRoute(
+             settings:  RouteSettings(name: name),
+             builder: (context) {
+               return SearchResultPage(searchWord: settings.arguments);
              }
          );
        }

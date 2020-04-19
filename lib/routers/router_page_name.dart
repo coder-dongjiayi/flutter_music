@@ -35,4 +35,7 @@ class RouterPageName{
 
   //搜索页面
   static const String SearchPage = "/search_page";
+
+  //搜索结果页面
+  static const String SearchResultPage = "/search_result_page";
 }

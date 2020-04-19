@@ -30,7 +30,16 @@ class SearchHotWidget extends StatelessWidget {
                   ),
                   delegate:
                   SliverChildBuilderDelegate((BuildContext context, int index) {
-                    return _hotItem(context,result[index]);
+                    SearchHotItemModel itemModel =  result[index];
+
+
+                    return MusicGestureDetector(
+                      onTap: (){
+                        Navigator.of(context).pushNamed(RouterPageName.SearchResultPage,arguments: itemModel.searchWord);
+
+                      },
+                      child:  _hotItem(context,result[index]),
+                    );
                   }, childCount: result.length
                   )
               )

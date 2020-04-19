@@ -38,9 +38,16 @@ class SearchListWidget extends StatelessWidget {
 
   Widget _item(context,result){
 
-    return Padding(
-      padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
-      child: Text("$result",style: TextStyle(color: MusicStore.Theme(context).titleColor),),
+
+    return MusicGestureDetector(
+      onTap: (){
+        Navigator.of(context).pushNamed(RouterPageName.SearchResultPage,arguments: result);
+
+      },
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
+        child: Text("$result",style: TextStyle(color: MusicStore.Theme(context).titleColor),),
+      ),
     );
   }
 }
