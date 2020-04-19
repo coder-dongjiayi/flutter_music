@@ -105,8 +105,8 @@ class MusicGlobalPlayListState extends ChangeNotifier{
             artist: currentTrackItem.arList.first.name,
             albumTitle: currentTrackItem.name,
             imageUrl: currentTrackItem.al.picUrl,
-            forwardSkipInterval: const Duration(seconds: 30), // default is 30s
-            backwardSkipInterval: const Duration(seconds: 30), // default is 30s
+//            forwardSkipInterval: const Duration(seconds: 30),
+//            backwardSkipInterval: const Duration(seconds: 30),
             duration: duration,
             elapsedTime: Duration(seconds: 0));
       }
@@ -212,6 +212,10 @@ class MusicGlobalPlayListState extends ChangeNotifier{
 
     if(audioUrl != null){
       int result = await _audioPlayer.play(audioUrl,isLocal: false);
+    }else{
+      //此歌曲 是vip歌曲 不能进行播放 进行下一首
+      music_control_next();
+
     }
 
 
