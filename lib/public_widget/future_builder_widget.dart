@@ -46,13 +46,13 @@ class FutureBuilderWidget<T> extends StatefulWidget {
 
 class _FutureBuilderWidgetState<T> extends State<FutureBuilderWidget<T>> {
 
-  var _future;
+
   @override
   void initState() {
     // TODO: implement initState
 
     super.initState();
-    _future = widget.future;
+
   }
 
   /// MARK:空白页面
@@ -99,7 +99,7 @@ class _FutureBuilderWidgetState<T> extends State<FutureBuilderWidget<T>> {
 
 
     return FutureBuilder(
-      future: _future,
+      future: widget.future,
 
       builder: (BuildContext context, AsyncSnapshot<T> snapshot){
 

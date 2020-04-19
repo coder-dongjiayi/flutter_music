@@ -26,6 +26,9 @@ class PlayItemModel{
   String name;
 
   int id;
+  int trackCount;
+  int playCount;
+  String blurPicUrl;
 
   String description;
 
@@ -37,7 +40,10 @@ class PlayItemModel{
     this.coverImgUrl,
     this.name,
     this.id,
-    this.selected
+    this.selected,
+    this.trackCount,
+    this.playCount,
+    this.blurPicUrl
   });
   PlayItemModel.fromJson(Map<String,dynamic> json){
     selected = false;
@@ -47,6 +53,9 @@ class PlayItemModel{
     name        = json["name"];
     id          = json["id"];
     description = json["description"] ?? "";
+    trackCount = json["trackCount"];
+    playCount = json["playCount"];
+    blurPicUrl = json["blurPicUrl"];
   }
 
 

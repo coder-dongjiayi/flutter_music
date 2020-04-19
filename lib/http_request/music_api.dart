@@ -94,14 +94,24 @@ class MusicApi{
 
 
 
+ /// 搜索结果
+ static Future<Map> search(keyword) async{
+   final response = await HttpRequestManager.request("/search",
+       params: {"keywords":keyword,"type":"1018"}
+       );
 
+   return response["result"];
+ }
 
  ///搜索建议
- static Future<List<Map<String,dynamic>>> searchSuggest(keyword) async{
+ static Future<List> searchSuggest(keyword) async{
+
    final response = await HttpRequestManager.request("/search/suggest",
        params: {"keywords":keyword,"type":"mobile"});
+    List result = response["result"]["allMatch"];
 
-   return response["result"]["allMatch"];
+
+   return result;
  }
 
 

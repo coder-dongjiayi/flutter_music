@@ -3,10 +3,14 @@ import 'package:flutter_music/common/music_store.dart';
 class MusicAlbumItemWidget extends StatelessWidget {
   MusicAlbumItemWidget({
     Key key,
-    this.coverImageUrl
+    this.coverImageUrl,
+    this.title,
+    this.subTitle
 
 }):super(key : key);
   final String coverImageUrl;
+  final String title;
+  final String subTitle;
   @override
   Widget build(BuildContext context) {
     ScreenAdapter.init(context);
@@ -17,7 +21,7 @@ class MusicAlbumItemWidget extends StatelessWidget {
           _itemCover(context),
           Expanded(
             flex: 1,
-            child: _itemTitle(context,"失恋必听歌单|因为你突然听懂了|因为你突然听懂了","185首音乐by不如喜欢我- 播放1亿次185首音乐by不如喜欢我- 播放1亿次"),
+            child: _itemTitle(context,title,subTitle),
           )
         ],
       ),

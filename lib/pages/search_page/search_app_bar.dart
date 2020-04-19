@@ -3,7 +3,7 @@ import 'package:flutter_music/common/music_store.dart';
 
 import 'package:flutter_music/public_widget/music_button.dart';
 
-typedef ValueChanged<String> = void Function(BuildContext context,String value);
+typedef ValueChanged = void Function(BuildContext context,String value);
 class SearchAppBar extends StatefulWidget implements PreferredSizeWidget{
   SearchAppBar({
     Key key,

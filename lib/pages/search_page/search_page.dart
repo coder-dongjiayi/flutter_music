@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_music/common/music_store.dart';
+import 'package:flutter_music/http_request/music_api.dart';
 import 'package:flutter_music/pages/search_page/search_app_bar.dart';
 import 'package:flutter_music/pages/search_page/search_result_widget.dart';
 import 'package:flutter_music/pages/search_page/search_hot_widget.dart';
@@ -7,10 +8,10 @@ import 'package:flutter_music/pages/search_page/search_list_widget.dart';
 
 class SearchChangeState extends ChangeNotifier{
 
-  String searchKeyWorld = "";
+  String searchKeyWord = "";
 
   void searchChangeValue(value){
-    searchKeyWorld = value;
+    searchKeyWord = value;
     notifyListeners();
   }
 }
@@ -22,8 +23,6 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
 
-
-  Widget _searchHotWidget;
 
 
   @override
@@ -49,18 +48,21 @@ class _SearchPageState extends State<SearchPage> {
       ],
       child: MusicScaffold(
         appBar: SearchAppBar(
-          onChange: (context,value){
+          onChange: ( BuildContext context,String value){
+
 
             Provider.of<SearchChangeState>(context,listen: false).searchChangeValue(value);
           },
 
         ),
-        body: Consumer<SearchChangeState>(
-          builder: (context,state,_){
-
-            return state.searchKeyWorld.length == 0 ? SearchHotWidget() : SearchListWidget();
-          },
-        ),
+      body: SearchResultWidget(),
+//        body: Consumer<SearchChangeState>(
+//          builder: (context,state,_){
+//
+//
+//            return state.searchKeyWord.length == 0 ? SearchHotWidget() : SearchListWidget();
+//          },
+//        ),
 
       ),
     );
