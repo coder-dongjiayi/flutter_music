@@ -31,9 +31,9 @@ dependencies:
   vibrate: ^0.0.4
   audioplayers: ^0.14.0
   dio: ^3.0.9
-  apple_sign_in: ^0.1.0
+
   flutter_secure_storage: ^3.2.1+1
-  before_after: ^1.0.1
+
   flutter_flexible_toast: ^0.1.4
 
 dev_dependencies:
