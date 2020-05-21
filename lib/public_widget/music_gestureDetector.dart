@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_music/common/music_store.dart';
-import 'package:vibrate/vibrate.dart';
+import 'package:flutter_vibrate/flutter_vibrate.dart';
 
 typedef GestureTapCallback = void Function();
 class MusicGestureDetector extends StatelessWidget {

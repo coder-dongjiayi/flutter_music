@@ -1,8 +1,15 @@
+///
+/// @Author: isanwenyu@163.com
+/// @Date: 2020-05-21 15:31:18
+/// @LastEditors: zhuyuanbao
+/// @LastEditTime: 2020-05-21 15:34:30
+/// @Description: 
+///
 
 
 import 'package:flutter/material.dart';
 import 'package:flutter_music/common/music_store.dart';
-import 'package:vibrate/vibrate.dart';
+import 'package:flutter_vibrate/flutter_vibrate.dart';
 
 class LibraryEmptyWidget extends StatelessWidget {
   @override

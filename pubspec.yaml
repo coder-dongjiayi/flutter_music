@@ -28,7 +28,7 @@ dependencies:
   flutter_swiper: ^1.1.6
   flutter_screenutil: ^0.5.3
   cached_network_image: ^2.0.0
-  vibrate: ^0.0.4
+  flutter_vibrate: ^1.0.0
   audioplayers: ^0.14.0
   dio: ^3.0.9
   apple_sign_in: ^0.1.0

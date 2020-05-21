@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_music/common/music_store.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-import 'package:vibrate/vibrate.dart';
+import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:flutter_music/public_widget/music_button.dart';
 
 typedef GestureTapCallback = void Function(int index);
