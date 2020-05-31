@@ -1,9 +1,12 @@
 # iMusic
 
+### 视频演示
+<video src="https://www.bilibili.com/video/BV1X54y1D7eb" controls="controls" width="500" height="300">
+
 ### 页面效果预览
 
 | <img src="http://ijishuang.oss-cn-hangzhou.aliyuncs.com/GZB/iOSFiles/IMG_1557.jpg" style="zoom:50%;" /> | <img src="http://ijishuang.oss-cn-hangzhou.aliyuncs.com/GZB/iOSFiles/IMG_1558.jpg" style="zoom:50%;" /> | <img src="http://ijishuang.oss-cn-hangzhou.aliyuncs.com/GZB/iOSFiles/IMG_1559.jpg" style="zoom:50%;" /> | <img src="http://ijishuang.oss-cn-hangzhou.aliyuncs.com/GZB/iOSFiles/IMG_1560.jpg" style="zoom:50%;" /> |
-| :-------------------------------------------------: | :-------------------------------------------------: | :-------------------------------------------------: | :-------------------------------------------------: |
+| :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
 | <img src="http://ijishuang.oss-cn-hangzhou.aliyuncs.com/GZB/iOSFiles/IMG_1561.jpg" style="zoom:50%;" /> | <img src="http://ijishuang.oss-cn-hangzhou.aliyuncs.com/GZB/iOSFiles/IMG_1562.jpg" style="zoom:50%;" /> | <img src="http://ijishuang.oss-cn-hangzhou.aliyuncs.com/GZB/iOSFiles/IMG_1563.jpg" style="zoom:50%;" /> | <img src="http://ijishuang.oss-cn-hangzhou.aliyuncs.com/GZB/iOSFiles/IMG_1564.jpg" style="zoom:50%;" /> |
 | <img src="http://ijishuang.oss-cn-hangzhou.aliyuncs.com/GZB/iOSFiles/IMG_1567.jpg" style="zoom:50%;" /> | <img src="http://ijishuang.oss-cn-hangzhou.aliyuncs.com/GZB/iOSFiles/IMG_1568.jpg" style="zoom:50%;" /> | <img src="http://ijishuang.oss-cn-hangzhou.aliyuncs.com/GZB/iOSFiles/IMG_1570.jpg" style="zoom:50%;" /> | <img src="http://ijishuang.oss-cn-hangzhou.aliyuncs.com/GZB/iOSFiles/IMG_1571.jpg" style="zoom:50%;" /> |
 
