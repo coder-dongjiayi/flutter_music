@@ -1,7 +1,7 @@
 # iMusic
 
 ### 视频演示
-<video src="https://www.bilibili.com/video/BV1X54y1D7eb" controls="controls" width="500" height="300">
+[哔哩哔哩](https://www.bilibili.com/video/BV1X54y1D7eb)
 
 ### 页面效果预览
 
