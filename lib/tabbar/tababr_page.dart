@@ -1,3 +1,10 @@
+///
+/// @Author: isanwenyu@163.com
+/// @Date: 2020-05-21 15:31:18
+/// @LastEditors: zhuyuanbao
+/// @LastEditTime: 2020-05-21 15:34:38
+/// @Description: 
+///
 import 'package:flutter/material.dart';
 import 'package:flutter_music/base_music/music_scaffold.dart';
 import 'package:flutter_music/common/music_store.dart';
@@ -5,7 +12,6 @@ import 'package:flutter_music/pages/library_page/library_page.dart';
 import 'package:flutter_music/pages/recommend_page/recommend_page.dart';
 import 'package:flutter_music/pages/browse_page/browse_page.dart';
 import 'package:flutter_music/tabbar/bottom_tabbar.dart';
-import 'package:vibrate/vibrate.dart';
 import 'package:flutter_music/common/screen_adapter.dart';
 
 class TabbarPage extends StatefulWidget {

@@ -10,7 +10,7 @@ export 'package:audioplayers/audioplayers.dart';
 class MusicGlobalPlayListState extends ChangeNotifier{
 
 
-  AudioPlayer _audioPlayer = AudioPlayer(mode: PlayerMode.LOW_LATENCY);
+  AudioPlayer _audioPlayer = AudioPlayer();
 
 
   int _currentIndex = 0;
