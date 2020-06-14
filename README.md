@@ -12,6 +12,11 @@
 
 
 
+## 安装体验
+* Android 可以扫描下面的二维码进行下载安装，苹果因为分发限制暂时安装不了。
+![avatar](/imgs/download.png)
+ 
+
 ## 前言
 
 * flutter 是谷歌2017年推出的一套跨平台解决方案。目前已经支持iOS Android 和 web 端。macOs 也也已经被提上了日程，而且谷歌未来的操作系统FuchsiaOS极大的可能 前端也是用flutter实现 ，flutter 野心很大，有想统一大前端的趋势。

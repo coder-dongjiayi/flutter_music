@@ -35,7 +35,7 @@ packages:
       name: audioplayers
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.14.1"
+    version: "0.15.1"
   before_after:
     dependency: "direct main"
     description:
@@ -138,7 +138,7 @@ packages:
       name: flutter_secure_storage
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "3.3.1+1"
+    version: "3.3.3"
   flutter_swiper:
     dependency: "direct main"
     description:
@@ -151,6 +151,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_vibrate:
+    dependency: "direct main"
+    description:
+      name: flutter_vibrate
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.0"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -392,13 +399,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.0.8"
-  vibrate:
-    dependency: "direct main"
-    description:
-      name: vibrate
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.0.4"
   xml:
     dependency: transitive
     description:
